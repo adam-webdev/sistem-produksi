@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class PencatatanProduksi extends Model
+{
+    use HasFactory;
+    protected $table = "pencatatan_produksis";
+    public function bahan_baku()
+    {
+        return $this->belongsTo(JadwalProduksi::class);
+    }
+}
