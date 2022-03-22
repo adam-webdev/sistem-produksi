@@ -12,6 +12,18 @@
 
     </div>
 
+    @if (count($errors) > 0)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul class="p-0 m-0" style="list-style: none;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -27,16 +39,17 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="kode_barang">Kode Material :</label>
-                            <input type="text" name="kode_material" class="form-control" id="kode_barang">
+                            <input type="text" name="kode_material" class="form-control id=" kode_barang">
                         </div>
+
                         <div class="form-group">
                             <label for="barang">Nama Material :</label>
-                            <input type="text" name="nama_material" class="form-control" maxlegth="5" id="barang">
+                            <input type="text" name="nama_material" class="form-control" id="barang">
                         </div>
 
                         <div class="form-group">
                             <label for="jenis_material">Jenis Material :</label>
-                            <select type="number" name="jenis_material" class="form-control" id="jenis_material">
+                            <select type="text" name="jenis_material" class="form-control" id="jenis_material">
                                 <option disabled selected>-- pilih jenis material --</option>
                                 <option value="a">a</option>
                                 <option value="b">b</option>
@@ -66,7 +79,6 @@
                         <tr align="center">
                             <th>Kode Material</th>
                             <th>Nama Material </th>
-                            <th>Jumlah Material</th>
                             <th>Jenis Material </th>
                             <th>Aksi</th>
                         </tr>
@@ -76,7 +88,6 @@
                             <tr align="center">
                                 <td>{{ $b->kode_material }}</td>
                                 <td>{{ $b->nama_material }}</td>
-                                <td>{{ $b->jumlah_material }}</td>
                                 <td>{{ $b->jenis_material }}</td>
                                 <td align="center" width="10%">
                                     {{-- @role('admin') --}}

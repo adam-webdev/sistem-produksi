@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\BahanBaku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BahanBakuController extends Controller
 {
     public function index()
     {
+
+
         $bahanbaku = BahanBaku::all();
         return view('bahanbaku.index', compact("bahanbaku"));
     }
@@ -23,10 +26,20 @@ class BahanBakuController extends Controller
 
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'kode_material' => 'required|unique:bahan_bakus',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('bahan-baku.index')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $material = new BahanBaku;
         $material->kode_material = $request->kode_material;
         $material->nama_material = $request->nama_material;
-        $material->jumlah_material = 0;
         $material->jenis_material = $request->jenis_material;
         $material->save();
         Alert::success('Tersimpan', 'Barang Berhasil Disimpan');
@@ -53,7 +66,6 @@ class BahanBakuController extends Controller
         $material->kode_material = $request->kode_material;
         $material->nama_material = $request->nama_material;
         $material->jenis_material = $request->jenis_material;
-        $material->jumlah_material = 0;
         $material->save();
         Alert::success('Terupdate', 'Barang Berhasil Diupdate');
         return redirect()->route('bahan-baku.index');

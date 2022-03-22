@@ -9,7 +9,7 @@ class JadwalProduksi extends Model
 {
     use HasFactory;
     protected $table = 'jadwal_produksis';
-    public function pencatatan_produksi()
+    public function pencatatanproduksi()
     {
         return $this->hasOne(PencatatanProduksi::class);
     }

@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <title>Beranda</title>
-
+    <link href="{{ asset('asset/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -97,6 +97,10 @@
                             href="{{ route('bahanbaku-masuk.index') }}"> Bahan Baku Masuk</a>
                         <a class="collapse-item fas fa-arrow-circle-right"
                             href="{{ route('bahanbaku-keluar.index') }}"> Bahan Baku Keluar</a>
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('stok.index') }}">Stok
+                            Barang</a>
+                        <a class="collapse-item fas fa-arrow-circle-right"
+                            href="{{ route('cek-permintaan.index') }}">Cek Permintaan Produksi</a>
                     </div>
                 </div>
             </li>
@@ -283,6 +287,9 @@
     <script src={{ asset('asset/js/demo/chart-area-demo.js') }}></script>
     <script src={{ asset('asset/js/demo/chart-pie-demo.js') }}></script>
     <script src={{ asset('asset/js/demo/datatables-demo.js') }}></script>
+    <script src="{{ asset('asset/vendor/select2/dist/js/select2.min.js') }}"></script>
+    @yield('scripts')
+
 </body>
 
 </html>

@@ -9,7 +9,7 @@ class PermintaanBahanBaku extends Model
 {
     use HasFactory;
     protected $table = "permintaan_bahan_bakus";
-    public function bahan_baku()
+    public function bahanbaku()
     {
         return $this->belongsTo(BahanBaku::class);
     }

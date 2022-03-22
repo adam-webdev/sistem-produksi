@@ -2,83 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JadwalProduksi;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JadwalProduksiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $data = JadwalProduksi::all();
+        return view('admin.jadwal_produksi.index', compact("data"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = new JadwalProduksi();
+        $data->nama_barang = $request->nama_barang;
+        $data->tanggal = $request->tanggal;
+        $data->jeniswarna_barang = $request->jenis;
+        $data->jumlah_barang = $request->target;
+        $data->save();
+        Alert::success('Tersimpan', 'Data Berhasil Disimpan');
+        return redirect()->route('jadwal-produksi.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
-        //
+        $data = JadwalProduksi::findOrFail($id);
+        return view("admin.jadwal_produksi.edit", compact('data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+        $data = JadwalProduksi::findOrFail($id);
+        $data->nama_barang = $request->nama_barang;
+        $data->tanggal = $request->tanggal;
+        $data->jeniswarna_barang = $request->jenis;
+        $data->jumlah_barang = $request->target;
+        $data->save();
+        Alert::success('Tersimpan', 'Data Berhasil Disimpan');
+        return redirect()->route('jadwal-produksi.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function delete($id)
     {
-        //
+        $barang = JadwalProduksi::findOrFail($id);
+        $barang->delete();
+        Alert::success('Terhapus', 'Data Berhasil Dihapus');
+        return redirect()->route('jadwal-produksi.index');
     }
 }

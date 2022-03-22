@@ -31,11 +31,11 @@
                         </div>
                         <div class="form-group">
                             <label for="barang">Nama Finish Good :</label>
-                            <input type="text" name="nama_fg" class="form-control" maxlegth="5" id="barang">
+                            <input type="text" name="nama_fg" class="form-control" id="barang">
                         </div>
                         <div class="form-group">
                             <label for="jumlah">Jumalah Finish Good :</label>
-                            <input type="text" name="jumlah_fg" class="form-control" maxlegth="5" id="jumlah">
+                            <input type="text" name="jumlah_fg" class="form-control" id="jumlah">
                         </div>
 
                         <div class="form-group">

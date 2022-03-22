@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{BahanBakuController, BahanBakuKeluarController, BahanBakuMasukController, DashboardController, FinishGoodController, JadwalProduksiController, PencatatanProduksiController, PermintaanBahanBakuController, UserController};
+use App\Http\Controllers\{BahanBakuController, BahanBakuKeluarController, BahanBakuMasukController, DashboardController, FinishGoodController, JadwalProduksiController, PencatatanProduksiController, PermintaanBahanBakuController, StokController, UserController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,5 +42,14 @@ Route::get('/pencatatan-produksi/hapus/{id}', [PencatatanProduksiController::cla
 Route::resource('/permintaan-bahanbaku', PermintaanBahanBakuController::class);
 Route::get('/permintaan-bahanbaku/hapus/{id}', [PermintaanBahanBakuController::class, "delete"]);
 
+// store
+
+Route::get('/cek-permintaan-bahanbaku', [PermintaanBahanBakuController::class, "cek_permintaan"])->name('cek-permintaan.index');
+Route::get('/cek-permintaan-bahanbaku/{id}', [PermintaanBahanBakuController::class, "edit_permintaan"])->name('cek-permintaan.edit');
+Route::put('/cek-permintaan-bahanbaku/{id}', [PermintaanBahanBakuController::class, "update_permintaan"])->name('cek-permintaan.update');
+
 Route::resource('/user', UserController::class);
 Route::get('/user/hapus/{id}', [UserController::class, "delete"]);
+
+Route::resource('/stok', StokController::class);
+Route::get('/stok/hapus/{id}', [StokController::class, "delete"]);

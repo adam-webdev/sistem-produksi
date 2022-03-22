@@ -2,83 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BahanBaku;
+use App\Models\BahanBakuMasuk;
+use App\Models\Stok;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BahanBakuMasukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $stok = Stok::all();
+        $bahanbaku_masuk = BahanBakuMasuk::with('stok')->get();
+        return view('bahanbaku_masuk.index', compact("bahanbaku_masuk", "stok"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+
+        $bahanbaku_masuk = new BahanBakuMasuk;
+        // $bahanbaku_masuk->bahanbaku_id = 22;
+        $bahanbaku_masuk->stok_id = $request->stok_id;
+        $bahanbaku_masuk->jumlah = $request->jumlah;
+        $bahanbaku_masuk->save();
+        Alert::success("Tersimpan", "Data Berhasil Disimpan");
+        return redirect()->route('bahanbaku-masuk.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    // public function edit($id)
+    // {
+    //     $bahanbaku_masuk = BahanBakuMasuk::findOrFail($id);
+    //     $bahanbaku = BahanBaku::all();
+    //     return view("bahanbaku_masuk.edit", compact("bahanbaku_masuk", "bahanbaku"));
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     $bahanbaku_masuk = BahanBakuMasuk::findOrFail($id);
+    //     $bahanbaku_masuk->stok_id = $request->stok_id;
+    //     $bahanbaku_masuk->jumlah = $request->jumlah;
+    //     $bahanbaku_masuk->save();
+    //     Alert::success("Terupdate", "Data Berhasil Diupdate");
+    //     return redirect()->route('bahanbaku-masuk.index');
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $bahanbaku_masuk = BahanBakuMasuk::findOrFail($id);
+        $bahanbaku_masuk->delete();
+        Alert::success("Terhapus", "Data Berhasil Dihapus");
+        return redirect()->route('bahanbaku-masuk.index');
     }
 }

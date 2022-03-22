@@ -2,83 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JadwalProduksi;
+use App\Models\PencatatanProduksi;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PencatatanProduksiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $jadwalproduksi = JadwalProduksi::all();
+        $data = PencatatanProduksi::with('jadwalproduksi')->get();
+        return view('produksi.pencatatan_produksi.index', compact("data", "jadwalproduksi"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+
+        $data = new PencatatanProduksi();
+        $data->jadwal_produksi_id = $request->jadwalproduksi_id;
+        $data->jumlah = $request->jumlah;
+        $data->keterangan = $request->keterangan;
+        $data->save();
+        Alert::success("Tersimpan", "Data Berhasil Disimpan");
+        return redirect()->route('pencatatan-produksi.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $data = PencatatanProduksi::findOrFail($id);
+        $jadwalproduksi = JadwalProduksi::all();
+        return view("produksi.pencatatan_produksi.edit", compact("data", "jadwalproduksi"));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $data = PencatatanProduksi::findOrFail($id);
+        $data->jadwal_produksi_id = $request->jadwalproduksi_id;
+        $data->jumlah = $request->jumlah;
+        $data->keterangan = $request->keterangan;
+        $data->save();
+        Alert::success("Terupdate", "Data Berhasil Diupdate");
+        return redirect()->route('pencatatan-produksi.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $data = PencatatanProduksi::findOrFail($id);
+        $data->delete();
+        Alert::success("Terhapus", "Data Berhasil Dihapus");
+        return redirect()->route('pencatatan-produksi.index');
     }
 }

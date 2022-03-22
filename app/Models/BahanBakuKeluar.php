@@ -10,8 +10,8 @@ class BahanBakuKeluar extends Model
     use HasFactory;
     protected $table = 'bahan_baku_keluars';
 
-    public function bahan_baku()
+    public function stok()
     {
-        return $this->belongsTo(BahanBaku::class);
+        return $this->belongsTo(Stok::class);
     }
 }
