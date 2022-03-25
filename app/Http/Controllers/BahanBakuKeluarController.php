@@ -19,7 +19,7 @@ class BahanBakuKeluarController extends Controller
     {
         $stok = Stok::all();
         $bahanbaku_keluar = BahanBakuKeluar::with('stok')->get();
-        return view('bahanbaku_keluar.index', compact("bahanbaku_keluar", "stok"));
+        return view('gudang.bahanbaku_keluar.index', compact("bahanbaku_keluar", "stok"));
     }
 
     public function create()
@@ -51,22 +51,22 @@ class BahanBakuKeluarController extends Controller
         //
     }
 
-    public function edit($id)
-    {
-        $bahanbaku_keluar = BahanBakuKeluar::findOrFail($id);
-        $bahanbaku = BahanBaku::all();
-        return view("bahanbaku_keluar.edit", compact("bahanbaku_keluar", "bahanbaku"));
-    }
+    // public function edit($id)
+    // {
+    //     $bahanbaku_keluar = BahanBakuKeluar::findOrFail($id);
+    //     $bahanbaku = BahanBaku::all();
+    //     return view("gudang.bahanbaku_keluar.edit", compact("bahanbaku_keluar", "bahanbaku"));
+    // }
 
-    public function update(Request $request, $id)
-    {
-        $bahanbaku_keluar = BahanBakuKeluar::findOrFail($id);
-        $bahanbaku_keluar->bahanbaku_id = $request->bahanbaku_id;
-        $bahanbaku_keluar->jumlah = $request->jumlah;
-        $bahanbaku_keluar->save();
-        Alert::success("Terupdate", "Data Berhasil Diupdate");
-        return redirect()->route('bahanbaku-keluar.index');
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     $bahanbaku_keluar = BahanBakuKeluar::findOrFail($id);
+    //     $bahanbaku_keluar->bahanbaku_id = $request->bahanbaku_id;
+    //     $bahanbaku_keluar->jumlah = $request->jumlah;
+    //     $bahanbaku_keluar->save();
+    //     Alert::success("Terupdate", "Data Berhasil Diupdate");
+    //     return redirect()->route('bahanbaku-keluar.index');
+    // }
 
 
     public function delete($id)

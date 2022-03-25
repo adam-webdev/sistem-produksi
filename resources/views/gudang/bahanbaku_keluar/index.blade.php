@@ -26,6 +26,7 @@
                         <div class="form-group">
                             <label for="barang">Nama Material :</label>
                             <select style="width:100%" name="stok_id" id="barang" class="form-control select" required>
+                                <option selected disabled value="">-- pilih material --</option>
                                 @foreach ($stok as $b)
                                     <option value="{{ $b->id }}">{{ $b->bahanbaku->nama_material }}</option>
                                 @endforeach
@@ -33,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label for="jumlah_barang">Jumlah Bahan Baku :</label>
-                            <input type="number" name="jumlah" class="form-control" id="jumlah_barang">
+                            <input type="number" name="jumlah" class="form-control" id="jumlah_barang" required>
                         </div>
 
 

@@ -27,18 +27,19 @@
                             <label for="barang">Nama Material :</label>
                             <select style="width:100%" name="jadwalproduksi_id" id="barang" class="form-control select"
                                 required>
-                                @foreach ($data as $b)
-                                    <option value="{{ $b->id }}">{{ $b->jadwalproduksi->nama_barang }}</option>
+                                <option selected disabled value="">-- pilih material --</option>
+                                @foreach ($jadwalproduksi as $b)
+                                    <option value="{{ $b->id }}">{{ $b->nama_barang }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="jumlah_barang">Jumlah Barang :</label>
-                            <input type="number" name="jumlah" class="form-control" id="jumlah_barang">
+                            <input type="number" name="jumlah" class="form-control" id="jumlah_barang" required>
                         </div>
                         <div class="form-group">
                             <label for="keterangan">Keterangan :</label>
-                            <textarea type="text" name="keterangan" class="form-control" id="keterangan"></textarea>
+                            <textarea type="text" name="keterangan" class="form-control" id="keterangan" required></textarea>
                         </div>
 
 
@@ -77,12 +78,17 @@
                         @foreach ($data as $data)
                             <tr align="center">
                                 <td>{{ $data->jadwalproduksi->nama_barang }}</td>
-                                <td>{{ $data->jadwalproduksi->tanggal->format('d-m-Y') }}</td>
+                                <td>{{ $data->jadwalproduksi->tanggal }}</td>
                                 <td>{{ $data->jadwalproduksi->jeniswarna_barang }}</td>
                                 <td>{{ $data->jadwalproduksi->jumlah_barang }}</td>
                                 <td>{{ $data->jumlah }}</td>
-                                <td>{{ $data->jumlah >= $data->jadwalproduksi->jumlah_barang ? 'Tercapai' : 'Belum Tercapai' }}
-                                </td>
+                                @if ($data->jumlah >= $data->jadwalproduksi->jumlah_barang)
+                                    <td><span class="btn btn-sm btn-light text-success shadow-sm">Tercapai</span></td>
+                                @else
+                                    <td width="150px">
+                                        <span class="btn btn-sm btn-light text-danger shadow-sm">Belum Tercapai</span>
+                                    </td>
+                                @endif
                                 <td>{{ $data->keterangan }}</td>
                                 <td align="center" width="10%">
                                     <a href="{{ route('pencatatan-produksi.edit', [$data->id]) }}" data-toggle="tooltip"

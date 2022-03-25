@@ -11,7 +11,7 @@ class FinishGoodController extends Controller
     public function index()
     {
         $data = FinishGood::all();
-        return view('finishgood.index', compact("data"));
+        return view('admin.finishgood.index', compact("data"));
     }
 
 
@@ -43,7 +43,7 @@ class FinishGoodController extends Controller
     public function edit($id)
     {
         $data = FinishGood::findOrFail($id);
-        return view("finishgood.edit", compact('data'));
+        return view("admin.finishgood.edit", compact('data'));
     }
 
 

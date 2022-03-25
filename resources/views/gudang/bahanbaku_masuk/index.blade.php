@@ -3,7 +3,7 @@
     @include('sweetalert::alert')
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Stok Material</h1>
+        <h1 class="h3 mb-0 text-gray-800">Data Material Masuk</h1>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             + Tambah
@@ -15,22 +15,28 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Stok</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Masuk</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('stok.store') }}" method="POST">
+                <form action="{{ route('bahanbaku-masuk.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="barang">Nama Material :</label>
-                            <select style="width:100%" name="bahanbaku_id" id="barang" class="form-control select" required>
-                                @foreach ($bahanbaku as $b)
-                                    <option value="{{ $b->id }}">{{ $b->nama_material }}</option>
+                            <select style="width:100%" name="stok_id" id="barang" class="form-control select" required>
+                                <option selected disabled value="">-- pilih material --</option>
+                                @foreach ($stok as $b)
+                                    <option value="{{ $b->id }}">{{ $b->bahanbaku->nama_material }}</option>
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="jumlah_barang">Jumlah Material :</label>
+                            <input type="number" name="jumlah" class="form-control" id="jumlah_barang" required>
+                        </div>
+
 
                     </div>
                     <div class="modal-footer">
@@ -56,23 +62,24 @@
                             <th>Kode Material</th>
                             <th>Tanggal</th>
                             <th>Nama Material</th>
-                            <th>Jumlah Stok Material</th>
+                            <th>Material Baru</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($stok as $bm)
+                        @foreach ($bahanbaku_masuk as $bm)
                             <tr align="center">
-                                <td>{{ $bm->bahanbaku->kode_material }}</td>
+                                <td>{{ $bm->stok->bahanbaku->kode_material }}</td>
                                 <td>{{ $bm->created_at->format('d-m-Y') }}</td>
-                                <td>{{ $bm->bahanbaku->nama_material }}</td>
-                                <td>{{ $bm->jumlah_material }}</td>
+                                <td>{{ $bm->stok->bahanbaku->nama_material }}</td>
+                                <td>{{ $bm->jumlah }}</td>
+                                {{-- <td>{{ $bm->stok->jumlah_material }}</td> --}}
                                 <td align="center" width="10%">
-                                    <a href="{{ route('stok.edit', [$bm->id]) }}" data-toggle="tooltip" title="Edit"
-                                        class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                    {{-- <a href="{{ route('bahanbaku-masuk.edit', [$bm->id]) }}" data-toggle="tooltip"
+                                        title="Edit" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                         <i class="fas fa-edit fa-sm text-white-50"></i>
-                                    </a>
-                                    <a href="/stok/hapus/{{ $bm->id }}" data-toggle="tooltip" title="Hapus"
+                                    </a> --}}
+                                    <a href="/bahanbaku-masuk/hapus/{{ $bm->id }}" data-toggle="tooltip" title="Hapus"
                                         onclick="return confirm('Yakin Ingin menghapus data?')"
                                         class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
                                         <i class="fas fa-trash-alt fa-sm text-white-50"></i>

@@ -28,22 +28,22 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nama">Nama Barang :</label>
-                            <input type="text" name="nama_barang" class="form-control id=" nama">
+                            <input type="text" name="nama_barang" class="form-control id=" nama" required>
                         </div>
 
                         <div class="form-group">
                             <label for="barang">Tanggal </label>
-                            <input type="date" name="tanggal" class="form-control" id="barang">
+                            <input type="date" name="tanggal" class="form-control" id="barang" required>
                         </div>
                         <div class="form-group">
                             <label for="barang">Target Produksi</label>
-                            <input type="number" name="target" class="form-control" id="barang">
+                            <input type="number" name="target" class="form-control" id="barang" required>
                         </div>
 
                         <div class="form-group">
                             <label for="jenis_warna">Jenis Warna Material :</label>
-                            <select type="text" name="jenis" class="form-control" id="jenis_warna">
-                                <option disabled selected>-- Pilih Jenis Warna --</option>
+                            <select type="text" name="jenis" class="form-control" id="jenis_warna" required>
+                                <option disabled selected value="">-- Pilih Jenis Warna --</option>
                                 <option value="Tidak ada">Tidak ada</option>
                                 <option value="Red">Red</option>
                                 <option value="White">White</option>
@@ -86,7 +86,7 @@
                         @foreach ($data as $b)
                             <tr align="center">
                                 <td>{{ $b->nama_barang }}</td>
-                                <td>{{ $b->tanggal->format('d-m-Y') }}</td>
+                                <td>{{ $b->tanggal }}</td>
                                 <td>{{ $b->jeniswarna_barang }}</td>
                                 <td>{{ $b->jumlah_barang }}</td>
                                 <td align="center" width="10%">

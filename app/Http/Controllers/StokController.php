@@ -13,7 +13,7 @@ class StokController extends Controller
     {
         $bahanbaku = BahanBaku::all();
         $stok = Stok::with('bahanbaku', 'bahanbakukeluar', 'bahanbakumasuk')->get();
-        return view('stok.index', compact("stok", "bahanbaku"));
+        return view('gudang.stok.index', compact("stok", "bahanbaku"));
     }
 
     public function create()
@@ -42,7 +42,7 @@ class StokController extends Controller
     {
         $stok = Stok::findOrFail($id);
         $bahanbaku = BahanBaku::all();
-        return view("stok.edit", compact("stok", "bahanbaku"));
+        return view("gudang.stok.edit", compact("stok", "bahanbaku"));
     }
 
     public function update(Request $request, $id)

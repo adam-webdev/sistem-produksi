@@ -2,7 +2,7 @@
 @section('content')
     @include('sweetalert::alert')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Finish Good </h1>
+        <h1 class="h3 mb-0 text-gray-800">Data Material </h1>
         <!-- Button trigger modal -->
         {{-- @role('admin') --}}
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -12,43 +12,48 @@
 
     </div>
 
+    @if (count($errors) > 0)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul class="p-0 m-0" style="list-style: none;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Finish Good</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Material</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('finish-good.store') }}" method="POST">
+                <form action="{{ route('bahan-baku.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="kode_barang">Kode Finish Good :</label>
-                            <input type="text" name="kode_fg" class="form-control" id="kode_barang">
-                        </div>
-                        <div class="form-group">
-                            <label for="barang">Nama Finish Good :</label>
-                            <input type="text" name="nama_fg" class="form-control" id="barang">
-                        </div>
-                        <div class="form-group">
-                            <label for="jumlah">Jumalah Finish Good :</label>
-                            <input type="text" name="jumlah_fg" class="form-control" id="jumlah">
+                            <label for="kode_barang">Kode Material :</label>
+                            <input type="text" name="kode_material" class="form-control id=" kode_barang" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="jenis_material">Jenis Warna Finish Good :</label>
-                            <select type="number" name="jeniswarna_fg" class="form-control" id="jenis_material">
-                                <option disabled selected>-- pilih jenis warna --</option>
-                                <option value="Red">Red</option>
-                                <option value="White">White</option>
-                                <option value="Blue">Blue</option>
-                                <option value="Green">Green</option>
-                                <option value="Black">Black</option>
-                                <option value="Gold">Gold</option>
-                                <option value="Yellow">Yellow</option>
+                            <label for="barang">Nama Material :</label>
+                            <input type="text" name="nama_material" class="form-control" id="barang" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jenis_material">Jenis Material :</label>
+                            <select type="text" required name="jenis_material" class="form-control" id="jenis_material">
+                                <option disabled selected value="">-- pilih jenis material --</option>
+                                <option value="a">a</option>
+                                <option value="b">b</option>
+                                <option value="c">c</option>
                             </select>
                         </div>
 
@@ -72,27 +77,25 @@
                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr align="center">
-                            <th>Kode Finish Good</th>
-                            <th>Nama Finish Good </th>
-                            <th>Jumlah Finish Good</th>
-                            <th>Jenis Warna Finish Good </th>
+                            <th>Kode Material</th>
+                            <th>Nama Material </th>
+                            <th>Jenis Material </th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data as $b)
+                        @foreach ($bahanbaku as $b)
                             <tr align="center">
-                                <td>{{ $b->kode_fg }}</td>
-                                <td>{{ $b->nama_fg }}</td>
-                                <td>{{ $b->jumlah_fg }}</td>
-                                <td>{{ $b->jeniswarna_fg }}</td>
+                                <td>{{ $b->kode_material }}</td>
+                                <td>{{ $b->nama_material }}</td>
+                                <td>{{ $b->jenis_material }}</td>
                                 <td align="center" width="10%">
                                     {{-- @role('admin') --}}
-                                    <a href="{{ route('finish-good.edit', [$b->id]) }}" data-toggle="tooltip" title="Edit"
+                                    <a href="{{ route('bahan-baku.edit', [$b->id]) }}" data-toggle="tooltip" title="Edit"
                                         class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                         <i class="fas fa-edit fa-sm text-white-50"></i>
                                     </a>
-                                    <a href="/finish-good/hapus/{{ $b->id }}" data-toggle="tooltip" title="Hapus"
+                                    <a href="/bahan-baku/hapus/{{ $b->id }}" data-toggle="tooltip" title="Hapus"
                                         onclick="return confirm('Yakin Ingin menghapus data?')"
                                         class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
                                         <i class="fas fa-trash-alt fa-sm text-white-50"></i>

@@ -14,7 +14,7 @@ class BahanBakuController extends Controller
 
 
         $bahanbaku = BahanBaku::all();
-        return view('bahanbaku.index', compact("bahanbaku"));
+        return view('admin.bahanbaku.index', compact("bahanbaku"));
     }
 
 
@@ -56,7 +56,7 @@ class BahanBakuController extends Controller
     public function edit($id)
     {
         $bahanbaku = BahanBaku::findOrFail($id);
-        return view("bahanbaku.edit", compact('bahanbaku'));
+        return view("admin.bahanbaku.edit", compact('bahanbaku'));
     }
 
 

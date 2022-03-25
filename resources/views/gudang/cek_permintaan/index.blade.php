@@ -31,7 +31,14 @@
                                 <td>{{ $data->created_at->format('d-m-Y') }}</td>
                                 <td>{{ $data->bahanbaku->nama_material }}</td>
                                 <td>{{ $data->jumlah_material }}</td>
-                                <td>{{ $data->status }}</td>
+                                @if ($data->status === 'Permintaan Diterima')
+                                    <td><span class="btn btn-sm btn-light  shadow-sm text-primary">Permintaan Diterima</span>
+                                    </td>
+                                @else
+                                    <td>
+                                        <span class="btn btn-sm btn-light shadow-sm text-danger">Belum Diterima</span>
+                                    </td>
+                                @endif
                                 <td align="center" width="10%">
                                     <a href="{{ route('cek-permintaan.edit', [$data->id]) }}" data-toggle="tooltip"
                                         title="Edit" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">

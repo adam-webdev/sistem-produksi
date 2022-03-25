@@ -13,7 +13,7 @@ class PermintaanBahanBakuController extends Controller
     {
         $bahanbaku = BahanBaku::all();
         $data = PermintaanBahanBaku::with('bahanbaku')->get();
-        return view('permintaan_bahanbaku.index', compact("data", "bahanbaku"));
+        return view('produksi.permintaan_bahanbaku.index', compact("data", "bahanbaku"));
     }
 
     public function create()
@@ -42,7 +42,7 @@ class PermintaanBahanBakuController extends Controller
     {
         $data = PermintaanBahanBaku::findOrFail($id);
         $bahanbaku = BahanBaku::all();
-        return view("permintaan_bahanbaku.edit", compact("data", "bahanbaku"));
+        return view("produksi.permintaan_bahanbaku.edit", compact("data", "bahanbaku"));
     }
 
     public function update(Request $request, $id)

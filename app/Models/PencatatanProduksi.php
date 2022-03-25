@@ -9,8 +9,9 @@ class PencatatanProduksi extends Model
 {
     use HasFactory;
     protected $table = "pencatatan_produksis";
+
     public function jadwalproduksi()
     {
-        return $this->belongsTo(JadwalProduksi::class);
+        return $this->belongsTo(JadwalProduksi::class, 'jadwal_produksi_id', 'id');
     }
 }

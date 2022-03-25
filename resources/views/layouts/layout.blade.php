@@ -103,6 +103,39 @@
                             href="{{ route('cek-permintaan.index') }}">Cek Permintaan Produksi</a>
                     </div>
                 </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages3"
+                    aria-expanded="true" aria-controls="collapsePage3">
+                    <i class="fas fa-fw fa-folder-open"></i>
+                    <span>Laporan</span>
+                </a>
+                <div id="collapsePages3" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.bahanbaku') }}">
+                            Bahan Baku </a>
+                        <a class="collapse-item fas fa-arrow-circle-right"
+                            href="{{ route('laporan.bahanbaku_keluar') }}">
+                            Bahan Baku Keluar </a>
+                        <a class="collapse-item fas fa-arrow-circle-right"
+                            href="{{ route('laporan.bahanbaku_masuk') }}">
+                            Bahan Baku Masuk </a>
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.finishgood') }}">
+                            Finish Good </a>
+                        <a class="collapse-item fas fa-arrow-circle-right"
+                            href="{{ route('laporan.jadwalproduksi') }}">
+                            Jadwal Produksi </a>
+                        <a class="collapse-item fas fa-arrow-circle-right"
+                            href="{{ route('laporan.pencatatanproduksi') }}">
+                            Pencatatan Produksi </a>
+                        <a class="collapse-item fas fa-arrow-circle-right"
+                            href="{{ route('laporan.permintaanbahanbaku') }}">
+                            Permintaan Bahan Baku </a>
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.stok') }}">
+                            Stok </a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Tables -->

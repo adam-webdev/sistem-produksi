@@ -14,6 +14,7 @@ class Stok extends Model
     {
         return $this->belongsTo(BahanBaku::class);
     }
+
     public function bahanbakukeluar()
     {
         return $this->hasOne(BahanBakuKeluar::class);

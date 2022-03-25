@@ -14,7 +14,7 @@ class BahanBakuMasukController extends Controller
     {
         $stok = Stok::all();
         $bahanbaku_masuk = BahanBakuMasuk::with('stok')->get();
-        return view('bahanbaku_masuk.index', compact("bahanbaku_masuk", "stok"));
+        return view('gudang.bahanbaku_masuk.index', compact("bahanbaku_masuk", "stok"));
     }
 
     public function create()

@@ -19,7 +19,7 @@
                 </div>
 
             </div>
-            <div class="form-group">
+            <div class="form-group row">
                 <div class="col-md-5">
                     <label for="jumlah_barang">Jumlah Material :</label>
                     <input type="number" value="{{ $data->jumlah_material }}" name="jumlah_material" class="form-control"

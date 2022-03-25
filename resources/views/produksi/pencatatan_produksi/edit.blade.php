@@ -12,8 +12,8 @@
                     <select style="width:100%" name="jadwalproduksi_id" id="barang" class="form-control select" required>
                         <option disabled value="{{ $data->jadwalproduksi->id }}">
                             {{ $data->jadwalproduksi->nama_barang }}</option>
-                        @foreach ($jadwal_produksi as $jp)
-                            <option value="{{ $jp->id }}">{{ $jp->nama_material }}</option>
+                        @foreach ($jadwalproduksi as $jp)
+                            <option value="{{ $jp->id }}">{{ $jp->nama_barang }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-5">
                     <label for="keterangan">Keterangan :</label>
-                    <textarea id="keterangan" type="text" name="keterangan" class="form-control" required
+                    <textarea rows="5" id="keterangan" type="text" name="keterangan" class="form-control" required
                         value="{{ $data->keterangan }}"></textarea>
                 </div>
             </div>
