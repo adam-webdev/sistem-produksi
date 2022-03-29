@@ -24,12 +24,25 @@ class StokController extends Controller
 
     public function store(Request $request)
     {
-        $stok = new Stok;
-        $stok->bahanbaku_id = $request->bahanbaku_id;
-        $stok->jumlah_material = 0;
 
+        $id = Stok::where('bahanbaku_id', $request->bahanbaku_id)->first();
+        // jika finish good sudah ada tambahkan jumlahnya
+        if ($id) {
+            $data = Stok::findOrFail($request->bahanbaku_id);
+            $data->bahanbaku_id =  $data->bahanbaku_id;
+            $data->satuan =  $data->satuan;
+            $data->jumlah_material = $data->jumlah_material + $request->jumlah;
+            $data->save();
+            Alert::success("Tersimpan", "Jumlah Stok Bahan Baku Berhasil Ditambah");
+            return redirect()->route('stok.index');
+        }
+
+        $stok = new Stok();
+        $stok->bahanbaku_id = $request->bahanbaku_id;
+        $stok->jumlah_material = $request->jumlah;
+        $stok->satuan = $request->satuan;
         $stok->save();
-        Alert::success("Tersimpan", "Stok Berhasil Disimpan");
+        Alert::success("Tersimpan", "Stok Bahan Baku Berhasil Disimpan");
         return redirect()->route('stok.index');
     }
 
@@ -50,6 +63,7 @@ class StokController extends Controller
         $stok = Stok::findOrFail($id);
         $stok->bahanbaku_id = $request->bahanbaku_id;
         $stok->jumlah_material = $stok->jumlah_material;
+        $stok->satuan = $request->satuan;
         $stok->save();
         Alert::success("Terupdate", "Data Berhasil Diupdate");
         return redirect()->route('stok.index');

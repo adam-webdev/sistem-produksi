@@ -9,6 +9,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class BahanBakuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin|Direktur');
+    }
     public function index()
     {
 

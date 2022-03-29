@@ -34,16 +34,16 @@
 
 <body>
     <div class="header">
-        <div class=" text">
+        <div class="text">
             <h2>CV. Mutiara Kencana</h2>
-            <p>Jl. Pengasinan Bekasi 17510</p>
+            <p>Jl. Kalimalang Bekasi 17512</p>
             <p>Email : cv-mutiara-kencana@gmail.com Fax :202020</p>
         </div>
     </div>
     <hr>
     <div class="row">
         <h5 class="text-center">
-            {{ $periode == 'all'? 'Laporan  Jadwal produksi all ': 'Laporan Jadwal produksi Per-periode ' . $tgl_awal . ' sampai dengan ' . $tgl_akhir }}
+            {{ $periode == 'all'? 'Laporan Bahan Baku all ': 'LaporanBahan Baku Per-periode ' . $tgl_awal . ' sampai dengan ' . $tgl_akhir }}
         </h5>
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -51,20 +51,20 @@
             <thead>
                 <tr align="center">
                     <th width="2%">No</th>
-                    <th>Nama Barang</th>
                     <th>Tanggal</th>
-                    <th>Jenis Warna Barang</th>
-                    <th> Jumlah Barang </th>
+                    <th>Kode Material</th>
+                    <th>Nama Material</th>
+                    <th>Jenis Material </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $r)
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
-                        <td>{{ $r->nama_barang }}</td>
                         <td>{{ $r->created_at->format('d-m-Y') }}</td>
-                        <td>{{ $r->jeniswarna_barang }}</td>
-                        <td>{{ $r->jumlah_barang }}</td>
+                        <td>{{ $r->kode_material }}</td>
+                        <td>{{ $r->nama_material }}</td>
+                        <td>{{ $r->jenis_material }}</td>
                     </tr>
                 @endforeach
 

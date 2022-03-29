@@ -5,9 +5,11 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Material Keluar</h1>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            + Tambah
-        </button>
+        @role('Admin|Gudang')
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                + Tambah
+            </button>
+        @endrole
     </div>
 
     <!-- Modal -->
@@ -63,6 +65,7 @@
                             <th>Tanggal</th>
                             <th>Nama Material</th>
                             <th>Material Keluar</th>
+                            <th>Satuan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -73,17 +76,20 @@
                                 <td>{{ $bm->created_at->format('d-m-Y') }}</td>
                                 <td>{{ $bm->stok->bahanbaku->nama_material }}</td>
                                 <td>{{ $bm->jumlah }}</td>
+                                <td>{{ $bm->stok->satuan }}</td>
                                 {{-- <td>{{ $bm->bahanbaku->jumlah_material }}</td> --}}
                                 <td align="center" width="10%">
-                                    {{-- <a href="{{ route('bahanbaku-keluar.edit', [$bm->id]) }}" data-toggle="tooltip"
+                                    @role('Admin|Gudang')
+                                        {{-- <a href="{{ route('bahanbaku-keluar.edit', [$bm->id]) }}" data-toggle="tooltip"
                                     title="Edit" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                     <i class="fas fa-edit fa-sm text-white-50"></i>
                                 </a> --}}
-                                    <a href="/bahanbaku-keluar/hapus/{{ $bm->id }}" data-toggle="tooltip"
-                                        title="Hapus" onclick="return confirm('Yakin Ingin menghapus data?')"
-                                        class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
-                                        <i class="fas fa-trash-alt fa-sm text-white-50"></i>
-                                    </a>
+                                        <a href="/bahanbaku-keluar/hapus/{{ $bm->id }}" data-toggle="tooltip"
+                                            title="Hapus" onclick="return confirm('Yakin Ingin menghapus data?')"
+                                            class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                                            <i class="fas fa-trash-alt fa-sm text-white-50"></i>
+                                        </a>
+                                    @endrole
                                 </td>
                             </tr>
                         @endforeach

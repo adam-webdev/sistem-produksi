@@ -45,111 +45,121 @@
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Data Master</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('bahan-baku.index') }}">
-                            Bahan
-                            Baku</a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('finish-good.index') }}">
-                            Barang Finish Good</a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('user.index') }}">User</a>
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('jadwal-produksi.index') }}">
-                            Jadwal Produksi</a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="#"> Sub Menu 5</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages1"
-                    aria-expanded="true" aria-controls="collapsePages1">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Produksi</span>
-                </a>
-                <div id="collapsePages1" class="collapse" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('permintaan-bahanbaku.index') }}"> Permintaan Bahan Baku</a>
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('pencatatan-produksi.index') }}"> Hasil Produksi</a>
-                    </div>
-                </div>
-            </li>
+            @hasanyrole('Admin|Direktur')
+                <li class="nav-item">
+                    <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages"
+                        aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas  fa-fw fa-table"></i>
+                        <span>Data Master</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item fas fa-archive" href="{{ route('bahan-baku.index') }}">
+                                Bahan
+                                <a class="collapse-item fas fa-clipboard-check" href="{{ route('finish-good.index') }}">
+                                    Barang Finish Good</a>
+                                <a class="collapse-item fas fa-users" href="{{ route('user.index') }}">
+                                    User</a>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages2"
-                    aria-expanded="true" aria-controls="collapsePage2">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Gudang</span>
-                </a>
-                <div id="collapsePages2" class="collapse" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('bahanbaku-masuk.index') }}"> Bahan Baku Masuk</a>
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('bahanbaku-keluar.index') }}"> Bahan Baku Keluar</a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('stok.index') }}">Stok
-                            Barang</a>
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('cek-permintaan.index') }}">Cek Permintaan Produksi</a>
+
+                        </div>
                     </div>
-                </div>
+                </li>
+            @endhasanyrole
+            @hasanyrole('Admin|Direktur|Produksi')
+                <li class="nav-item">
+                    <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages1"
+                        aria-expanded="true" aria-controls="collapsePages1">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Produksi</span>
+                    </a>
+
+                    <div id="collapsePages1" class="collapse" aria-labelledby="headingPages"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item fas fa-hands" href="{{ route('permintaan-bahanbaku.index') }}">
+                                Permintaan Bahan Baku</a>
+                            <a class="collapse-item fas fa-box-open" href="{{ route('pencatatan-produksi.index') }}">
+                                Hasil Produksi</a>
+                            <a class="collapse-item fas fa-hourglass-half"
+                                href="{{ route('cek-jadwalproduksi.index') }}">
+                                Cek Jadwal Produksi</a>
+                        </div>
+                    </div>
+                </li>
+            @endhasanyrole
+            @hasanyrole('Admin|Direktur|Gudang')
+                <li class="nav-item">
+                    <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages2"
+                        aria-expanded="true" aria-controls="collapsePage2">
+                        <i class="fas fa-fw fa-warehouse"></i>
+                        <span>Gudang</span>
+                    </a>
+                    <div id="collapsePages2" class="collapse" aria-labelledby="headingPages"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+
+                            <a class="collapse-item fas fa-box" href="{{ route('stok.index') }}"> Stok
+                                Bahan Baku</a>
+                            <a class="collapse-item fas fa-check-double" href="{{ route('stokfinishgood.index') }}"> Stok
+                                Finish Good</a>
+                            <a class="collapse-item fas fa-door-open" href="{{ route('bahanbaku-masuk.index') }}"> Bahan
+                                Baku Masuk</a>
+                            <a class="collapse-item fas fa-external-link-alt"
+                                href="{{ route('bahanbaku-keluar.index') }}"> Bahan Baku Keluar</a>
+                            <a class="collapse-item fas fa-hourglass-half" href="{{ route('jadwal-produksi.index') }}">
+                                Jadwal Produksi</a>
+                            <a class="collapse-item fas fa-hands" href="{{ route('cek-permintaan.index') }}">
+                                Permintaan Produksi</a>
+                        </div>
+                    </div>
+                </li>
+            @endhasanyrole
 
             <li class="nav-item">
                 <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages3"
                     aria-expanded="true" aria-controls="collapsePage3">
-                    <i class="fas fa-fw fa-folder-open"></i>
+                    <i class="fas fa-fw  fa-file-pdf"></i>
                     <span>Laporan</span>
                 </a>
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.bahanbaku') }}">
-                            Bahan Baku </a>
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('laporan.bahanbaku_keluar') }}">
-                            Bahan Baku Keluar </a>
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('laporan.bahanbaku_masuk') }}">
-                            Bahan Baku Masuk </a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.finishgood') }}">
-                            Finish Good </a>
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('laporan.jadwalproduksi') }}">
-                            Jadwal Produksi </a>
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('laporan.pencatatanproduksi') }}">
-                            Pencatatan Produksi </a>
-                        <a class="collapse-item fas fa-arrow-circle-right"
-                            href="{{ route('laporan.permintaanbahanbaku') }}">
-                            Permintaan Bahan Baku </a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.stok') }}">
-                            Stok </a>
+                        {{-- @hasanyrole('Admin|Direktur')
+                            <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.bahanbaku') }}">
+                                Bahan Baku </a>
+                            <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.finishgood') }}">
+                                Finish Good </a>
+                        @endhasanyrole --}}
+
+                        @hasanyrole('Admin|Direktur|Gudang')
+                            <a class="collapse-item fas fa-hourglass-half" href="{{ route('laporan.jadwalproduksi') }}">
+                                Jadwal Produksi </a>
+                            <a class="collapse-item fas fa-external-link-alt"
+                                href="{{ route('laporan.bahanbaku_keluar') }}">
+                                Bahan Baku Keluar </a>
+                            <a class="collapse-item fas fa-door-open" href="{{ route('laporan.bahanbaku_masuk') }}">
+                                Bahan Baku Masuk </a>
+                            <a class="collapse-item fas fa-box" href="{{ route('laporan.stok') }}">
+                                Stok Bahan Baku </a>
+                            <a class="collapse-item fas fa-check-double" href="{{ route('laporan.stokfinishgood') }}">
+                                Stok Finsih Good </a>
+                        @endhasanyrole
+
+                        @hasanyrole('Admin|Direktur|Produksi')
+                            <a class="collapse-item fas fa-hands" href="{{ route('laporan.pencatatanproduksi') }}">
+                                Pencatatan Produksi </a>
+                            <a class="collapse-item fas fa-archive" href="{{ route('laporan.permintaanbahanbaku') }}">
+                                Permintaan Bahan Baku </a>
+                        @endhasanyrole
+
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item ">
-                <a class="nav-link text-white" href="#">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Menu Utama 3</span></a>
-            </li>
 
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="fas fa-fw fa-archive"></i>
-                    <span>Menu Utama 4</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

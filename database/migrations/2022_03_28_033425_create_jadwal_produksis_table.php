@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStoksTable extends Migration
+class CreateJadwalProduksisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateStoksTable extends Migration
      */
     public function up()
     {
-        Schema::create('stoks', function (Blueprint $table) {
+        Schema::create('jadwal_produksis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bahanbaku_id')->constrained('bahan_bakus')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('jumlah_material');
+            $table->foreignId('stokfinishgood_id')->constrained('stok_finish_goods')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('tanggal');
+            $table->integer('jumlah_barang');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateStoksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stoks');
+        Schema::dropIfExists('jadwal_produksis');
     }
 }

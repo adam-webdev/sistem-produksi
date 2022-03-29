@@ -17,7 +17,6 @@ class CreateFinishGoodsTable extends Migration
             $table->id();
             $table->string('kode_fg');
             $table->string('nama_fg');
-            $table->integer('jumlah_fg');
             $table->string('jeniswarna_fg');
             $table->timestamps();
         });

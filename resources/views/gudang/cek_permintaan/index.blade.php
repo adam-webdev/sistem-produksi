@@ -5,9 +5,7 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Permintaan Bahan Baku Produksi</h1>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            + Tambah
-        </button>
+
     </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">

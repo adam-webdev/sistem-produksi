@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{BahanBakuController, BahanBakuKeluarController, BahanBakuMasukController, DashboardController, FinishGoodController, JadwalProduksiController, LaporanController, PencatatanProduksiController, PermintaanBahanBakuController, StokController, UserController};
+use App\Http\Controllers\{BahanBakuController, BahanBakuKeluarController, BahanBakuMasukController, DashboardController, FinishGoodController, JadwalProduksiController, LaporanController, PencatatanProduksiController, PermintaanBahanBakuController, StokController, StokFinishGoodController, UserController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,11 +49,19 @@ Route::get('/cek-permintaan-bahanbaku', [PermintaanBahanBakuController::class, "
 Route::get('/cek-permintaan-bahanbaku/{id}', [PermintaanBahanBakuController::class, "edit_permintaan"])->name('cek-permintaan.edit');
 Route::put('/cek-permintaan-bahanbaku/{id}', [PermintaanBahanBakuController::class, "update_permintaan"])->name('cek-permintaan.update');
 
+// cek jadwal produksi
+Route::get('/cek-jadwalproduksi', [JadwalProduksiController::class, "cekjadwalproduksi"])->name('cek-jadwalproduksi.index');
+
 Route::resource('/user', UserController::class);
 Route::get('/user/hapus/{id}', [UserController::class, "delete"]);
 
+
 Route::resource('/stok', StokController::class);
 Route::get('/stok/hapus/{id}', [StokController::class, "delete"]);
+
+//stok finish good
+Route::resource('/stokfinishgood', StokFinishGoodController::class);
+Route::get('/stokfinishgood/hapus/{id}', [StokFinishGoodController::class, "delete"]);
 
 // laporan
 
@@ -88,3 +96,7 @@ Route::post('/laporan-permintaanbahanbaku', [LaporanController::class, 'perminta
 // laporan stok
 Route::get('/laporan-stok', [LaporanController::class, 'view_stok'])->name('laporan.stok');
 Route::post('/laporan-stok', [LaporanController::class, 'stok'])->name('laporan.stok.print');
+Route::get('/laporan-stokfinishgood', [LaporanController::class, 'view_stokfinishgood'])->name('laporan.stokfinishgood');
+Route::post('/laporan-stokfinishgood', [LaporanController::class, 'stokfinishgood'])->name('laporan.stokfinishgood.print');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

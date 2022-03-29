@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JadwalProduksi;
 use App\Models\PencatatanProduksi;
+use App\Models\StokFinishGood;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -12,8 +13,9 @@ class PencatatanProduksiController extends Controller
     public function index()
     {
         $jadwalproduksi = JadwalProduksi::all();
-        $data = PencatatanProduksi::with('jadwalproduksi')->get();
-        return view('produksi.pencatatan_produksi.index', compact("data", "jadwalproduksi"));
+        $stokfinishgood = StokFinishGood::all();
+        $data = PencatatanProduksi::with('jadwalproduksi', 'stokfinishgood')->get();
+        return view('produksi.pencatatan_produksi.index', compact("data", "jadwalproduksi", "stokfinishgood"));
     }
 
     public function create()
@@ -26,6 +28,7 @@ class PencatatanProduksiController extends Controller
 
         $data = new PencatatanProduksi();
         $data->jadwal_produksi_id = $request->jadwalproduksi_id;
+        $data->stokfinishgood_id = $request->stokfinishgood_id;
         $data->jumlah = $request->jumlah;
         $data->keterangan = $request->keterangan;
         $data->save();
@@ -42,13 +45,16 @@ class PencatatanProduksiController extends Controller
     {
         $data = PencatatanProduksi::findOrFail($id);
         $jadwalproduksi = JadwalProduksi::all();
-        return view("produksi.pencatatan_produksi.edit", compact("data", "jadwalproduksi"));
+        $stokfinishgood = StokFinishGood::all();
+
+        return view("produksi.pencatatan_produksi.edit", compact("data", "jadwalproduksi", "stokfinishgood"));
     }
 
     public function update(Request $request, $id)
     {
         $data = PencatatanProduksi::findOrFail($id);
         $data->jadwal_produksi_id = $request->jadwalproduksi_id;
+        $data->stokfinishgood_id = $request->stokfinishgood_id;
         $data->jumlah = $request->jumlah;
         $data->keterangan = $request->keterangan;
         $data->save();

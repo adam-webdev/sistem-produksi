@@ -17,11 +17,11 @@
                     <input id="kode" type="text" name="kode_fg" class="form-control" required
                         value="{{ $data->kode_fg }}">
                 </div>
-                <div class="col-md-5">
+                {{-- <div class="col-md-5">
                     <label for="jumlah">Jumlah Finish Good</label>
                     <input id="jumlah" type="number" name="jumlah_fg" class="form-control" required
                         value="{{ $data->jumlah_fg }}">
-                </div>
+                </div> --}}
                 <div class="col-md-5">
                     <label for="barang">Jenis Warna Finish Good :</label>
                     <select style="width:100%" name="jeniswarna_fg" id="barang" class="form-control select" required>

@@ -10,10 +10,15 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class BahanBakuMasukController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin|Direktur|Gudang');
+    }
+
     public function index()
     {
         $stok = Stok::all();
-        $bahanbaku_masuk = BahanBakuMasuk::with('stok')->get();
+        $bahanbaku_masuk = BahanBakuMasuk::with('stok', 'stok.bahanbaku')->get();
         return view('gudang.bahanbaku_masuk.index', compact("bahanbaku_masuk", "stok"));
     }
 

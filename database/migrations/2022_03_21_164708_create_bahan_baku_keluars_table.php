@@ -15,8 +15,7 @@ class CreateBahanBakuKeluarsTable extends Migration
     {
         Schema::create('bahan_baku_keluars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bahanbaku_id')->constrained('bahan_bakus')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('stok_id')->constrained('stoks')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('stok_id')->constrained('stok_bahan_bakus')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('jumlah');
             $table->timestamps();
         });

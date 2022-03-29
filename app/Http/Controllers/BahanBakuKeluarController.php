@@ -15,6 +15,11 @@ class BahanBakuKeluarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('role:Admin|Direktur|Gudang');
+    }
+
     public function index()
     {
         $stok = Stok::all();

@@ -51,7 +51,7 @@
             <thead>
                 <tr align="center">
                     <th width="2%">No</th>
-                    <th>Kode Material</th>
+                    <th>Kode Permintaan</th>
                     <th>Tanggal</th>
                     <th>Nama Material</th>
                     <th> Jumlah</th>
@@ -62,7 +62,7 @@
                 @foreach ($data as $r)
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
-                        <td>{{ $r->bahanbaku->kode_material }}</td>
+                        <td>{{ $r->kode }}</td>
                         <td>{{ $r->created_at->format('d-m-Y') }}</td>
                         <td>{{ $r->bahanbaku->nama_material }}</td>
                         <td>{{ $r->jumlah_material }}</td>

@@ -18,7 +18,7 @@ class CreateDeleteOldStokBahanbakumasukTable extends Migration
         DB::unprepared('
         CREATE TRIGGER delete_old_stok_bahanbakumasuk after DELETE ON bahan_baku_masuks
         FOR EACH ROW BEGIN
-        UPDATE stoks
+        UPDATE stok_bahan_bakus
             SET jumlah_material = jumlah_material - OLD.jumlah
         WHERE
         id = OLD.stok_id;

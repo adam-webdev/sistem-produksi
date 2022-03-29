@@ -16,6 +16,7 @@ class CreatePencatatanProduksisTable extends Migration
         Schema::create('pencatatan_produksis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('jadwal_produksi_id')->constrained('jadwal_produksis')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('stokfinishgood_id')->constrained('stok_finish_goods')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('jumlah');
             $table->string('keterangan');
             $table->timestamps();

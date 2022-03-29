@@ -10,6 +10,7 @@ use App\Models\JadwalProduksi;
 use App\Models\PencatatanProduksi;
 use App\Models\PermintaanBahanBaku;
 use App\Models\Stok;
+use App\Models\StokFinishGood;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,7 @@ class LaporanController extends Controller
 
     public function bahan_baku(Request $request)
     {
+        $this->middleware('role:Admin|Direktur');
         $periode = $request->periode;
         if ($periode == "all") {
             $data = BahanBaku::all();
@@ -106,21 +108,21 @@ class LaporanController extends Controller
 
     public function view_jadwalproduksi()
     {
-        return view('admin.jadwal_produksi.laporan.laporan');
+        return view('gudang.jadwal_produksi.laporan.laporan');
     }
     public function jadwal_produksi(Request $request)
     {
         $periode = $request->periode;
         if ($periode == "all") {
-            $data = JadwalProduksi::all();
-            $pdf = PDF::loadview('admin.jadwal_produksi.laporan.print', compact('data', 'periode'))->setPaper('A4');
+            $data = JadwalProduksi::with('stokfinishgood')->get();
+            $pdf = PDF::loadview('gudang.jadwal_produksi.laporan.print', compact('data', 'periode'))->setPaper('A4');
             return $pdf->stream('laporan-jadwal-produksi-all.pdf');
         } else if ($periode == "periode") {
             $tgl_awal = $request->awal;
             $tgl_akhir = $request->akhir;
             $data = JadwalProduksi::whereBetween('created_at', [$tgl_awal, $tgl_akhir])
                 ->orderBy('created_at', 'ASC')->get();
-            $pdf = PDF::loadview('admin.jadwal_produksi.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
+            $pdf = PDF::loadview('gudang.jadwal_produksi.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
             return $pdf->stream('laporan-jadwal-produksi-perperiode.pdf');
         }
     }
@@ -132,7 +134,7 @@ class LaporanController extends Controller
     {
         $periode = $request->periode;
         if ($periode == "all") {
-            $data = PencatatanProduksi::with('jadwalproduksi')->get();
+            $data = PencatatanProduksi::with('jadwalproduksi', 'stokfinishgood')->get();
             $pdf = PDF::loadview('produksi.pencatatan_produksi.laporan.print', compact('data', 'periode'))->setPaper('a4', 'landscape');
             return $pdf->stream('laporan-pencatatan-produksi-all.pdf');
         } else if ($periode == "periode") {
@@ -185,6 +187,26 @@ class LaporanController extends Controller
                 ->orderBy('created_at', 'ASC')->get();
             $pdf = PDF::loadview('gudang.stok.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
             return $pdf->stream('laporan-stok-perperiode.pdf');
+        }
+    }
+    public function view_stokfinishgood()
+    {
+        return view('gudang.stokfinishgood.laporan.laporan');
+    }
+    public function stokfinishgood(Request $request)
+    {
+        $periode = $request->periode;
+        if ($periode == "all") {
+            $data = StokFinishGood::with('finishgood')->get();
+            $pdf = PDF::loadview('gudang.stokfinishgood.laporan.print', compact('data', 'periode'))->setPaper('A4');
+            return $pdf->stream('laporan-stokfinishgood-all.pdf');
+        } else if ($periode == "periode") {
+            $tgl_awal = $request->awal;
+            $tgl_akhir = $request->akhir;
+            $data = StokFinishGood::whereBetween('created_at', [$tgl_awal, $tgl_akhir])
+                ->orderBy('created_at', 'ASC')->get();
+            $pdf = PDF::loadview('gudang.stokfinishgood.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
+            return $pdf->stream('laporan-stokfinishgood-perperiode.pdf');
         }
     }
 }

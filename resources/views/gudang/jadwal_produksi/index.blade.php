@@ -4,11 +4,11 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Jadwal Produksi </h1>
         <!-- Button trigger modal -->
-        {{-- @role('admin') --}}
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            + Tambah
-        </button>
-        {{-- @endrole --}}
+        @role('Admin')
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                + Tambah
+            </button>
+        @endrole
 
     </div>
 
@@ -27,17 +27,24 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nama">Nama Barang :</label>
-                            <input type="text" name="nama_barang" class="form-control id=" nama" required>
+                            <label for="kode">Kode Jadwal Produksi :</label>
+                            <input type="text" name="kode" class="form-control" id="kode" value="{{ $kodeGenerator }}"
+                                readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label for="barang">Nama Finish Good :</label>
+                            <select style="width:100%" name="stokfinishgood_id" id="barang" class="form-control select"
+                                required>
+                                <option selected disabled value="">-- Pilih Nama Finish Good --</option>
+                                @foreach ($stokfinishgoods as $sfg)
+                                    <option value="{{ $sfg->id }}">{{ $sfg->finishgood->nama_fg }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="barang">Tanggal </label>
+                            <label for="barang">Tanggal :</label>
                             <input type="date" name="tanggal" class="form-control" id="barang" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="barang">Target Produksi</label>
-                            <input type="number" name="target" class="form-control" id="barang" required>
                         </div>
 
                         <div class="form-group">
@@ -53,6 +60,10 @@
                                 <option value="Gold">Gold</option>
                                 <option value="Blue">Blue</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="barang">Target Produksi :</label>
+                            <input type="number" name="target" class="form-control" id="barang" required>
                         </div>
 
                     </div>
@@ -75,32 +86,36 @@
                 <table class="table table-str6iped table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr align="center">
-                            <th>Nama Barang </th>
+                            <th>Kode Jadwal Produksi </th>
+                            <th>Nama FG </th>
                             <th>Tanggal</th>
                             <th>Jenis Warna Barang </th>
                             <th>Target </th>
+                            <th>Satuan </th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $b)
                             <tr align="center">
-                                <td>{{ $b->nama_barang }}</td>
+                                <td>{{ $b->kode_jadwalproduksi }}</td>
+                                <td>{{ $b->stokfinishgood->finishgood->nama_fg }}</td>
                                 <td>{{ $b->tanggal }}</td>
-                                <td>{{ $b->jeniswarna_barang }}</td>
+                                <td>{{ $b->stokfinishgood->finishgood->jeniswarna_fg }}</td>
                                 <td>{{ $b->jumlah_barang }}</td>
+                                <td>{{ $b->stokfinishgood->satuan }}</td>
                                 <td align="center" width="10%">
-                                    {{-- @role('admin') --}}
-                                    <a href="{{ route('jadwal-produksi.edit', [$b->id]) }}" data-toggle="tooltip"
-                                        title="Edit" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
-                                        <i class="fas fa-edit fa-sm text-white-50"></i>
-                                    </a>
-                                    <a href="/jadwal-produksi/hapus/{{ $b->id }}" data-toggle="tooltip" title="Hapus"
-                                        onclick="return confirm('Yakin Ingin menghapus data?')"
-                                        class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
-                                        <i class="fas fa-trash-alt fa-sm text-white-50"></i>
-                                    </a>
-                                    {{-- @endrole --}}
+                                    @role('Admin')
+                                        <a href="{{ route('jadwal-produksi.edit', [$b->id]) }}" data-toggle="tooltip"
+                                            title="Edit" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                            <i class="fas fa-edit fa-sm text-white-50"></i>
+                                        </a>
+                                        <a href="/jadwal-produksi/hapus/{{ $b->id }}" data-toggle="tooltip"
+                                            title="Hapus" onclick="return confirm('Yakin Ingin menghapus data?')"
+                                            class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                                            <i class="fas fa-trash-alt fa-sm text-white-50"></i>
+                                        </a>
+                                    @endrole
                                 </td>
                             </tr>
                         @endforeach
@@ -109,4 +124,14 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.select').select2({
+                tags: true,
+                width: 'resolve'
+            });
+        });
+    </script>
 @endsection

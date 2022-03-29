@@ -11,9 +11,10 @@ class PermintaanBahanBakuController extends Controller
 {
     public function index()
     {
+        $kodeGenerator = PermintaanBahanBaku::kode();
         $bahanbaku = BahanBaku::all();
         $data = PermintaanBahanBaku::with('bahanbaku')->get();
-        return view('produksi.permintaan_bahanbaku.index', compact("data", "bahanbaku"));
+        return view('produksi.permintaan_bahanbaku.index', compact("data", "bahanbaku", "kodeGenerator"));
     }
 
     public function create()
@@ -27,6 +28,7 @@ class PermintaanBahanBakuController extends Controller
         $data = new PermintaanBahanBaku();
         $data->bahanbaku_id = $request->bahanbaku_id;
         $data->jumlah_material = $request->jumlah_material;
+        $data->kode = $request->kode;
         $data->status = "Belum Di ACC";
         $data->save();
         Alert::success("Tersimpan", "Data Berhasil Disimpan");
@@ -50,6 +52,7 @@ class PermintaanBahanBakuController extends Controller
         $data = PermintaanBahanBaku::findOrFail($id);
         $data->bahanbaku_id = $request->bahanbaku_id;
         $data->jumlah_material = $request->jumlah_material;
+        $data->kode = $data->kode;
         $data->status = $data->status;
         $data->save();
         Alert::success("Terupdate", "Data Berhasil Diupdate");
@@ -62,7 +65,7 @@ class PermintaanBahanBakuController extends Controller
         $data = PermintaanBahanBaku::findOrFail($id);
         $data->delete();
         Alert::success("Terhapus", "Data Berhasil Dihapus");
-        return redirect()->route('Permintaan-bahanbaku.index');
+        return redirect()->route('permintaan-bahanbaku.index');
     }
 
     // cek permintaan gudang

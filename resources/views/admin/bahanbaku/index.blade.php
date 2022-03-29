@@ -4,11 +4,11 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Material </h1>
         <!-- Button trigger modal -->
-        {{-- @role('admin') --}}
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            + Tambah
-        </button>
-        {{-- @endrole --}}
+        @role('Admin')
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                + Tambah
+            </button>
+        @endrole
 
     </div>
 
@@ -90,17 +90,17 @@
                                 <td>{{ $b->nama_material }}</td>
                                 <td>{{ $b->jenis_material }}</td>
                                 <td align="center" width="10%">
-                                    {{-- @role('admin') --}}
-                                    <a href="{{ route('bahan-baku.edit', [$b->id]) }}" data-toggle="tooltip" title="Edit"
-                                        class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
-                                        <i class="fas fa-edit fa-sm text-white-50"></i>
-                                    </a>
-                                    <a href="/bahan-baku/hapus/{{ $b->id }}" data-toggle="tooltip" title="Hapus"
-                                        onclick="return confirm('Yakin Ingin menghapus data?')"
-                                        class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
-                                        <i class="fas fa-trash-alt fa-sm text-white-50"></i>
-                                    </a>
-                                    {{-- @endrole --}}
+                                    @role('Admin')
+                                        <a href="{{ route('bahan-baku.edit', [$b->id]) }}" data-toggle="tooltip" title="Edit"
+                                            class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                            <i class="fas fa-edit fa-sm text-white-50"></i>
+                                        </a>
+                                        <a href="/bahan-baku/hapus/{{ $b->id }}" data-toggle="tooltip" title="Hapus"
+                                            onclick="return confirm('Yakin Ingin menghapus data?')"
+                                            class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                                            <i class="fas fa-trash-alt fa-sm text-white-50"></i>
+                                        </a>
+                                    @endrole
                                 </td>
                             </tr>
                         @endforeach

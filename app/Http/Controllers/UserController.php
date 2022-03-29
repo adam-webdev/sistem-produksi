@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $user = User::all();
-        return view('user.index', ['user'  => $user]);
+        $users = User::with('roles')->get();
+        return view('admin.users.index', ['users'  => $users]);
     }
 
     /**
@@ -20,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        //
     }
 
     /**
@@ -31,17 +34,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $pass = $request->get('passw');
-        $kpass = $request->get('kpassw');
-        if ($pass == $kpass) {
-            $save_user = new User;
-            $save_user->name = $request->get('name');
-            $save_user->email = $request->get('email');
-            $save_user->password = \Hash::make($request->get('passw'));
-            $save_user->alamat = $request->get('alamat');
-            $save_user->telephone = $request->get('tlp');
-            $save_user->save();
+        // $pass = $request->password;
+        // $cpass = $request->cpassword;
+
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('user.index')
+                ->withErrors($validator)
+                ->withInput();
         }
+        $save_user = new User;
+        $save_user->name = $request->name;
+        $save_user->email = $request->email;
+        $save_user->password = \Hash::make($request->password);
+        $save_user->save();
+        $save_user->assignRole($request->roles);
+        Alert::success('Berhasil', 'User Berhasil Ditambahkan');
         return redirect()->route('user.index');
     }
 
@@ -65,7 +78,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user_edit = User::findOrFail($id);
-        return view('user.edit', ['user'  => $user_edit]);
+        return view('admin.users.edit', ['user'  => $user_edit]);
     }
 
     /**
@@ -77,25 +90,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $pass = $request->get('passw');
-        $kpass = $request->get('kpassw');
-        $user = User::findOrFail($id);
-        if ($request->get('ubahpass') == 'ubah') {
-            if ($pass == $kpass) {
-                $user->name = $request->get('name');
-                $user->email = $request->get('email');
-                $user->alamat = $request->get('alamat');
-                $user->telephone = $request->get('tlp');
-                $user->password = \Hash::make($request->get('passw'));
-                $user->save();
-            }
-        } else {
-            $user->email = $request->get('email');
-            $user->name = $request->get('name');
-            $user->alamat = $request->get('alamat');
-            $user->telephone = $request->get('tlp');
-            $user->save();
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('user.index')
+                ->withErrors($validator)
+                ->withInput();
         }
+        $save_user =  User::findOrFail($id);
+        $save_user->name = $request->name;
+        $save_user->email = $request->email;
+        $save_user->password = \Hash::make($request->password);
+        $save_user->save();
+        $save_user->assignRole($request->roles);
+        Alert::success('Berhasil', 'User Berhasil Ditambahkan');
         return redirect()->route('user.index');
     }
 
@@ -105,11 +117,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
-
+        Alert::success('Berhasil', 'User Berhasil Dihapus');
         return redirect()->route('user.index');
     }
 }

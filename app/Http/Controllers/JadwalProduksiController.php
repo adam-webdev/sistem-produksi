@@ -2,16 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FinishGood;
 use App\Models\JadwalProduksi;
+use App\Models\StokFinishGood;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class JadwalProduksiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin|Direktur|Produksi');
+    }
+
     public function index()
     {
-        $data = JadwalProduksi::all();
-        return view('admin.jadwal_produksi.index', compact("data"));
+        $kodeGenerator = JadwalProduksi::kode();
+        $data = JadwalProduksi::with('stokfinishgood')->get();
+        $stokfinishgoods = StokFinishGood::all();
+        return view('gudang.jadwal_produksi.index', compact("data", "stokfinishgoods", "kodeGenerator"));
+    }
+
+    public function cekjadwalproduksi()
+    {
+        $data = JadwalProduksi::with('stokfinishgood')->get();
+        return view('produksi.cekjadwalproduksi', compact('data'));
     }
 
     public function create()
@@ -22,9 +38,9 @@ class JadwalProduksiController extends Controller
     public function store(Request $request)
     {
         $data = new JadwalProduksi();
-        $data->nama_barang = $request->nama_barang;
         $data->tanggal = $request->tanggal;
-        $data->jeniswarna_barang = $request->jenis;
+        $data->kode_jadwalproduksi = $request->kode;
+        $data->stokfinishgood_id = $request->stokfinishgood_id;
         $data->jumlah_barang = $request->target;
         $data->save();
         Alert::success('Tersimpan', 'Data Berhasil Disimpan');
@@ -41,16 +57,17 @@ class JadwalProduksiController extends Controller
     public function edit($id)
     {
         $data = JadwalProduksi::findOrFail($id);
-        return view("admin.jadwal_produksi.edit", compact('data'));
+        $stokfinishgoods = StokFinishGood::all();
+        return view("gudang.jadwal_produksi.edit", compact('data', 'stokfinishgoods'));
     }
 
 
     public function update(Request $request, $id)
     {
         $data = JadwalProduksi::findOrFail($id);
-        $data->nama_barang = $request->nama_barang;
         $data->tanggal = $request->tanggal;
-        $data->jeniswarna_barang = $request->jenis;
+        $data->kode_jadwalproduksi =  $data->kode_jadwalproduksi;
+        $data->stokfinishgood_id = $request->stokfinishgood_id;
         $data->jumlah_barang = $request->target;
         $data->save();
         Alert::success('Tersimpan', 'Data Berhasil Disimpan');

@@ -55,6 +55,7 @@
                     <th>Tanggal</th>
                     <th>Nama Material</th>
                     <th> Material Keluar </th>
+                    <th> Satuan </th>
                 </tr>
             </thead>
             <tbody>
@@ -65,6 +66,7 @@
                         <td>{{ $r->created_at->format('d-m-Y') }}</td>
                         <td>{{ $r->stok->bahanbaku->nama_material }}</td>
                         <td>{{ $r->jumlah }}</td>
+                        <td>{{ $r->stok->satuan }}</td>
                     </tr>
                 @endforeach
 

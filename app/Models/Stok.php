@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Stok extends Model
 {
     use HasFactory;
-    protected $table = 'stoks';
+    protected $table = 'stok_bahan_bakus';
 
     public function bahanbaku()
     {

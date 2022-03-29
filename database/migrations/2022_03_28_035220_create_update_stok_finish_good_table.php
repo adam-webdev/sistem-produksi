@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUpdateOldStokBahanbakumasukTable extends Migration
+class CreateUpdateStokFinishGoodTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,12 +15,12 @@ class CreateUpdateOldStokBahanbakumasukTable extends Migration
     public function up()
     {
         DB::unprepared('
-        CREATE TRIGGER update_old_stok_bahanbakumasuk before UPDATE ON bahan_baku_masuks
+        CREATE TRIGGER update_stok_finish_good after INSERT ON pencatatan_produksis
         FOR EACH ROW BEGIN
-        UPDATE stoks
-            SET jumlah_material = NEW.jumlah
+        UPDATE stok_finish_goods
+            SET jumlah = jumlah + NEW.jumlah
         WHERE
-        OLD.id = NEW.stok_id;
+        id = NEW.stokfinishgood_id;
         END
         ');
     }
@@ -32,6 +32,6 @@ class CreateUpdateOldStokBahanbakumasukTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('update_old_stok_bahanbakumasuk');
+        Schema::dropIfExists('update_stok_finish_good');
     }
 }

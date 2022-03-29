@@ -10,23 +10,36 @@
                 <div class="col-md-5">
                     <label for="barang">Nama Barang :</label>
                     <select style="width:100%" name="jadwalproduksi_id" id="barang" class="form-control select" required>
-                        <option disabled value="{{ $data->jadwalproduksi->id }}">
-                            {{ $data->jadwalproduksi->nama_barang }}</option>
+                        <option disabled value="{{ $data->jadwalproduksi_id }}">
+                            {{ $data->stokfinishgood->finishgood->nama_fg }}</option>
                         @foreach ($jadwalproduksi as $jp)
-                            <option value="{{ $jp->id }}">{{ $jp->nama_barang }}</option>
+                            <option value="{{ $jp->id }}">{{ $jp->stokfinishgood->finishgood->nama_fg }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <input type="hidden" name="jadwalproduksi" value="{{}}">
+                <input type="hidden" name="finishgood">
+                <div class="col-md-5">
+                    <label for="barang">Nama Barang :</label>
+                    <select style="width:100%" name="stokfinishgood_id" id="barang" class="form-control select" required>
+                        <option disabled value="{{ $data->stokfinishgood_id }}">
+                            {{ $data->stokfinishgood->finishgood->nama_fg }}</option>
+                        @foreach ($stokfinishgood as $sfg)
+                            <option value="{{ $sfg->id }}">{{ $sfg->finishgood->nama_fg }}</option>
                         @endforeach
                     </select>
                 </div>
 
-                <div class="col-md-5">
-                    <label for="jumlah_barang">Jumlah Barang :</label>
-                    <input id="jumlah_barang" type="text" name="jumlah" class="form-control" required
-                        value="{{ $data->jumlah }}">
-                </div>
+
                 <div class="col-md-5">
                     <label for="keterangan">Keterangan :</label>
                     <textarea rows="5" id="keterangan" type="text" name="keterangan" class="form-control" required
-                        value="{{ $data->keterangan }}"></textarea>
+                        value="{{ $data->keterangan }}">{{ $data->keterangan }}</textarea>
+                </div>
+                <div class="col-md-5">
+                    <label for="jumlah_barang">Jumlah Barang :</label>
+                    <input id="jumlah_barang" type="text" name="jumlah" class="form-control" required readonly
+                        value="{{ $data->jumlah }}">
                 </div>
             </div>
 

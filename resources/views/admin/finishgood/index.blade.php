@@ -4,11 +4,11 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Finish Good </h1>
         <!-- Button trigger modal -->
-        {{-- @role('admin') --}}
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            + Tambah
-        </button>
-        {{-- @endrole --}}
+        @role('Admin')
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                + Tambah
+            </button>
+        @endrole
 
     </div>
 
@@ -33,10 +33,10 @@
                             <label for="barang">Nama Finish Good :</label>
                             <input type="text" name="nama_fg" class="form-control" id="barang" required>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="jumlah">Jumalah Finish Good :</label>
                             <input type="text" name="jumlah_fg" class="form-control" id="jumlah" required>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <label for="jenis_material">Jenis Warna Finish Good :</label>
@@ -74,7 +74,6 @@
                         <tr align="center">
                             <th>Kode Finish Good</th>
                             <th>Nama Finish Good </th>
-                            <th>Jumlah Finish Good</th>
                             <th>Jenis Warna Finish Good </th>
                             <th>Aksi</th>
                         </tr>
@@ -84,20 +83,19 @@
                             <tr align="center">
                                 <td>{{ $b->kode_fg }}</td>
                                 <td>{{ $b->nama_fg }}</td>
-                                <td>{{ $b->jumlah_fg }}</td>
                                 <td>{{ $b->jeniswarna_fg }}</td>
                                 <td align="center" width="10%">
-                                    {{-- @role('admin') --}}
-                                    <a href="{{ route('finish-good.edit', [$b->id]) }}" data-toggle="tooltip" title="Edit"
-                                        class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
-                                        <i class="fas fa-edit fa-sm text-white-50"></i>
-                                    </a>
-                                    <a href="/finish-good/hapus/{{ $b->id }}" data-toggle="tooltip" title="Hapus"
-                                        onclick="return confirm('Yakin Ingin menghapus data?')"
-                                        class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
-                                        <i class="fas fa-trash-alt fa-sm text-white-50"></i>
-                                    </a>
-                                    {{-- @endrole --}}
+                                    @role('Admin')
+                                        <a href="{{ route('finish-good.edit', [$b->id]) }}" data-toggle="tooltip" title="Edit"
+                                            class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                            <i class="fas fa-edit fa-sm text-white-50"></i>
+                                        </a>
+                                        <a href="/finish-good/hapus/{{ $b->id }}" data-toggle="tooltip" title="Hapus"
+                                            onclick="return confirm('Yakin Ingin menghapus data?')"
+                                            class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                                            <i class="fas fa-trash-alt fa-sm text-white-50"></i>
+                                        </a>
+                                    @endrole
                                 </td>
                             </tr>
                         @endforeach

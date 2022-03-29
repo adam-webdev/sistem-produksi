@@ -17,6 +17,18 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="col-md-5">
+
+                    <label for="satuan">Satuan Barang :</label>
+                    <select style="width:100%" name="satuan" id="satuan" class="form-control select" required>
+                        <option value="{{ $stok->satuan }}">{{ $stok->satuan }}</option>
+                        <option value="Unit">Unit</option>
+                        <option value="Kg">Kg</option>
+                        <option value="Liter">Liter</option>
+                        <option value="Pcs">Pcs</option>
+                        <option value="Meter">Meter</option>
+                    </select>
+                </div>
 
             </div>
 
