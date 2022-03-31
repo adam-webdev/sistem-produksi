@@ -26,6 +26,12 @@ class PencatatanProduksiController extends Controller
     public function store(Request $request)
     {
 
+        $id = PencatatanProduksi::where('jadwal_produksi_id', $request->jadwalproduksi_id)->first();
+        if ($id) {
+            Alert::error("Gagal", "Kode Jadwal Produksi sudah ada");
+            return redirect()->route('pencatatan-produksi.index');
+        }
+
         $data = new PencatatanProduksi();
         $data->jadwal_produksi_id = $request->jadwalproduksi_id;
         $data->stokfinishgood_id = $request->stokfinishgood_id;

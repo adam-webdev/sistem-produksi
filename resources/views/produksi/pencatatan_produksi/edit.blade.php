@@ -17,8 +17,6 @@
                         @endforeach
                     </select>
                 </div>
-                <input type="hidden" name="jadwalproduksi" value="{{}}">
-                <input type="hidden" name="finishgood">
                 <div class="col-md-5">
                     <label for="barang">Nama Barang :</label>
                     <select style="width:100%" name="stokfinishgood_id" id="barang" class="form-control select" required>
