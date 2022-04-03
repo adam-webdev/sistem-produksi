@@ -37,12 +37,20 @@ class JadwalProduksiController extends Controller
 
     public function store(Request $request)
     {
-        $data = new JadwalProduksi();
-        $data->tanggal = $request->tanggal;
-        $data->kode_jadwalproduksi = $request->kode;
-        $data->stokfinishgood_id = $request->stokfinishgood_id;
-        $data->jumlah_barang = $request->target;
-        $data->save();
+        $jumlah = $request->input('target', []);
+        $stokfinish = $request->input('stokfinishgood_id', []);
+        $datas = [];
+        foreach ($stokfinish as $index => $value) {
+            $datas[] = [
+                "tanggal" => $request->tanggal,
+                "stokfinishgood_id" => $stokfinish[$index],
+                "kode_jadwalproduksi" => $request->kode,
+                "jumlah_barang" => $jumlah[$index],
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ];
+        }
+        JadwalProduksi::insert($datas);
         Alert::success('Tersimpan', 'Data Berhasil Disimpan');
         return redirect()->route('jadwal-produksi.index');
     }

@@ -22,6 +22,6 @@ class StokFinishGood extends Model
 
     public function jadwalproduksi()
     {
-        return $this->hasOne(JadwalProduksi::class);
+        return $this->hasMany(JadwalProduksi::class);
     }
 }

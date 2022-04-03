@@ -32,41 +32,32 @@
                             <input type="text" name="kode" class="form-control" id="kode" value="{{ $kodeGenerator }}"
                                 readonly required>
                         </div>
-                        <div class="form-group">
-                            <label for="barang">Nama Finish Good :</label>
-                            <select style="width:100%" name="stokfinishgood_id" id="barang" class="form-control select"
-                                required>
-                                <option selected disabled value="">-- Pilih Nama Finish Good --</option>
-                                @foreach ($stokfinishgoods as $sfg)
-                                    <option value="{{ $sfg->id }}">{{ $sfg->finishgood->nama_fg }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <div class="form-group row align-items-center add-data">
+                            <div class="col-md-6">
+                                <label for="barang">Finish Good :</label>
+                                <select style="width:100%" name="stokfinishgood_id[]" id="barang" class="form-control  "
+                                    required>
+                                    <option selected disabled value="">-- Pilih Finish Good --</option>
+                                    @foreach ($stokfinishgoods as $sfg)
+                                        <option value="{{ $sfg->id }}">{{ $sfg->finishgood->nama_fg }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
+                            <div class="col-md-4">
+                                <label for="barang">Target Produksi :</label>
+                                <input type="number" name="target[]" class="form-control" id="barang" required>
+                            </div>
+
+                            <div class="col-md-2 add">
+                                <label>Aksi :</label>
+                                <button id="add" name="add" type="button" class="btn btn-sm btn-success">Add</button>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="barang">Tanggal :</label>
                             <input type="date" name="tanggal" class="form-control" id="barang" required>
                         </div>
-
-                        <div class="form-group">
-                            <label for="jenis_warna">Jenis Warna Material :</label>
-                            <select type="text" name="jenis" class="form-control" id="jenis_warna" required>
-                                <option disabled selected value="">-- Pilih Jenis Warna --</option>
-                                <option value="Tidak ada">Tidak ada</option>
-                                <option value="Red">Red</option>
-                                <option value="White">White</option>
-                                <option value="Black">Black</option>
-                                <option value="Green">Green</option>
-                                <option value="Yellow">Yellow</option>
-                                <option value="Gold">Gold</option>
-                                <option value="Blue">Blue</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="barang">Target Produksi :</label>
-                            <input type="number" name="target" class="form-control" id="barang" required>
-                        </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> Batal</button>
@@ -133,6 +124,37 @@
                 tags: true,
                 width: 'resolve'
             });
+            $('.select1').select2({
+                tags: true,
+                width: 'resolve'
+            });
         });
+        $(add).on('click', function() {
+            $('.add-data').append(`<div class="form-group px-3 mt-2 row child              align-items-center">
+                            <div class="col-md-6">
+                                <label for="barang">Finish Good :</label>
+                                <select style="width:100%" name="stokfinishgood_id[]" id="barang" class="form-control "
+                                    required>
+                                    <option selected disabled value="">-- Pilih Finish Good --</option>
+                                    @foreach ($stokfinishgoods as $sfg)
+                                        <option value="{{ $sfg->id }}">{{ $sfg->finishgood->nama_fg }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="barang">Target Produksi :</label>
+                                <input type="number" name="target[]" class="form-control" id="barang" required>
+                            </div>
+                            <div class="col-md-2 add">
+                                <label>Aksi :</label>
+                                <button type="button" class="btn btn-sm  delete-child btn-danger">Delete</button>
+                            </div>
+                        </div>
+                         `)
+        })
+        $(document).on('click', '.delete-child', function() {
+            $(this).parents('.child').remove()
+        })
     </script>
 @endsection
