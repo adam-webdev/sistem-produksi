@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Stok Finish Good')
 @section('content')
     @include('sweetalert::alert')
 

@@ -1,4 +1,6 @@
 @extends('layouts.layout')
+@section('title', 'Bahan Baku Masuk')
+
 @section('content')
     @include('sweetalert::alert')
 

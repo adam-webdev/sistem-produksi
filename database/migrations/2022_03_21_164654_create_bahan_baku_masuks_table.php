@@ -17,6 +17,7 @@ class CreateBahanBakuMasuksTable extends Migration
             $table->id();
             $table->foreignId('stok_id')->constrained('stok_bahan_bakus')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('jumlah');
+            $table->date('tanggal');
             $table->timestamps();
         });
     }

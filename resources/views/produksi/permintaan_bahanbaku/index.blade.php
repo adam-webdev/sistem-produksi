@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Permintaan Bahan Baku')
 @section('content')
     @include('sweetalert::alert')
 
@@ -24,24 +25,37 @@
                 </div>
                 <form action="{{ route('permintaan-bahanbaku.store') }}" method="POST">
                     @csrf
-                    <div class="modal-body">
+                    <div class="modal-body ">
                         <div class="form-group">
                             <label for="kode">Kode :</label>
                             <input type="text" name="kode" class="form-control" id="kode" value="{{ $kodeGenerator }}"
                                 readonly required>
                         </div>
-                        <div class="form-group">
-                            <label for="barang">Nama Material :</label>
-                            <select style="width:100%" name="bahanbaku_id" id="barang" class="form-control select" required>
-                                <option selected disabled value="">-- pilih material --</option>
-                                @foreach ($bahanbaku as $b)
-                                    <option value="{{ $b->id }}">{{ $b->nama_material }}</option>
-                                @endforeach
-                            </select>
+
+                        <div class="form-group row align-items-center add-data">
+                            <div class="col-md-5">
+                                <label for="barang">Nama Material :</label>
+                                <select style="width:100%" name="bahanbaku_id[]" id="barang" class="form-control "
+                                    required>
+                                    <option selected disabled value="">-- pilih material --</option>
+                                    @foreach ($bahanbaku as $b)
+                                        <option value="{{ $b->id }}">{{ $b->nama_material }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="jumlah_barang">Jumlah Material :</label>
+                                <input type="number" name="jumlah_material[]" class="form-control" id="jumlah_barang"
+                                    required>
+                            </div>
+                            <div class="col-md-2 add">
+                                <label>Aksi :</label>
+                                <button id="add" name="add" type="button" class="btn btn-sm btn-success">Add</button>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="jumlah_barang">Jumlah Material :</label>
-                            <input type="number" name="jumlah_material" class="form-control" id="jumlah_barang" required>
+                            <label for="tanggal">Tanggal :</label>
+                            <input type="date" name="date" class="form-control" id="tanggal" required>
                         </div>
 
                     </div>
@@ -78,7 +92,7 @@
                         @foreach ($data as $data)
                             <tr align="center">
                                 <td>{{ $data->kode }}</td>
-                                <td>{{ $data->created_at->format('d-m-Y') }}</td>
+                                <td>{{ $data->date }}</td>
                                 <td>{{ $data->bahanbaku->nama_material }}</td>
                                 <td>{{ $data->jumlah_material }}</td>
                                 {{-- <td>{{ $data->bahanbaku->stok->satuan }}</td> --}}
@@ -90,6 +104,7 @@
                                         <span class="btn btn-sm btn-light text-danger shadow-lg">Belum Diterima</span>
                                     </td>
                                 @endif
+
                                 <td align="center" width="10%">
                                     @role('Admin|Produksi')
                                         <a href="{{ route('permintaan-bahanbaku.edit', [$data->id]) }}" data-toggle="tooltip"
@@ -119,5 +134,31 @@
                 width: 'resolve'
             });
         });
+        $(add).on('click', function() {
+            $('.add-data').append(`<div class="form-group row child mt-2 px-3 align-items-center">
+                            <div class="col-md-5">
+                                <label for="barang">Nama Material :</label>
+                                <select style="width:100%" name="bahanbaku_id[]" id="barang" class="form-control "
+                                    required>
+                                    <option selected disabled value="">-- pilih material --</option>
+                                    @foreach ($bahanbaku as $b)
+                                        <option value="{{ $b->id }}">{{ $b->nama_material }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="jumlah_barang">Jumlah Material :</label>
+                                <input type="number" name="jumlah_material[]" class="form-control" id="jumlah_barang"
+                                    required>
+                            </div>
+                            <div class="col-md-2 add">
+                                <label>Aksi :</label>
+                                <button type="button"  class="btn btn-sm  delete-child btn-danger">Delete</button>
+                            </div>
+                        </div>`)
+        })
+        $(document).on('click', '.delete-child', function() {
+            $(this).parents('.child').remove()
+        })
     </script>
 @endsection

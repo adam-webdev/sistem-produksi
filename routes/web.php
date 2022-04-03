@@ -48,6 +48,7 @@ Route::get('/permintaan-bahanbaku/hapus/{id}', [PermintaanBahanBakuController::c
 Route::get('/cek-permintaan-bahanbaku', [PermintaanBahanBakuController::class, "cek_permintaan"])->name('cek-permintaan.index');
 Route::get('/cek-permintaan-bahanbaku/{id}', [PermintaanBahanBakuController::class, "edit_permintaan"])->name('cek-permintaan.edit');
 Route::put('/cek-permintaan-bahanbaku/{id}', [PermintaanBahanBakuController::class, "update_permintaan"])->name('cek-permintaan.update');
+Route::post('/cek-permintaan-bahanbaku', [PermintaanBahanBakuController::class, "filter_tanggal"])->name('cek-permintaan.filter');
 
 // cek jadwal produksi
 Route::get('/cek-jadwalproduksi', [JadwalProduksiController::class, "cekjadwalproduksi"])->name('cek-jadwalproduksi.index');

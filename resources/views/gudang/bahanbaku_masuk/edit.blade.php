@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Edit Bahan Baku Masuk')
 @section('content')
     @include('sweetalert::alert')
     <form action="{{ route('bahanbaku-masuk.update', [$bahanbaku_masuk->id]) }}" method="POST">

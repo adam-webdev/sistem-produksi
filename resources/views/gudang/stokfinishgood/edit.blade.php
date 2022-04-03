@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Edit Stok Finish Good')
 @section('content')
     @include('sweetalert::alert')
     <form action="{{ route('stokfinishgood.update', [$stokfinishgood->id]) }}" method="POST">
@@ -27,6 +28,11 @@
                         <option value="Pcs">Pcs</option>
                         <option value="Meter">Meter</option>
                     </select>
+                </div>
+                <div class="col-md-5">
+                    <label for="jumlah_barang">Jumlah :</label>
+                    <input type="number" value="{{ $stokfinishgood->jumlah }}" name="jumlah" class="form-control"
+                        id="jumlah_barang" required>
                 </div>
             </div>
 

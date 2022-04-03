@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Finish Good')
 @section('content')
     @include('sweetalert::alert')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">

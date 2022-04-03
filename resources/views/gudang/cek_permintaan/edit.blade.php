@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Edit Cek Permintaan')
 @section('content')
     @include('sweetalert::alert')
     <form action="{{ route('cek-permintaan.update', [$data->id]) }}" method="POST">

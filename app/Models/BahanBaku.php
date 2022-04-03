@@ -28,6 +28,6 @@ class BahanBaku extends Model
 
     public function permintaanbahanbaku()
     {
-        return $this->hasOne(Stok::class);
+        return $this->hasMany(Stok::class);
     }
 }

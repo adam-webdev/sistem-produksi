@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BahanBaku;
 use App\Models\PermintaanBahanBaku;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -25,12 +26,26 @@ class PermintaanBahanBakuController extends Controller
 
     public function store(Request $request)
     {
-        $data = new PermintaanBahanBaku();
-        $data->bahanbaku_id = $request->bahanbaku_id;
-        $data->jumlah_material = $request->jumlah_material;
-        $data->kode = $request->kode;
-        $data->status = "Belum Di ACC";
-        $data->save();
+        setlocale(LC_TIME, 'id_ID');
+        Carbon::setLocale('id');
+        // Carbon::now()->formatLocalized("%A, %d %B %Y");
+
+        $bahanbaku = $request->input('bahanbaku_id', []);
+        $jumlah_material = $request->input('jumlah_material', []);
+
+        foreach ($bahanbaku as $index => $value) {
+            $datas[] = [
+                'bahanbaku_id' => $bahanbaku[$index],
+                'jumlah_material' => $jumlah_material[$index],
+                'status' => "Belum Di ACC",
+                'date' => $request->date,
+                'kode' => $request->kode,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'kode' => $request->kode,
+            ];
+        }
+        PermintaanBahanBaku::insert($datas);
         Alert::success("Tersimpan", "Data Berhasil Disimpan");
         return redirect()->route('permintaan-bahanbaku.index');
     }
@@ -74,7 +89,8 @@ class PermintaanBahanBakuController extends Controller
     {
         $bahanbaku = BahanBaku::all();
         $data = PermintaanBahanBaku::with('bahanbaku')->get();
-        return view('gudang.cek_permintaan.index', compact("data", "bahanbaku"));
+        $dataFilter = 0;
+        return view('gudang.cek_permintaan.index', compact("data", "dataFilter", "bahanbaku"));
     }
     public function edit_permintaan($id)
     {
@@ -89,5 +105,10 @@ class PermintaanBahanBakuController extends Controller
         $data->save();
         Alert::success("Terupdate", "Data Berhasil Diupdate");
         return redirect()->route('cek-permintaan.index');
+    }
+    public function filter_tanggal(Request $request)
+    {
+        $dataFilter = PermintaanBahanBaku::whereBetween('date', [$request->from_tanggal, $request->to_tanggal])->orderBy('date', 'ASC')->get();
+        return view('gudang.cek_permintaan.index', compact("dataFilter"));
     }
 }

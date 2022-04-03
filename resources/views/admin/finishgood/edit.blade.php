@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Edit Finish Good')
 @section('content')
     @include('sweetalert::alert')
     <form action="{{ route('finish-good.update', [$data->id]) }}" method="POST">

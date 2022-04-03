@@ -61,7 +61,7 @@ class StokFinishGoodController extends Controller
     {
         $stokfinishgood = StokFinishGood::findOrFail($id);
         $stokfinishgood->finishgood_id = $request->finishgood_id;
-        $stokfinishgood->jumlah = $stokfinishgood->jumlah;
+        $stokfinishgood->jumlah = $request->jumlah;
         $stokfinishgood->satuan = $request->satuan;
 
         $stokfinishgood->save();

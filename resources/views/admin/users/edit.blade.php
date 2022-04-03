@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', 'Edit Data User')
 @section('content')
     @include('sweetalert::alert')
     <form action="{{ route('user.update', [$user->id]) }}" method="POST">

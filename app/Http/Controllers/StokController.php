@@ -62,7 +62,7 @@ class StokController extends Controller
     {
         $stok = Stok::findOrFail($id);
         $stok->bahanbaku_id = $request->bahanbaku_id;
-        $stok->jumlah_material = $stok->jumlah_material;
+        $stok->jumlah_material = $request->jumlah;
         $stok->satuan = $request->satuan;
         $stok->save();
         Alert::success("Terupdate", "Data Berhasil Diupdate");
