@@ -38,6 +38,7 @@ class BahanBakuKeluarController extends Controller
         $bahanbaku_keluar = new BahanBakuKeluar;
         $bahanbaku_keluar->stok_id = $request->stok_id;
         $bahanbaku_keluar->jumlah = $request->jumlah;
+        $bahanbaku_keluar->tanggal = $request->tanggal;
         $stok = Stok::select("jumlah_material")->where("id", $request->stok_id)->get();
         $stok = $stok[0]->jumlah_material;
 

@@ -34,6 +34,7 @@ class BahanBakuMasukController extends Controller
         // $bahanbaku_masuk->bahanbaku_id = 22;
         $bahanbaku_masuk->stok_id = $request->stok_id;
         $bahanbaku_masuk->jumlah = $request->jumlah;
+        $bahanbaku_masuk->tanggal = $request->tanggal;
         $bahanbaku_masuk->save();
         Alert::success("Tersimpan", "Data Berhasil Disimpan");
         return redirect()->route('bahanbaku-masuk.index');

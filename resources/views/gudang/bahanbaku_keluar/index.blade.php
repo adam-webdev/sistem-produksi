@@ -40,7 +40,10 @@
                             <input type="number" name="jumlah" class="form-control" id="jumlah_barang" required>
                         </div>
 
-
+                        <div class="form-group">
+                            <label for="date">Tanggal :</label>
+                            <input type="date" name="tanggal" class="form-control" id="date" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> Batal</button>
@@ -74,7 +77,7 @@
                         @foreach ($bahanbaku_keluar as $bm)
                             <tr align="center">
                                 <td>{{ $bm->stok->bahanbaku->kode_material }}</td>
-                                <td>{{ $bm->created_at->format('d-m-Y') }}</td>
+                                <td>{{ $bm->tanggal }}</td>
                                 <td>{{ $bm->stok->bahanbaku->nama_material }}</td>
                                 <td>{{ $bm->jumlah }}</td>
                                 <td>{{ $bm->stok->satuan }}</td>

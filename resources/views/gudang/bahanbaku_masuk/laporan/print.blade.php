@@ -63,7 +63,7 @@
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
                         <td>{{ $r->stok->bahanbaku->kode_material }}</td>
-                        <td>{{ $r->created_at->format('d-m-Y') }}</td>
+                        <td>{{ $r->tanggal }}</td>
                         <td>{{ $r->stok->bahanbaku->nama_material }}</td>
                         <td>{{ $r->jumlah }}</td>
                         <td>{{ $r->stok->satuan }}</td>
