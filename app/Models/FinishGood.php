@@ -14,4 +14,13 @@ class FinishGood extends Model
     {
         return $this->hasOne(StokFinishGood::class);
     }
+    public function pencatatanproduksi()
+    {
+        return $this->hasOne(PencatatanProduksi::class);
+    }
+
+    public function jadwalproduksi()
+    {
+        return $this->hasMany(JadwalProduksi::class);
+    }
 }

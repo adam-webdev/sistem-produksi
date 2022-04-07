@@ -34,16 +34,16 @@
 
 <body>
     <div class="header">
-        <div class=" text">
+        <div class="text">
             <h2>CV. Mutiara Kencana</h2>
-            <p>Jl. Pengasinan Bekasi 17510</p>
+            <p>Jl. Kalimalang Bekasi 17512</p>
             <p>Email : cv-mutiara-kencana@gmail.com Fax :202020</p>
         </div>
     </div>
     <hr>
     <div class="row">
         <h5 class="text-center">
-            {{ $periode == 'all'? 'Laporan  Finish Good all ': 'Laporan Finish Good Per-periode ' . $tgl_awal . ' sampai dengan ' . $tgl_akhir }}
+            {{ $periode == 'all'? 'Laporan Supplier all ': 'Laporan Supplier Per-periode ' . $tgl_awal . ' sampai dengan ' . $tgl_akhir }}
         </h5>
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -51,24 +51,22 @@
             <thead>
                 <tr align="center">
                     <th width="2%">No</th>
-                    <th>Kode FG</th>
                     <th>Tanggal</th>
-                    <th>Nama FG</th>
-                    <th> Jenis Warna FG </th>
-                    <th> Jumlah FG </th>
-                    <th> Satuan FG </th>
+                    <th>Nama</th>
+                    <th>No Telephone </th>
+                    <th>Email</th>
+                    <th>Alamat</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $r)
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
-                        <td>{{ $r->kode_fg }}</td>
                         <td>{{ $r->created_at->format('d-m-Y') }}</td>
-                        <td>{{ $r->nama_fg }}</td>
-                        <td>{{ $r->jumlah_fg }}</td>
-                        <td>{{ $r->satuan_fg }}</td>
-                        <td>{{ $r->jeniswarna_fg }}</td>
+                        <td>{{ $r->nama }}</td>
+                        <td>{{ $r->nohp }}</td>
+                        <td>{{ $r->email }}</td>
+                        <td>{{ $r->alamat }}</td>
                     </tr>
                 @endforeach
 

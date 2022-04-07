@@ -6,9 +6,10 @@
         <h1 class="h3 mb-0 text-gray-800">Data Material </h1>
         <!-- Button trigger modal -->
         @role('Admin')
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                + Tambah
-            </button>
+            <div type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <i class="fas fa-shopping-basket"></i>
+                Buy
+            </div>
         @endrole
 
     </div>
@@ -38,23 +39,53 @@
                 <form action="{{ route('bahan-baku.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="kode_barang">Kode Material :</label>
-                            <input type="text" name="kode_material" class="form-control id=" kode_barang" required>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="kode_barang">Kode Material :</label>
+                                <input type="text" name="kode_material" class="form-control id=" kode_barang" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="barang">Nama Material :</label>
+                                <input type="text" name="nama_material" class="form-control" id="barang" required>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="barang">Nama Material :</label>
-                            <input type="text" name="nama_material" class="form-control" id="barang" required>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="harga">Harga :</label>
+                                <input type="number" name="harga" class="form-control" id="harga" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="jumlah">Jumlah Material :</label>
+                                <input type="number" name="jumlah_material" class="form-control" id="jumlah" required>
+                            </div>
                         </div>
-
+                        <div class="form-group">
+                            <label for="satuan">Satuan Barang :</label>
+                            <select style="width:100%" name="satuan" id="satuan" class="form-control" required>
+                                <option selected disabled value="">-- Pilih Satuan Barang --</option>
+                                <option value="Unit">Unit</option>
+                                <option value="Kg">Kg</option>
+                                <option value="Liter">Liter</option>
+                                <option value="Pcs">Pcs</option>
+                                <option value="Meter">Meter</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="jenis_material">Jenis Material :</label>
                             <select type="text" required name="jenis_material" class="form-control" id="jenis_material">
-                                <option disabled selected value="">-- pilih jenis material --</option>
+                                <option disabled selected value="">-- Pilih Jenis Material --</option>
                                 <option value="a">a</option>
                                 <option value="b">b</option>
                                 <option value="c">c</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier">Supplier :</label>
+                            <select type="text" name="supplier_id" class="form-control" id="supplier" required>
+                                @foreach ($supplier as $s)
+                                    <option value="{{ $s->id }}">{{ $s->nama }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -81,6 +112,9 @@
                             <th>Kode Material</th>
                             <th>Nama Material </th>
                             <th>Jenis Material </th>
+                            <th>Jumlah Material </th>
+                            <th>Satuan Material </th>
+                            <th>Supplier </th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -90,6 +124,9 @@
                                 <td>{{ $b->kode_material }}</td>
                                 <td>{{ $b->nama_material }}</td>
                                 <td>{{ $b->jenis_material }}</td>
+                                <td>{{ $b->jumlah_material }}</td>
+                                <td>{{ $b->satuan }}</td>
+                                <td>{{ $b->supplier->nama }}</td>
                                 <td align="center" width="10%">
                                     @role('Admin')
                                         <a href="{{ route('bahan-baku.edit', [$b->id]) }}" data-toggle="tooltip" title="Edit"

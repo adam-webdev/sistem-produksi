@@ -44,7 +44,7 @@
                             @foreach ($dataFilter as $data)
                                 <tr align="center">
                                     <td>{{ $data->bahanbaku->kode_material }}</td>
-                                    <td>{{ $data->date }}</td>
+                                    <td>{{ $data->tanggal }}</td>
                                     <td>{{ $data->bahanbaku->nama_material }}</td>
                                     <td>{{ $data->jumlah_material }}</td>
                                     @if ($data->status === 'Permintaan Diterima')
@@ -68,7 +68,7 @@
                             @foreach ($data as $data)
                                 <tr align="center">
                                     <td>{{ $data->bahanbaku->kode_material }}</td>
-                                    <td>{{ $data->date }}</td>
+                                    <td>{{ $data->tanggal }}</td>
                                     <td>{{ $data->bahanbaku->nama_material }}</td>
                                     <td>{{ $data->jumlah_material }}</td>
                                     @if ($data->status === 'Permintaan Diterima')

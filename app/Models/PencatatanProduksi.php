@@ -15,8 +15,8 @@ class PencatatanProduksi extends Model
         return $this->belongsTo(JadwalProduksi::class, 'jadwal_produksi_id', 'id');
     }
 
-    public function stokfinishgood()
+    public function finishgood()
     {
-        return $this->belongsTo(StokFinishGood::class);
+        return $this->belongsTo(FinishGood::class);
     }
 }

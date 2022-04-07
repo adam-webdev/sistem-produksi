@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\BahanBaku;
 use App\Models\BahanBakuMasuk;
-use App\Models\Stok;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -17,9 +16,9 @@ class BahanBakuMasukController extends Controller
 
     public function index()
     {
-        $stok = Stok::all();
-        $bahanbaku_masuk = BahanBakuMasuk::with('stok', 'stok.bahanbaku')->get();
-        return view('gudang.bahanbaku_masuk.index', compact("bahanbaku_masuk", "stok"));
+        $bahanbaku = Bahanbaku::all();
+        $bahanbaku_masuk = BahanBakuMasuk::with('bahanbaku')->get();
+        return view('gudang.bahanbaku_masuk.index', compact("bahanbaku_masuk", "bahanbaku"));
     }
 
     public function create()
@@ -32,7 +31,7 @@ class BahanBakuMasukController extends Controller
 
         $bahanbaku_masuk = new BahanBakuMasuk;
         // $bahanbaku_masuk->bahanbaku_id = 22;
-        $bahanbaku_masuk->stok_id = $request->stok_id;
+        $bahanbaku_masuk->bahanbaku_id = $request->bahanbaku_id;
         $bahanbaku_masuk->jumlah = $request->jumlah;
         $bahanbaku_masuk->tanggal = $request->tanggal;
         $bahanbaku_masuk->save();

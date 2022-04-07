@@ -17,10 +17,10 @@ class CreateUpdateStokBahanBakuKeluarTable extends Migration
         DB::unprepared('
         CREATE TRIGGER update_stok_bahanbakukeluar after INSERT ON bahan_baku_keluars
         FOR EACH ROW BEGIN
-        UPDATE stok_bahan_bakus
+        UPDATE bahan_bakus
             SET jumlah_material = jumlah_material - NEW.jumlah
         WHERE
-        id = NEW.stok_id;
+        id = NEW.bahanbaku_id;
         END
         ');
     }

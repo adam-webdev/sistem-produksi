@@ -26,9 +26,7 @@ class PermintaanBahanBakuController extends Controller
 
     public function store(Request $request)
     {
-        setlocale(LC_TIME, 'id_ID');
-        Carbon::setLocale('id');
-        // Carbon::now()->formatLocalized("%A, %d %B %Y");
+
 
         $bahanbaku = $request->input('bahanbaku_id', []);
         $jumlah_material = $request->input('jumlah_material', []);
@@ -38,7 +36,7 @@ class PermintaanBahanBakuController extends Controller
                 'bahanbaku_id' => $bahanbaku[$index],
                 'jumlah_material' => $jumlah_material[$index],
                 'status' => "Belum Di ACC",
-                'date' => $request->date,
+                'tanggal' => $request->date,
                 'kode' => $request->kode,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -68,6 +66,7 @@ class PermintaanBahanBakuController extends Controller
         $data->bahanbaku_id = $request->bahanbaku_id;
         $data->jumlah_material = $request->jumlah_material;
         $data->kode = $data->kode;
+        $data->tanggal = $data->date;
         $data->status = $data->status;
         $data->save();
         Alert::success("Terupdate", "Data Berhasil Diupdate");
@@ -108,7 +107,7 @@ class PermintaanBahanBakuController extends Controller
     }
     public function filter_tanggal(Request $request)
     {
-        $dataFilter = PermintaanBahanBaku::whereBetween('date', [$request->from_tanggal, $request->to_tanggal])->orderBy('date', 'ASC')->get();
+        $dataFilter = PermintaanBahanBaku::whereBetween('tanggal', [$request->from_tanggal, $request->to_tanggal])->orderBy('tanggal', 'ASC')->get();
         return view('gudang.cek_permintaan.index', compact("dataFilter"));
     }
 }

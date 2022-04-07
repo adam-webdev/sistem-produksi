@@ -11,6 +11,7 @@ use App\Models\PencatatanProduksi;
 use App\Models\PermintaanBahanBaku;
 use App\Models\Stok;
 use App\Models\StokFinishGood;
+use App\Models\Supplier;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 
@@ -37,6 +38,29 @@ class LaporanController extends Controller
                 ->orderBy('created_at', 'ASC')->get();
             $pdf = PDF::loadView('admin.bahanbaku.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
             return $pdf->stream('laporan-bahanbaku-perperiode.pdf');
+        }
+    }
+
+    public function view_supplier()
+    {
+        return view('admin.supplier.laporan.laporan');
+    }
+
+    public function supplier(Request $request)
+    {
+        $this->middleware('role:Admin|Direktur');
+        $periode = $request->periode;
+        if ($periode == "all") {
+            $data = Supplier::all();
+            $pdf = PDF::loadView('admin.supplier.laporan.print', compact('data', 'periode'))->setPaper('A4');
+            return $pdf->stream('laporan-supplier-all.pdf');
+        } else if ($periode == "periode") {
+            $tgl_awal = $request->awal;
+            $tgl_akhir = $request->akhir;
+            $data = Supplier::whereBetween('created_at', [$tgl_awal, $tgl_akhir])
+                ->orderBy('created_at', 'ASC')->get();
+            $pdf = PDF::loadView('admin.supplier.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
+            return $pdf->stream('laporan-supplier-perperiode.pdf');
         }
     }
 

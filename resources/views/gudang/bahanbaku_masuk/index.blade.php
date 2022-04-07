@@ -29,10 +29,10 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="barang">Nama Material :</label>
-                            <select style="width:100%" name="stok_id" id="barang" class="form-control select" required>
+                            <select style="width:100%" name="bahanbaku_id" id="barang" class="form-control select" required>
                                 <option selected disabled value="">-- Pilih Bahan Baku --</option>
-                                @foreach ($stok as $b)
-                                    <option value="{{ $b->id }}">{{ $b->bahanbaku->nama_material }}</option>
+                                @foreach ($bahanbaku as $b)
+                                    <option value="{{ $b->id }}">{{ $b->nama_material }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -78,11 +78,11 @@
                     <tbody>
                         @foreach ($bahanbaku_masuk as $bm)
                             <tr align="center">
-                                <td>{{ $bm->stok->bahanbaku->kode_material }}</td>
+                                <td>{{ $bm->bahanbaku->kode_material }}</td>
                                 <td>{{ $bm->tanggal }}</td>
-                                <td>{{ $bm->stok->bahanbaku->nama_material }}</td>
+                                <td>{{ $bm->bahanbaku->nama_material }}</td>
                                 <td>{{ $bm->jumlah }}</td>
-                                <td>{{ $bm->stok->satuan }}</td>
+                                <td>{{ $bm->bahanbaku->satuan }}</td>
                                 {{-- <td>{{ $bm->stok->jumlah_material }}</td> --}}
                                 <td align="center" width="10%">
                                     {{-- <a href="{{ route('bahanbaku-masuk.edit', [$bm->id]) }}" data-toggle="tooltip"

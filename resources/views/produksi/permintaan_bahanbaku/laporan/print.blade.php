@@ -63,7 +63,7 @@
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
                         <td>{{ $r->kode }}</td>
-                        <td>{{ $r->date }}</td>
+                        <td>{{ $r->tanggal }}</td>
                         <td>{{ $r->bahanbaku->nama_material }}</td>
                         <td>{{ $r->jumlah_material }}</td>
                         @if ($r->status === 'Permintaan Diterima')

@@ -62,11 +62,11 @@
                 @foreach ($data as $r)
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
-                        <td>{{ $r->stok->bahanbaku->kode_material }}</td>
+                        <td>{{ $r->bahanbaku->kode_material }}</td>
                         <td>{{ $r->tanggal }}</td>
-                        <td>{{ $r->stok->bahanbaku->nama_material }}</td>
+                        <td>{{ $r->bahanbaku->nama_material }}</td>
                         <td>{{ $r->jumlah }}</td>
-                        <td>{{ $r->stok->satuan }}</td>
+                        <td>{{ $r->bahanbaku->satuan }}</td>
                     </tr>
                 @endforeach
 

@@ -30,13 +30,13 @@
                     <tbody>
                         @foreach ($data as $b)
                             <tr align="center">
-                                <td>{{ $b->stokfinishgood->finishgood->kode_fg }}</td>
+                                <td>{{ $b->finishgood->kode_fg }}</td>
                                 <td>{{ $b->kode_jadwalproduksi }}</td>
-                                <td>{{ $b->stokfinishgood->finishgood->nama_fg }}</td>
+                                <td>{{ $b->finishgood->nama_fg }}</td>
                                 <td>{{ $b->tanggal }}</td>
-                                <td>{{ $b->stokfinishgood->finishgood->jeniswarna_fg }}</td>
+                                <td>{{ $b->finishgood->jeniswarna_fg }}</td>
                                 <td>{{ $b->jumlah_barang }}</td>
-                                <td>{{ $b->stokfinishgood->satuan }}</td>
+                                <td>{{ $b->finishgood->satuan }}</td>
 
                             </tr>
                         @endforeach

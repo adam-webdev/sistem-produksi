@@ -35,11 +35,11 @@
                         <div class="form-group row align-items-center add-data">
                             <div class="col-md-6">
                                 <label for="barang">Finish Good :</label>
-                                <select style="width:100%" name="stokfinishgood_id[]" id="barang" class="form-control  "
+                                <select style="width:100%" name="finishgood_id[]" id="barang" class="form-control  "
                                     required>
                                     <option selected disabled value="">-- Pilih Finish Good --</option>
-                                    @foreach ($stokfinishgoods as $sfg)
-                                        <option value="{{ $sfg->id }}">{{ $sfg->finishgood->nama_fg }}</option>
+                                    @foreach ($finishgoods as $fg)
+                                        <option value="{{ $fg->id }}">{{ $fg->nama_fg }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -91,11 +91,11 @@
                         @foreach ($data as $b)
                             <tr align="center">
                                 <td>{{ $b->kode_jadwalproduksi }}</td>
-                                <td>{{ $b->stokfinishgood->finishgood->nama_fg }}</td>
+                                <td>{{ $b->finishgood->nama_fg }}</td>
                                 <td>{{ $b->tanggal }}</td>
-                                <td>{{ $b->stokfinishgood->finishgood->jeniswarna_fg }}</td>
+                                <td>{{ $b->finishgood->jeniswarna_fg }}</td>
                                 <td>{{ $b->jumlah_barang }}</td>
-                                <td>{{ $b->stokfinishgood->satuan }}</td>
+                                <td>{{ $b->finishgood->satuan_fg }}</td>
                                 <td align="center" width="10%">
                                     @role('Admin')
                                         <a href="{{ route('jadwal-produksi.edit', [$b->id]) }}" data-toggle="tooltip"
@@ -124,20 +124,17 @@
                 tags: true,
                 width: 'resolve'
             });
-            $('.select1').select2({
-                tags: true,
-                width: 'resolve'
-            });
+
         });
         $(add).on('click', function() {
             $('.add-data').append(`<div class="form-group px-3 mt-2 row child              align-items-center">
                             <div class="col-md-6">
                                 <label for="barang">Finish Good :</label>
-                                <select style="width:100%" name="stokfinishgood_id[]" id="barang" class="form-control "
+                                <select style="width:100%" name="finishgood_id[]" id="barang" class="form-control "
                                     required>
                                     <option selected disabled value="">-- Pilih Finish Good --</option>
-                                    @foreach ($stokfinishgoods as $sfg)
-                                        <option value="{{ $sfg->id }}">{{ $sfg->finishgood->nama_fg }}</option>
+                                    @foreach ($finishgoods as $fg)
+                                        <option value="{{ $fg->id }}">{{ $fg->nama_fg }}</option>
                                     @endforeach
                                 </select>
                             </div>

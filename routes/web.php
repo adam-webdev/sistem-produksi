@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{BahanBakuController, BahanBakuKeluarController, BahanBakuMasukController, DashboardController, FinishGoodController, JadwalProduksiController, LaporanController, PencatatanProduksiController, PermintaanBahanBakuController, StokController, StokFinishGoodController, UserController};
+use App\Http\Controllers\{BahanBakuController, BahanBakuKeluarController, BahanBakuMasukController, DashboardController, FinishGoodController, JadwalProduksiController, LaporanController, PencatatanProduksiController, PermintaanBahanBakuController, StokController, StokFinishGoodController, SupplierController, UserController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +24,9 @@ Route::resource('/dashboard', DashboardController::class);
 Route::resource('/bahan-baku', BahanBakuController::class);
 Route::get('/bahan-baku/hapus/{id}', [BahanBakuController::class, "delete"]);
 
+Route::resource('/supplier', SupplierController::class);
+Route::get('/supplier/hapus/{id}', [SupplierController::class, "delete"]);
+
 
 Route::resource('/bahanbaku-keluar', BahanBakuKeluarController::class);
 Route::get('/bahanbaku-keluar/hapus/{id}', [BahanBakuKeluarController::class, "delete"]);
@@ -42,6 +45,14 @@ Route::get('/pencatatan-produksi/hapus/{id}', [PencatatanProduksiController::cla
 
 Route::resource('/permintaan-bahanbaku', PermintaanBahanBakuController::class);
 Route::get('/permintaan-bahanbaku/hapus/{id}', [PermintaanBahanBakuController::class, "delete"]);
+
+
+// Transaksi
+// Pembelian
+Route::get('pembelian-bahanbaku', [BahanBakuController::class, 'pembelian'])->name('pembelian.index');
+
+Route::get('pembelian-bahanbaku/{id}', [BahanBakuController::class, 'detail'])->name('pembelian.detail');
+
 
 // store
 
@@ -69,6 +80,10 @@ Route::get('/stokfinishgood/hapus/{id}', [StokFinishGoodController::class, "dele
 // laporan bahan  baku
 Route::get('/laporan-bahanbaku', [LaporanController::class, 'view_bahanbaku'])->name('laporan.bahanbaku');
 Route::post('/laporan-bahanbaku', [LaporanController::class, 'bahan_baku'])->name('laporan.bahanbaku.print');
+
+// laporan supplier
+Route::get('/laporan-supplier', [LaporanController::class, 'view_supplier'])->name('laporan.supplier');
+Route::post('/laporan-supplier', [LaporanController::class, 'supplier'])->name('laporan.supplier.print');
 
 // laporan bahan baku keluar
 Route::get('/laporan-bahanbaku-keluar', [LaporanController::class, 'view_bahanbaku_keluar'])->name('laporan.bahanbaku_keluar');

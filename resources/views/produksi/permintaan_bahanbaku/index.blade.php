@@ -92,7 +92,7 @@
                         @foreach ($data as $data)
                             <tr align="center">
                                 <td>{{ $data->kode }}</td>
-                                <td>{{ $data->date }}</td>
+                                <td>{{ $data->tanggal }}</td>
                                 <td>{{ $data->bahanbaku->nama_material }}</td>
                                 <td>{{ $data->jumlah_material }}</td>
                                 {{-- <td>{{ $data->bahanbaku->stok->satuan }}</td> --}}

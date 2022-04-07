@@ -17,10 +17,10 @@ class CreateDeleteOldStokFinishGoodTable extends Migration
         DB::unprepared('
         CREATE TRIGGER delete_old_stok_finish_good after DELETE ON pencatatan_produksis
         FOR EACH ROW BEGIN
-        UPDATE stok_finish_goods
+        UPDATE finish_goods
             SET jumlah = jumlah - OLD.jumlah
         WHERE
-        id = OLD.stokfinishgood_id;
+        id = OLD.finishgood_id;
         END
         ');
     }

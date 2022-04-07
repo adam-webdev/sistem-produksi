@@ -56,11 +56,15 @@
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item fas fa-archive" href="{{ route('bahan-baku.index') }}">
-                                Bahan
-                                <a class="collapse-item fas fa-clipboard-check" href="{{ route('finish-good.index') }}">
-                                    Barang Finish Good</a>
-                                <a class="collapse-item fas fa-users" href="{{ route('user.index') }}">
-                                    User</a>
+                                Bahan Baku
+                            </a>
+                            <a class="collapse-item fas fa-car" href="{{ route('supplier.index') }}">
+                                Supplier
+                            </a>
+                            <a class="collapse-item fas fa-clipboard-check" href="{{ route('finish-good.index') }}">
+                                Barang Finish Good</a>
+                            <a class="collapse-item fas fa-users" href="{{ route('user.index') }}">
+                                User</a>
 
 
                         </div>
@@ -100,10 +104,10 @@
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
 
-                            <a class="collapse-item fas fa-box" href="{{ route('stok.index') }}"> Stok
+                            {{-- <a class="collapse-item fas fa-box" href="{{ route('stok.index') }}"> Stok
                                 Bahan Baku</a>
                             <a class="collapse-item fas fa-check-double" href="{{ route('stokfinishgood.index') }}"> Stok
-                                Finish Good</a>
+                                Finish Good</a> --}}
                             <a class="collapse-item fas fa-door-open" href="{{ route('bahanbaku-masuk.index') }}"> Bahan
                                 Baku Masuk</a>
                             <a class="collapse-item fas fa-external-link-alt"
@@ -116,11 +120,28 @@
                     </div>
                 </li>
             @endhasanyrole
+            <li class="nav-item">
+                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages4"
+                    aria-expanded="true" aria-controls="collapsePage4">
+                    <i class="fas fa-fw fa-money-bill-wave"></i>
+                    <span>Transaksi</span>
+                </a>
+                <div id="collapsePages4" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        @hasanyrole('Admin|Direktur|Gudang')
+                            <a class="collapse-item fas  fa-shopping-basket" href="{{ route('pembelian.index') }}">
+                                Pembelian </a>
+                        @endhasanyrole
 
+
+                    </div>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages3"
                     aria-expanded="true" aria-controls="collapsePage3">
-                    <i class="fas fa-fw  fa-file-pdf"></i>
+                    <i class="fas fa-fw fa-file-pdf"></i>
                     <span>Laporan</span>
                 </a>
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages"
@@ -141,10 +162,10 @@
                                 Bahan Baku Keluar </a>
                             <a class="collapse-item fas fa-door-open" href="{{ route('laporan.bahanbaku_masuk') }}">
                                 Bahan Baku Masuk </a>
-                            <a class="collapse-item fas fa-box" href="{{ route('laporan.stok') }}">
+                            {{-- <a class="collapse-item fas fa-box" href="{{ route('laporan.stok') }}">
                                 Stok Bahan Baku </a>
                             <a class="collapse-item fas fa-check-double" href="{{ route('laporan.stokfinishgood') }}">
-                                Stok Finsih Good </a>
+                                Stok Finsih Good </a> --}}
                         @endhasanyrole
 
                         @hasanyrole('Admin|Direktur|Produksi')

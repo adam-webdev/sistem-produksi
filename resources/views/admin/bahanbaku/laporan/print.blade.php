@@ -54,6 +54,8 @@
                     <th>Tanggal</th>
                     <th>Kode Material</th>
                     <th>Nama Material</th>
+                    <th>Jumlah Material</th>
+                    <th>Satuan Material</th>
                     <th>Jenis Material </th>
                 </tr>
             </thead>
@@ -65,6 +67,8 @@
                         <td>{{ $r->kode_material }}</td>
                         <td>{{ $r->nama_material }}</td>
                         <td>{{ $r->jenis_material }}</td>
+                        <td>{{ $r->jumlah_material }}</td>
+                        <td>{{ $r->satuan }}</td>
                     </tr>
                 @endforeach
 

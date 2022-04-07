@@ -10,13 +10,15 @@ class JadwalProduksi extends Model
 {
     use HasFactory;
     protected $table = 'jadwal_produksis';
+
     public function pencatatanproduksi()
     {
         return $this->hasOne(PencatatanProduksi::class);
     }
-    public function stokfinishgood()
+
+    public function finishgood()
     {
-        return $this->belongsTo(StokFinishGood::class);
+        return $this->belongsTo(FinishGood::class);
     }
 
     public static function kode()

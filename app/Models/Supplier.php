@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BahanBakuKeluar extends Model
+class Supplier extends Model
 {
     use HasFactory;
-    protected $table = 'bahan_baku_keluars';
-
     public function bahanbaku()
     {
-        return $this->belongsTo(BahanBaku::class);
+        return $this->hasOne(BahanBaku::class);
     }
 }

@@ -31,6 +31,8 @@ class FinishGoodController extends Controller
         $data = new FinishGood;
         $data->kode_fg = $request->kode_fg;
         $data->nama_fg = $request->nama_fg;
+        $data->jumlah_fg = $request->jumlah_fg;
+        $data->satuan_fg = $request->satuan_fg;
         $data->jeniswarna_fg = $request->jeniswarna_fg;
         $data->save();
         Alert::success('Tersimpan', 'Finish Good Berhasil Disimpan');
@@ -56,6 +58,8 @@ class FinishGoodController extends Controller
         $data = FinishGood::findOrFail($id);
         $data->kode_fg = $request->kode_fg;
         $data->nama_fg = $request->nama_fg;
+        $data->jumlah_fg = $request->jumlah_fg;
+        $data->satuan_fg = $request->satuan_fg;
         $data->jeniswarna_fg = $request->jeniswarna_fg;
         $data->save();
         Alert::success('Tersimpan', 'Finish Good Berhasil Diupdate');

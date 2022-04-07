@@ -34,11 +34,23 @@
                             <label for="barang">Nama Finish Good :</label>
                             <input type="text" name="nama_fg" class="form-control" id="barang" required>
                         </div>
-                        {{-- <div class="form-group">
+
+                        <div class="form-group">
                             <label for="jumlah">Jumalah Finish Good :</label>
                             <input type="text" name="jumlah_fg" class="form-control" id="jumlah" required>
-                        </div> --}}
+                        </div>
 
+                        <div class="form-group">
+                            <label for="satuan">Satuan Barang :</label>
+                            <select style="width:100%" name="satuan_fg" id="satuan" class="form-control" required>
+                                <option selected disabled value="">-- Pilih Satuan Finish Good --</option>
+                                <option value="Unit">Unit</option>
+                                <option value="Kg">Kg</option>
+                                <option value="Liter">Liter</option>
+                                <option value="Pcs">Pcs</option>
+                                <option value="Meter">Meter</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="jenis_material">Jenis Warna Finish Good :</label>
                             <select type="number" name="jeniswarna_fg" class="form-control" id="jenis_material" required>
@@ -75,6 +87,8 @@
                         <tr align="center">
                             <th>Kode Finish Good</th>
                             <th>Nama Finish Good </th>
+                            <th>Jumlah Finish Good </th>
+                            <th>Satuan Finish Good </th>
                             <th>Jenis Warna Finish Good </th>
                             <th>Aksi</th>
                         </tr>
@@ -84,6 +98,8 @@
                             <tr align="center">
                                 <td>{{ $b->kode_fg }}</td>
                                 <td>{{ $b->nama_fg }}</td>
+                                <td>{{ $b->jumlah_fg }}</td>
+                                <td>{{ $b->satuan_fg }}</td>
                                 <td>{{ $b->jeniswarna_fg }}</td>
                                 <td align="center" width="10%">
                                     @role('Admin')

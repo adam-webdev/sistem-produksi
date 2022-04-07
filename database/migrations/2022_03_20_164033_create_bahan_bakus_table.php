@@ -17,6 +17,9 @@ class CreateBahanBakusTable extends Migration
             $table->id();
             $table->string('kode_material')->unique();
             $table->string('nama_material');
+            $table->integer('jumlah_material');
+            $table->integer('harga');
+            $table->string('satuan');
             $table->string('jenis_material');
             $table->timestamps();
         });

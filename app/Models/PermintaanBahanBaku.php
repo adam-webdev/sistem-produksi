@@ -10,7 +10,6 @@ class PermintaanBahanBaku extends Model
 {
     use HasFactory;
     protected $table = "permintaan_bahan_bakus";
-    protected $dates = ['tanggal'];
     protected $fillable = ['kode', 'bahanbaku_id', 'jumlah_material', 'date', 'status'];
     public function bahanbaku()
     {

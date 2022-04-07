@@ -47,11 +47,11 @@
 
                         <div class="form-group">
                             <label for="barang">Nama Stok FG :</label>
-                            <select style="width:100%" name="stokfinishgood_id" id="barang" class="form-control select"
+                            <select style="width:100%" name="finishgood_id" id="barang" class="form-control select"
                                 required>
                                 <option selected disabled value="">-- Pilih Stok Finish Good --</option>
-                                @foreach ($stokfinishgood as $sfg)
-                                    <option value="{{ $sfg->id }}">{{ $sfg->finishgood->nama_fg }}</option>
+                                @foreach ($finishgood as $fg)
+                                    <option value="{{ $fg->id }}">{{ $fg->nama_fg }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -101,13 +101,13 @@
                     <tbody>
                         @foreach ($data as $data)
                             <tr align="center">
-                                <td>{{ $data->stokfinishgood->finishgood->kode_fg }}</td>
-                                <td>{{ $data->stokfinishgood->finishgood->nama_fg }}</td>
+                                <td>{{ $data->finishgood->kode_fg }}</td>
+                                <td>{{ $data->finishgood->nama_fg }}</td>
                                 <td>{{ $data->jadwalproduksi->tanggal }}</td>
-                                <td>{{ $data->stokfinishgood->finishgood->jeniswarna_fg }}</td>
+                                <td>{{ $data->finishgood->jeniswarna_fg }}</td>
                                 <td>{{ $data->jadwalproduksi->jumlah_barang }}</td>
                                 <td>{{ $data->jumlah }}</td>
-                                <td>{{ $data->stokfinishgood->satuan }}</td>
+                                <td>{{ $data->finishgood->satuan }}</td>
                                 @if ($data->jumlah >= $data->jadwalproduksi->jumlah_barang)
                                     <td><span class="btn btn-sm btn-light text-success shadow-sm">Tercapai</span></td>
                                 @else

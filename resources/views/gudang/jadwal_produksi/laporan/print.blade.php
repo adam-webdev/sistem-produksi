@@ -64,11 +64,11 @@
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
                         <td>{{ $r->kode_jadwalproduksi }}</td>
-                        <td>{{ $r->stokfinishgood->finishgood->nama_fg }}</td>
+                        <td>{{ $r->finishgood->nama_fg }}</td>
                         <td>{{ $r->created_at->format('d-m-Y') }}</td>
-                        <td>{{ $r->stokfinishgood->finishgood->jeniswarna_fg }}</td>
+                        <td>{{ $r->finishgood->jeniswarna_fg }}</td>
                         <td>{{ $r->jumlah_barang }}</td>
-                        <td>{{ $r->stokfinishgood->satuan }}</td>
+                        <td>{{ $r->finishgood->satuan }}</td>
                     </tr>
                 @endforeach
 

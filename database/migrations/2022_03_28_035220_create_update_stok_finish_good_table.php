@@ -17,10 +17,10 @@ class CreateUpdateStokFinishGoodTable extends Migration
         DB::unprepared('
         CREATE TRIGGER update_stok_finish_good after INSERT ON pencatatan_produksis
         FOR EACH ROW BEGIN
-        UPDATE stok_finish_goods
+        UPDATE finish_goods
             SET jumlah = jumlah + NEW.jumlah
         WHERE
-        id = NEW.stokfinishgood_id;
+        id = NEW.finishgood_id;
         END
         ');
     }

@@ -27,6 +27,11 @@
                         id="jumlah_barang">
 
                 </div>
+                <div class="form-group">
+                    <label for="tanggal">Tanggal :</label>
+                    <input type="date" name="date" value="{{ $data->jumlah_material }}" class="form-control" id="tanggal"
+                        required>
+                </div>
             </div>
 
             <input type="submit" class="btn btn-success btn-send" value="Update">

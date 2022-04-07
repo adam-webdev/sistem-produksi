@@ -12,19 +12,19 @@
                     <label for="barang">Nama Barang :</label>
                     <select style="width:100%" name="jadwalproduksi_id" id="barang" class="form-control select" required>
                         <option disabled value="{{ $data->jadwalproduksi_id }}">
-                            {{ $data->stokfinishgood->finishgood->nama_fg }}</option>
+                            {{ $data->finishgood->nama_fg }}</option>
                         @foreach ($jadwalproduksi as $jp)
-                            <option value="{{ $jp->id }}">{{ $jp->stokfinishgood->finishgood->nama_fg }}</option>
+                            <option value="{{ $jp->id }}">{{ $jp->finishgood->nama_fg }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-5">
                     <label for="barang">Nama Barang :</label>
-                    <select style="width:100%" name="stokfinishgood_id" id="barang" class="form-control select" required>
-                        <option disabled value="{{ $data->stokfinishgood_id }}">
-                            {{ $data->stokfinishgood->finishgood->nama_fg }}</option>
-                        @foreach ($stokfinishgood as $sfg)
-                            <option value="{{ $sfg->id }}">{{ $sfg->finishgood->nama_fg }}</option>
+                    <select style="width:100%" name="finishgood_id" id="barang" class="form-control select" required>
+                        <option disabled value="{{ $data->finishgood_id }}">
+                            {{ $data->finishgood->nama_fg }}</option>
+                        @foreach ($finishgood as $fg)
+                            <option value="{{ $fg->id }}">{{ $fg->nama_fg }}</option>
                         @endforeach
                     </select>
                 </div>

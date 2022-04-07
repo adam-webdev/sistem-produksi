@@ -19,6 +19,27 @@
                         value="{{ $bahanbaku->kode_material }}">
                 </div>
                 <div class="col-md-5">
+                    <label for="jumlah">Jumlah Material :</label>
+                    <input type="text" name="jumlah_material" value="{{ $bahanbaku->jumlah_material }}"
+                        class="form-control" id="jumlah" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="harga">Harga Material :</label>
+                    <input type="text" name="harga" value="{{ $bahanbaku->harga }}" class="form-control" id="harga"
+                        required>
+                </div>
+                <div class="col-md-5">
+                    <label for="satuan">Satuan Barang :</label>
+                    <select style="width:100%" name="satuan" id="satuan" class="form-control" required>
+                        <option value="{{ $bahanbaku->satuan }}">{{ $bahanbaku->satuan }}</option>
+                        <option value="Unit">Unit</option>
+                        <option value="Kg">Kg</option>
+                        <option value="Liter">Liter</option>
+                        <option value="Pcs">Pcs</option>
+                        <option value="Meter">Meter</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
                     <label for="barang">Jenis Material :</label>
                     <select style="width:100%" name="jenis_material" id="barang" class="form-control select" required>
                         <option value="{{ $bahanbaku->jenis_material }}">{{ $bahanbaku->jenis_material }}
@@ -26,6 +47,16 @@
                         <option value="a">a</option>
                         <option value="b">b</option>
                         <option value="c">c</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label for="supplier">Supplier :</label>
+                    <select type="text" name="supplier_id" class="form-control" id="supplier" required>
+                        <option disabled value="{{ $bahanbaku->supplier_id }}">{{ $bahanbaku->supplier->nama }}
+                        </option>
+                        @foreach ($supplier as $s)
+                            <option value="{{ $s->id }}">{{ $s->nama }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

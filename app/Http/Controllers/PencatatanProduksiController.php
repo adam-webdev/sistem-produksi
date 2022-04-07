@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FinishGood;
 use App\Models\JadwalProduksi;
 use App\Models\PencatatanProduksi;
-use App\Models\StokFinishGood;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -13,9 +13,9 @@ class PencatatanProduksiController extends Controller
     public function index()
     {
         $jadwalproduksi = JadwalProduksi::all();
-        $stokfinishgood = StokFinishGood::all();
-        $data = PencatatanProduksi::with('jadwalproduksi', 'stokfinishgood')->get();
-        return view('produksi.pencatatan_produksi.index', compact("data", "jadwalproduksi", "stokfinishgood"));
+        $finishgood = FinishGood::all();
+        $data = PencatatanProduksi::with('jadwalproduksi', 'finishgood')->get();
+        return view('produksi.pencatatan_produksi.index', compact("data", "jadwalproduksi", "finishgood"));
     }
 
     public function create()
@@ -34,7 +34,7 @@ class PencatatanProduksiController extends Controller
 
         $data = new PencatatanProduksi();
         $data->jadwal_produksi_id = $request->jadwalproduksi_id;
-        $data->stokfinishgood_id = $request->stokfinishgood_id;
+        $data->finishgood_id = $request->finishgood_id;
         $data->jumlah = $request->jumlah;
         $data->keterangan = $request->keterangan;
         $data->save();
@@ -51,16 +51,16 @@ class PencatatanProduksiController extends Controller
     {
         $data = PencatatanProduksi::findOrFail($id);
         $jadwalproduksi = JadwalProduksi::all();
-        $stokfinishgood = StokFinishGood::all();
+        $finishgood = FinishGood::all();
 
-        return view("produksi.pencatatan_produksi.edit", compact("data", "jadwalproduksi", "stokfinishgood"));
+        return view("produksi.pencatatan_produksi.edit", compact("data", "jadwalproduksi", "finishgood"));
     }
 
     public function update(Request $request, $id)
     {
         $data = PencatatanProduksi::findOrFail($id);
         $data->jadwal_produksi_id = $request->jadwalproduksi_id;
-        $data->stokfinishgood_id = $request->stokfinishgood_id;
+        $data->finishgood_id = $request->finishgood_id;
         $data->jumlah = $request->jumlah;
         $data->keterangan = $request->keterangan;
         $data->save();

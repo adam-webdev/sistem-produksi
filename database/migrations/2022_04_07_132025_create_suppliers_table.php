@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStokFinishGoodsTable extends Migration
+class CreateSuppliersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateStokFinishGoodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stok_finish_goods', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('finishgood_id')->constrained('finish_goods')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('jumlah');
-            $table->string('satuan');
+            $table->string('nama');
+            $table->longText('alamat');
+            $table->string('email');
+            $table->string('nama_bank');
+            $table->string('no_rekening');
+            $table->string('nohp');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateStokFinishGoodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stok_finish_goods');
+        Schema::dropIfExists('suppliers');
     }
 }
