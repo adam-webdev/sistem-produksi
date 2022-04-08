@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFinishGoodsTable extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateFinishGoodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('finish_goods', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_fg');
-            $table->integer('harga');
-            $table->string('nama_fg');
-            $table->string('jeniswarna_fg');
-            $table->integer('jumlah_fg');
-            $table->string('satuan_fg');
+            $table->string('nama_customer');
+            $table->string('nohp');
+            $table->string('alamat');
+            $table->string('email');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateFinishGoodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('finish_goods');
+        Schema::dropIfExists('customers');
     }
 }

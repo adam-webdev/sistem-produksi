@@ -30,4 +30,9 @@ class BahanBaku extends Model
     {
         return $this->hasMany(Stok::class);
     }
+
+    public function pembeliandetail()
+    {
+        return $this->hasMany(PembelianDetail::class);
+    }
 }

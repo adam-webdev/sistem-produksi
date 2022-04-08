@@ -6,10 +6,9 @@
         <h1 class="h3 mb-0 text-gray-800">Data Material </h1>
         <!-- Button trigger modal -->
         @role('Admin')
-            <div type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                <i class="fas fa-shopping-basket"></i>
-                Buy
-            </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                + Tambah
+            </button>
         @endrole
 
     </div>

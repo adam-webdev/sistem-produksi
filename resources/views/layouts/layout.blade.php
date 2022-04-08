@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title> @yield('title')</title>
     <link href="{{ asset('asset/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -17,8 +16,11 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('asset/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('asset/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    @yield('meta')
 
+</head>
 </head>
 
 <body id="page-top">
@@ -60,6 +62,9 @@
                             </a>
                             <a class="collapse-item fas fa-car" href="{{ route('supplier.index') }}">
                                 Supplier
+                            </a>
+                            <a class="collapse-item fas fa-car" href="{{ route('customer.index') }}">
+                                Customer
                             </a>
                             <a class="collapse-item fas fa-clipboard-check" href="{{ route('finish-good.index') }}">
                                 Barang Finish Good</a>
@@ -132,6 +137,8 @@
                         @hasanyrole('Admin|Direktur|Gudang')
                             <a class="collapse-item fas  fa-shopping-basket" href="{{ route('pembelian.index') }}">
                                 Pembelian </a>
+                            <a class="collapse-item fas  fa-shopping-basket" href="{{ route('penjualan.index') }}">
+                                Penjualan </a>
                         @endhasanyrole
 
 

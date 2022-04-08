@@ -52,11 +52,9 @@
                 <tr align="center">
                     <th width="2%">No</th>
                     <th>Tanggal</th>
-                    <th>Nama</th>
+                    <th>Nama customer</th>
                     <th>No Telephone </th>
                     <th>Email</th>
-                    <th>Nama Bank</th>
-                    <th>No rekening</th>
                     <th>Alamat</th>
                 </tr>
             </thead>
@@ -65,11 +63,9 @@
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
                         <td>{{ $r->created_at->format('d-m-Y') }}</td>
-                        <td>{{ $r->nama }}</td>
+                        <td>{{ $r->nama_customer }}</td>
                         <td>{{ $r->nohp }}</td>
                         <td>{{ $r->email }}</td>
-                        <td>{{ $r->nama_bank }}</td>
-                        <td>{{ $r->no_rekening }}</td>
                         <td>{{ $r->alamat }}</td>
                     </tr>
                 @endforeach

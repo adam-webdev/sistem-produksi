@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{BahanBakuController, BahanBakuKeluarController, BahanBakuMasukController, DashboardController, FinishGoodController, JadwalProduksiController, LaporanController, PencatatanProduksiController, PermintaanBahanBakuController, StokController, StokFinishGoodController, SupplierController, UserController};
+use App\Http\Controllers\{BahanBakuController, BahanBakuKeluarController, BahanBakuMasukController, CustomerController, DashboardController, FinishGoodController, JadwalProduksiController, LaporanController, PembelianController, PencatatanProduksiController, PenjualanController, PermintaanBahanBakuController, StokController, StokFinishGoodController, SupplierController, UserController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +24,13 @@ Route::resource('/dashboard', DashboardController::class);
 Route::resource('/bahan-baku', BahanBakuController::class);
 Route::get('/bahan-baku/hapus/{id}', [BahanBakuController::class, "delete"]);
 
+//supplier
 Route::resource('/supplier', SupplierController::class);
 Route::get('/supplier/hapus/{id}', [SupplierController::class, "delete"]);
+
+//customer
+Route::resource('/customer', CustomerController::class);
+Route::get('/customer/hapus/{id}', [CustomerController::class, "delete"]);
 
 
 Route::resource('/bahanbaku-keluar', BahanBakuKeluarController::class);
@@ -49,10 +54,20 @@ Route::get('/permintaan-bahanbaku/hapus/{id}', [PermintaanBahanBakuController::c
 
 // Transaksi
 // Pembelian
-Route::get('pembelian-bahanbaku', [BahanBakuController::class, 'pembelian'])->name('pembelian.index');
+Route::resource('/pembelian', PembelianController::class);
 
-Route::get('pembelian-bahanbaku/{id}', [BahanBakuController::class, 'detail'])->name('pembelian.detail');
+Route::get('/pembelian/hapus/{id}', [PembelianController::class, 'destroy'])->name('pembelian.hapus');
 
+Route::get('/pembelian-detail/{id}', [PembelianController::class, 'pembelian_detail'])->name('pembelian.detail');
+
+Route::post('/pembelian-detail', [PembelianController::class, 'bahanbakuid'])->name('pembelian.bahanbakuid');
+
+// penjualan
+Route::resource('/penjualan', PenjualanController::class);
+
+Route::get('/penjualan/hapus/{id}', [PenjualanController::class, 'destroy'])->name('penjualan.hapus');
+
+Route::get('/penjualan-detail/{id}', [PenjualanController::class, 'penjualan_detail'])->name('penjualan.detail');
 
 // store
 

@@ -52,7 +52,6 @@ class PencatatanProduksiController extends Controller
         $data = PencatatanProduksi::findOrFail($id);
         $jadwalproduksi = JadwalProduksi::all();
         $finishgood = FinishGood::all();
-
         return view("produksi.pencatatan_produksi.edit", compact("data", "jadwalproduksi", "finishgood"));
     }
 
