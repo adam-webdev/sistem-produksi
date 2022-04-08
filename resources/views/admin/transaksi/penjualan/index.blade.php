@@ -41,16 +41,14 @@
                             </div>
 
                         </div>
-                        <div class="form-group row">
-                            <div class="col-md-5">
-                                <label for="finishgood_id">Customer :</label>
-                                <select type="text" name="customer_id" class="form-control" id="finishgood_id" required>
+                        <div class="form-group">
+                            <label for="customer_id">Customer :</label>
+                            <select type="text" name="customer_id" class="form-control" id="customer_idrequired>
                                     <option value="">-- Pilih Nama Customer --</option>
-                                    @foreach ($customer as $c)
-                                        <option value="{{ $c->id }}">{{ $c->nama_customer }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                                     @foreach ($customer as $c)
+                                <option value="{{ $c->id }}">{{ $c->nama_customer }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group row add-data">
                             <div class="col-md-5">

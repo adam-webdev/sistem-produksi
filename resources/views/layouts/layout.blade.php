@@ -137,7 +137,7 @@
                         @hasanyrole('Admin|Direktur|Gudang')
                             <a class="collapse-item fas  fa-shopping-basket" href="{{ route('pembelian.index') }}">
                                 Pembelian </a>
-                            <a class="collapse-item fas  fa-shopping-basket" href="{{ route('penjualan.index') }}">
+                            <a class="collapse-item fas fa-money-bill-alt" href="{{ route('penjualan.index') }}">
                                 Penjualan </a>
                         @endhasanyrole
 

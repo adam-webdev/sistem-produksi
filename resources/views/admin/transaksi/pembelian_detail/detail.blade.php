@@ -19,6 +19,7 @@
                             <th>Harga </th>
                             <th>Jumlah </th>
                             <th>Tanggal Pembayaran </th>
+                            <th>Tanggal Jatuh Tempo </th>
                             <th>Total </th>
                         </tr>
                     </thead>
@@ -30,7 +31,17 @@
                                 <td>{{ $pd->jenis_pembayaran }}</td>
                                 <td>@currency($pd->bahanbaku->harga) </td>
                                 <td>{{ $pd->jumlah }}</td>
-                                <td>{{ $pd->tanggal_pembayaran }}</td>
+                                @if ($pd->jenis_pembayaran === 'Cash')
+                                    <td>{{ $pd->tanggal_pembayaran }}</td>
+                                @else
+                                    <td> - </td>
+                                @endif
+
+                                @if ($pd->jenis_pembayaran === 'Kredit')
+                                    <td>{{ $pd->tanggal_pembayaran }}</td>
+                                @else
+                                    <td>-</td>
+                                @endif
                                 <td>@currency($pd->bahanbaku->harga * $pd->jumlah)</td>
                             </tr>
                         @endforeach
