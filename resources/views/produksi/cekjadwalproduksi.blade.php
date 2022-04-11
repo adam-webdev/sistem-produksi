@@ -36,7 +36,7 @@
                                 <td>{{ $b->tanggal }}</td>
                                 <td>{{ $b->finishgood->jeniswarna_fg }}</td>
                                 <td>{{ $b->jumlah_barang }}</td>
-                                <td>{{ $b->finishgood->satuan }}</td>
+                                <td>{{ $b->finishgood->satuan_fg }}</td>
 
                             </tr>
                         @endforeach

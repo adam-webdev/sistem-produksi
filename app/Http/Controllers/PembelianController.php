@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BahanBaku;
+use App\Models\FinishGood;
+use App\Models\Hutang;
 use App\Models\Pembelian;
 use App\Models\PembelianDetail;
 use App\Models\Supplier;
@@ -20,10 +22,12 @@ class PembelianController extends Controller
      */
     public function index()
     {
+
         $no = Pembelian::NoPembelian();
         $supplier = Supplier::all();
         $bahanbaku = BahanBaku::all();
         $pembelian = Pembelian::all();
+
         return view('admin.transaksi.pembelian.index', compact('supplier', 'bahanbaku', 'pembelian', 'no'));
     }
 
@@ -70,7 +74,7 @@ class PembelianController extends Controller
         $pembelian_id = DB::table('pembelians')->insertGetId($pembelian);
 
         $bahanbaku = $request->input('bahanbaku_id', []);
-        $jumlah = $request->input('jumlah', []);
+        $jumlah =  $request->input('jumlah', []);
 
         $pembelian_detail = [];
 
@@ -81,21 +85,55 @@ class PembelianController extends Controller
         } else {
             $tanggal = Carbon::now()->addDay(30);
         }
+
+        $hargaBahanbaku = [];
+        // ddd($bahanbaku);
+        foreach ($bahanbaku as $bb) {
+            $hargaBahanbaku[] = BahanBaku::select('harga')->where('id', $bb)->sum('harga');
+        }
+
+        // $collection = collect($relasi);
+
+        // ddd($j);
+        // $datas = $collection->reduce(function ($result, $value, $key) use ($j) {
+        //     return  $result + ($value * $j[$key]);
+        // });
+
+
+        $result = [];
+        foreach ($hargaBahanbaku as $index => $value) {
+            $result[$index] = $value * $jumlah[$index];
+        }
+        // array_sum($res)
+        // ddd(array_sum($result));
+        $total = array_sum($result);
         foreach ($bahanbaku as $index => $value) {
+
+            // ddd($result[$index]);
             $pembelian_detail[] = [
                 'pembelian_id' => $pembelian_id,
                 'bahanbaku_id' => $bahanbaku[$index],
                 'jumlah' => $jumlah[$index],
                 'jenis_pembayaran' => $request->jenis_pembayaran,
                 'tanggal_pembayaran' => $tanggal,
-                'total_pembayaran' => 0,
+                'total_pembayaran' => $result[$index],
+                'tanggal_pembelian' => $request->tanggal_pembelian,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ];
         }
-        $data = DB::table('pembelian_details')->insert($pembelian_detail);
-        Alert::success('Berhasil', 'Data Berhasil Disimpan');
-        return redirect()->route('pembelian.index');
+        DB::table('pembelian_details')->insert($pembelian_detail);
+        // ddd($pembelian_detail);
+
+
+        if ($request->jenis_pembayaran === 'Kredit') {
+            $hutang = new Hutang();
+            $hutang->pembelian_id = $pembelian_id;
+            $hutang->total = array_sum($result);
+            $hutang->save();
+            Alert::success('Berhasil', 'Data Berhasil Disimpan');
+            return redirect()->route('pembelian.index');
+        }
     }
 
     /**

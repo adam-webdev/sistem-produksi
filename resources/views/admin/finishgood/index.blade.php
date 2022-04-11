@@ -36,8 +36,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="jumlah">Jumalah Finish Good :</label>
+                            <label for="jumlah">Jumlah Finish Good :</label>
                             <input type="text" name="jumlah_fg" class="form-control" id="jumlah" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="harga">Harga Finish Good :</label>
+                            <input type="text" name="harga" class="form-control" id="harga" required>
                         </div>
 
                         <div class="form-group">
@@ -89,6 +94,7 @@
                             <th>Nama Finish Good </th>
                             <th>Jumlah Finish Good </th>
                             <th>Satuan Finish Good </th>
+                            <th>Harga </th>
                             <th>Jenis Warna Finish Good </th>
                             <th>Aksi</th>
                         </tr>
@@ -100,6 +106,7 @@
                                 <td>{{ $b->nama_fg }}</td>
                                 <td>{{ $b->jumlah_fg }}</td>
                                 <td>{{ $b->satuan_fg }}</td>
+                                <td>@currency($b->harga)</td>
                                 <td>{{ $b->jeniswarna_fg }}</td>
                                 <td align="center" width="10%">
                                     @role('Admin')

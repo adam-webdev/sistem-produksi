@@ -6,9 +6,14 @@ use App\Models\BahanBaku;
 use App\Models\BahanBakuKeluar;
 use App\Models\BahanBakuMasuk;
 use App\Models\FinishGood;
+use App\Models\Hutang;
 use App\Models\JadwalProduksi;
+use App\Models\Pembelian;
+use App\Models\PembelianDetail;
 use App\Models\PencatatanProduksi;
+use App\Models\PenjualanDetail;
 use App\Models\PermintaanBahanBaku;
+use App\Models\Piutang;
 use App\Models\Stok;
 use App\Models\StokFinishGood;
 use App\Models\Supplier;
@@ -158,7 +163,7 @@ class LaporanController extends Controller
     {
         $periode = $request->periode;
         if ($periode == "all") {
-            $data = PencatatanProduksi::with('jadwalproduksi', 'stokfinishgood')->get();
+            $data = PencatatanProduksi::with('jadwalproduksi', 'finishgood')->get();
             $pdf = PDF::loadview('produksi.pencatatan_produksi.laporan.print', compact('data', 'periode'))->setPaper('a4', 'landscape');
             return $pdf->stream('laporan-pencatatan-produksi-all.pdf');
         } else if ($periode == "periode") {
@@ -231,6 +236,91 @@ class LaporanController extends Controller
                 ->orderBy('created_at', 'ASC')->get();
             $pdf = PDF::loadview('gudang.stokfinishgood.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
             return $pdf->stream('laporan-stokfinishgood-perperiode.pdf');
+        }
+    }
+
+    public function view_pembelian()
+    {
+        return view('admin.transaksi.pembelian.laporan.laporan');
+    }
+    public function pembelian(Request $request)
+    {
+        $periode = $request->periode;
+        if ($periode == "all") {
+            $data = PembelianDetail::with('pembelian', 'bahanbaku', 'bahanbaku.supplier')->get();
+            $pdf = PDF::loadview('admin.transaksi.pembelian.laporan.print', compact('data', 'periode'))->setPaper('A4');
+            return $pdf->stream('laporan-pembelian-all.pdf');
+        } else if ($periode == "periode") {
+            $tgl_awal = $request->awal;
+            $tgl_akhir = $request->akhir;
+            $data = PembelianDetail::whereBetween('tanggal_pembelian', [$tgl_awal, $tgl_akhir])
+                ->orderBy('created_at', 'ASC')->get();
+            $pdf = PDF::loadview('admin.transaksi.pembelian.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
+            return $pdf->stream('laporan-pembelian-perperiode.pdf');
+        }
+    }
+
+    public function view_penjualan()
+    {
+        return view('admin.transaksi.penjualan.laporan.laporan');
+    }
+
+    public function penjualan(Request $request)
+    {
+        $periode = $request->periode;
+        if ($periode == "all") {
+            $data = PenjualanDetail::with('penjualan', 'finishgood', 'customer')->get();
+            $pdf = PDF::loadview('admin.transaksi.penjualan.laporan.print', compact('data', 'periode'))->setPaper('A4');
+            return $pdf->stream('laporan-penjualan-all.pdf');
+        } else if ($periode == "periode") {
+            $tgl_awal = $request->awal;
+            $tgl_akhir = $request->akhir;
+            $data = PenjualanDetail::whereBetween('tanggal_penjualan', [$tgl_awal, $tgl_akhir])
+                ->orderBy('created_at', 'ASC')->get();
+            $pdf = PDF::loadview('admin.transaksi.penjualan.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
+            return $pdf->stream('laporan-penjualan-perperiode.pdf');
+        }
+    }
+    public function view_hutang()
+    {
+        return view('admin.transaksi.hutang.laporan.laporan');
+    }
+
+    public function hutang(Request $request)
+    {
+        $periode = $request->periode;
+        if ($periode == "all") {
+            $data = Hutang::with('pembelian.pembeliandetail.bahanbaku.supplier')->get();
+            $pdf = PDF::loadview('admin.transaksi.hutang.laporan.print', compact('data', 'periode'))->setPaper('A4');
+            return $pdf->stream('laporan-hutang-all.pdf');
+        } else if ($periode == "periode") {
+            $tgl_awal = $request->awal;
+            $tgl_akhir = $request->akhir;
+            $data = Hutang::whereBetween('created_at', [$tgl_awal, $tgl_akhir])
+                ->orderBy('created_at', 'ASC')->get();
+            $pdf = PDF::loadview('admin.transaksi.hutang.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
+            return $pdf->stream('laporan-hutang-perperiode.pdf');
+        }
+    }
+    public function view_piutang()
+    {
+        return view('admin.transaksi.piutang.laporan.laporan');
+    }
+
+    public function piutang(Request $request)
+    {
+        $periode = $request->periode;
+        if ($periode == "all") {
+            $data = Piutang::with('penjualan', 'penjualan.penjualandetail.customer')->get();
+            $pdf = PDF::loadview('admin.transaksi.piutang.laporan.print', compact('data', 'periode'))->setPaper('A4');
+            return $pdf->stream('laporan-piutang-all.pdf');
+        } else if ($periode == "periode") {
+            $tgl_awal = $request->awal;
+            $tgl_akhir = $request->akhir;
+            $data = Piutang::whereBetween('created_at', [$tgl_awal, $tgl_akhir])
+                ->orderBy('created_at', 'ASC')->get();
+            $pdf = PDF::loadview('admin.transaksi.piutang.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'))->setPaper('A4');
+            return $pdf->stream('laporan-piutang-perperiode.pdf');
         }
     }
 }

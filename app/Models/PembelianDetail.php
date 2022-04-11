@@ -17,4 +17,8 @@ class PembelianDetail extends Model
     {
         return $this->belongsTo(BahanBaku::class);
     }
+    public function hutang()
+    {
+        return $this->hasOne(Hutang::class);
+    }
 }

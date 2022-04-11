@@ -91,10 +91,25 @@ Route::resource('/stokfinishgood', StokFinishGoodController::class);
 Route::get('/stokfinishgood/hapus/{id}', [StokFinishGoodController::class, "delete"]);
 
 // laporan
+// laporan penjualan
+Route::get('/laporan-penjualan', [LaporanController::class, 'view_penjualan'])->name('laporan.penjualan');
+Route::post('/laporan-penjualan', [LaporanController::class, 'penjualan'])->name('laporan.penjualan.print');
+
+// laporan pembelian
+Route::get('/laporan-pembelian', [LaporanController::class, 'view_pembelian'])->name('laporan.pembelian');
+Route::post('/laporan-pembelian', [LaporanController::class, 'pembelian'])->name('laporan.pembelian.print');
 
 // laporan bahan  baku
 Route::get('/laporan-bahanbaku', [LaporanController::class, 'view_bahanbaku'])->name('laporan.bahanbaku');
 Route::post('/laporan-bahanbaku', [LaporanController::class, 'bahan_baku'])->name('laporan.bahanbaku.print');
+
+// laporan Hutang
+Route::get('/laporan-hutang', [LaporanController::class, 'view_hutang'])->name('laporan.hutang');
+Route::post('/laporan-hutang', [LaporanController::class, 'hutang'])->name('laporan.hutang.print');
+
+// laporan Piutang
+Route::get('/laporan-piutang', [LaporanController::class, 'view_piutang'])->name('laporan.piutang');
+Route::post('/laporan-piutang', [LaporanController::class, 'piutang'])->name('laporan.piutang.print');
 
 // laporan supplier
 Route::get('/laporan-supplier', [LaporanController::class, 'view_supplier'])->name('laporan.supplier');

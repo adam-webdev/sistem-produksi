@@ -15,6 +15,10 @@ class Pembelian extends Model
     {
         return $this->hasMany(PembelianDetail::class);
     }
+    public function hutang()
+    {
+        return $this->hasMany(Hutang::class);
+    }
     public static function NoPembelian()
     {
         $tanggalNow = Carbon::now()->format('d m Y');

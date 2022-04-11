@@ -43,7 +43,7 @@
     <hr>
     <div class="row">
         <h5 class="text-center">
-            {{ $periode == 'all'? 'Laporan  Pencatatan produksi all ': 'Laporan Pencatatan produksi Per-periode ' . $tgl_awal . ' sampai dengan ' . $tgl_akhir }}
+            {{ $periode == 'all'? 'Laporan Produksi all ': 'Laporan Produksi Per-periode ' . $tgl_awal . ' sampai dengan ' . $tgl_akhir }}
         </h5>
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -51,34 +51,43 @@
             <thead>
                 <tr align="center">
                     <th width="2%">No</th>
-                    <th>Nama Barang</th>
+                    <th>No Produksi</th>
                     <th>Tanggal</th>
-                    <th>Jenis Warna Barang</th>
+                    <th>Nama Barang</th>
                     <th> Target Yang Diharapkan </th>
                     <th> Target Yang Diselesaikan </th>
-                    <th> Satuan </th>
-                    <th> Status </th>
-                    <th> Keterangan </th>
+                    <th> Persentase Keberhasilan </th>
+                    {{-- <th> Status </th> --}}
+                    {{-- <th> Keterangan </th> --}}
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $r)
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
-                        <td>{{ $r->stokfinishgood->finishgood->nama_fg }}</td>
-                        <td>{{ $r->created_at->format('d-m-Y') }}</td>
-                        <td>{{ $r->stokfinishgood->finishgood->jeniswarna_fg }}</td>
+                        <td>{{ $r->jadwalproduksi->kode_jadwalproduksi }}</td>
+                        <td>{{ $r->jadwalproduksi->tanggal }}</td>
+                        <td>{{ $r->finishgood->nama_fg }}</td>
+                        {{-- <td>{{ $r->created_at->format('d-m-Y') }}</td> --}}
                         <td>{{ $r->jadwalproduksi->jumlah_barang }}</td>
                         <td>{{ $r->jumlah }}</td>
-                        <td>{{ $r->stokfinishgood->satuan }}</td>
                         @if ($r->jumlah >= $r->jadwalproduksi->jumlah_barang)
+                            <td> <span class="text-success font-weight-bold">+ </span>
+                                {{ ($r->jumlah / $r->jadwalproduksi->jumlah_barang) * 100 }}
+                                %</td>
+                        @else
+                            <td> <span class="text-danger font-weight-bold">- </span>
+                                {{ ($r->jumlah / $r->jadwalproduksi->jumlah_barang) * 100 }}
+                                %</td>
+                        @endif
+                        {{-- @if ($r->jumlah >= $r->jadwalproduksi->jumlah_barang)
                             <td><span class="btn btn-sm btn-light shadow-sm text-success">Tercapai</span></td>
                         @else
                             <td width="150px">
                                 <span class="btn btn-sm btn-light shadow-sm text-danger">Belum Tercapai</span>
                             </td>
                         @endif
-                        <td>{{ $r->keterangan }}</td>
+                        <td>{{ $r->keterangan }}</td> --}}
                     </tr>
                 @endforeach
 

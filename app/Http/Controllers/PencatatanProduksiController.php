@@ -12,7 +12,7 @@ class PencatatanProduksiController extends Controller
 {
     public function index()
     {
-        $jadwalproduksi = JadwalProduksi::all();
+        $jadwalproduksi = JadwalProduksi::with('finishgood')->get();
         $finishgood = FinishGood::all();
         $data = PencatatanProduksi::with('jadwalproduksi', 'finishgood')->get();
         return view('produksi.pencatatan_produksi.index', compact("data", "jadwalproduksi", "finishgood"));

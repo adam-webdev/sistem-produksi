@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\FinishGood;
 use App\Models\Penjualan;
 use App\Models\PenjualanDetail;
+use App\Models\Piutang;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -69,6 +70,26 @@ class PenjualanController extends Controller
 
         $penjualan_detail = [];
 
+        $hargaFG = [];
+        $stokfg = [];
+        foreach ($finishgood as $fg) {
+            $hargaFG[] = FinishGood::select('harga')->where('id', $fg)->sum('harga');
+            $stokfg[] = FinishGood::select('jumlah_fg')->where('id', $fg)->sum('jumlah_fg');
+        }
+
+        $result = [];
+        foreach ($hargaFG as $index => $value) {
+            $result[$index] = $value * $jumlah[$index];
+        }
+
+        foreach ($stokfg as $index => $value) {
+            if ($jumlah[$index] > $stokfg[$index]) {
+                Alert::error("Gagal", "Jumlah stok fg tidak cukup maksimal {{$stokfg[$index]}} ");
+                return redirect()->route('penjualan.index');
+            }
+        }
+
+        $total = array_sum($result);
         $tanggal = '';
 
         if ($request->jenis_pembayaran === 'Cash') {
@@ -76,6 +97,7 @@ class PenjualanController extends Controller
         } else {
             $tanggal = Carbon::now()->addDay(30);
         }
+
         foreach ($finishgood as $index => $value) {
             $penjualan_detail[] = [
                 'penjualan_id' => $penjualan_id,
@@ -84,12 +106,21 @@ class PenjualanController extends Controller
                 'customer_id' => $request->customer_id,
                 'jenis_pembayaran' => $request->jenis_pembayaran,
                 'tanggal_pembayaran' => $tanggal,
-                'total_pembayaran' => 0,
+                'tanggal_penjualan' => $request->tanggal_penjualan,
+                'total_pembayaran' => $result[$index],
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ];
         }
-        $data = DB::table('penjualan_details')->insert($penjualan_detail);
+
+        DB::table('penjualan_details')->insert($penjualan_detail);
+
+        if ($request->jenis_pembayaran === 'Kredit') {
+            $piutang = new Piutang();
+            $piutang->penjualan_id = $penjualan_id;
+            $piutang->total = $total;
+            $piutang->save();
+        }
         Alert::success('Berhasil', 'Data Berhasil Disimpan');
         return redirect()->route('penjualan.index');
     }

@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Pembelian')
+@section('title', 'Penjualan')
 
 @section('content')
     @include('sweetalert::alert')
@@ -44,8 +44,8 @@
                         <div class="form-group">
                             <label for="customer_id">Customer :</label>
                             <select type="text" name="customer_id" class="form-control" id="customer_idrequired>
-                                    <option value="">-- Pilih Nama Customer --</option>
-                                     @foreach ($customer as $c)
+                                        <option value="">-- Pilih Nama Customer --</option>
+                                          @foreach ($customer as $c)
                                 <option value="{{ $c->id }}">{{ $c->nama_customer }}</option>
                                 @endforeach
                             </select>

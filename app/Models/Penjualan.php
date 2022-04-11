@@ -13,6 +13,10 @@ class Penjualan extends Model
     {
         return $this->hasMany(PenjualanDetail::class);
     }
+    public function piutang()
+    {
+        return $this->hasMany(Piutang::class);
+    }
     public static function NoPenjualan()
     {
         $tanggalNow = Carbon::now()->format('d m Y');

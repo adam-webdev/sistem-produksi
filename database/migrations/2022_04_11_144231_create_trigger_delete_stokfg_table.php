@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeleteOldStokFinishGoodTable extends Migration
+class CreateTriggerDeleteStokfgTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,10 +15,10 @@ class CreateDeleteOldStokFinishGoodTable extends Migration
     public function up()
     {
         DB::unprepared('
-        CREATE TRIGGER delete_old_stok_finish_good after DELETE ON pencatatan_produksis
+        CREATE TRIGGER delete_old_stokfg after DELETE ON penjualan_details
         FOR EACH ROW BEGIN
         UPDATE finish_goods
-            SET jumlah = jumlah - OLD.jumlah
+            SET jumlah_fg = jumlah_fg - OLD.jumlah
         WHERE
         id = OLD.finishgood_id;
         END
@@ -32,6 +32,6 @@ class CreateDeleteOldStokFinishGoodTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delete_old_stok_finish_good');
+        Schema::dropIfExists('trigger_delete_stokfg');
     }
 }

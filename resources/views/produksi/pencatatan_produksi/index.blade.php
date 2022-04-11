@@ -49,9 +49,9 @@
                             <label for="barang">Nama Stok FG :</label>
                             <select style="width:100%" name="finishgood_id" id="barang" class="form-control select"
                                 required>
-                                <option selected disabled value="">-- Pilih Stok Finish Good --</option>
-                                @foreach ($finishgood as $fg)
-                                    <option value="{{ $fg->id }}">{{ $fg->nama_fg }}</option>
+                                <option selected disabled value="">-- Pilih Finish Good --</option>
+                                @foreach ($jadwalproduksi as $d)
+                                    <option value="{{ $d->finishgood->id }}">{{ $d->finishgood->nama_fg }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -107,7 +107,7 @@
                                 <td>{{ $data->finishgood->jeniswarna_fg }}</td>
                                 <td>{{ $data->jadwalproduksi->jumlah_barang }}</td>
                                 <td>{{ $data->jumlah }}</td>
-                                <td>{{ $data->finishgood->satuan }}</td>
+                                <td>{{ $data->finishgood->satuan_fg }}</td>
                                 @if ($data->jumlah >= $data->jadwalproduksi->jumlah_barang)
                                     <td><span class="btn btn-sm btn-light text-success shadow-sm">Tercapai</span></td>
                                 @else

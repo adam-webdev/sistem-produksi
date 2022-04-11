@@ -21,6 +21,7 @@ class CreatePenjualanDetailsTable extends Migration
             $table->string('jumlah');
             $table->string('jenis_pembayaran');
             $table->date('tanggal_pembayaran');
+            $table->date('tanggal_penjualan');
             $table->string('total_pembayaran');
             $table->timestamps();
         });

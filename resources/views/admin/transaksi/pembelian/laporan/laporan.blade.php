@@ -1,11 +1,12 @@
 @extends('layouts.layout')
+@section('title', 'Laporan Pembelian')
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Laporan Produksi</h1>
+        <h1 class="h3 mb-0 text-gray-800">Laporan Pembelian</h1>
 
     </div>
 
-    <form action="{{ route('laporan.pencatatanproduksi.print') }}" method="post">
+    <form action="{{ route('laporan.pembelian.print') }}" method="post">
         @csrf
         <div class="card p-4 flex justify-content-between">
             <div class="row">
