@@ -13,7 +13,7 @@
                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr align="center">
-                            <th>No Pembelian</th>
+                            <th>No Penjualan</th>
                             <th>Nama Bahan Baku </th>
                             <th>Jenis Pembayaran </th>
                             <th>Harga </th>

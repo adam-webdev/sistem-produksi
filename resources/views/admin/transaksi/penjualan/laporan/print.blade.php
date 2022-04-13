@@ -63,7 +63,7 @@
                 @foreach ($data as $r)
                     <tr>
                         <td width="2%">{{ $loop->iteration }}</td>
-                        <td>{{ $r->no_penjualan }}</td>
+                        <td>{{ $r->penjualan->no_penjualan }}</td>
                         <td>{{ $r->finishgood->nama_fg }}</td>
                         <td>{{ $r->customer->nama_customer }}</td>
                         <td>{{ $r->penjualan->tanggal_penjualan }}</td>
