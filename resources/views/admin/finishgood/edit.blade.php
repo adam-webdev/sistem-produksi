@@ -18,17 +18,19 @@
                     <input id="kode" type="text" name="kode_fg" class="form-control" required
                         value="{{ $data->kode_fg }}">
                 </div>
-                <div class="col-md-5">
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
                     <label for="jumlah">Jumlah Finish Good</label>
                     <input id="jumlah" type="number" name="jumlah_fg" class="form-control" required
                         value="{{ $data->jumlah_fg }}">
                 </div>
-                <div class="form-group">
+                <div class="col-md-4">
                     <label for="harga">Harga Finish Good :</label>
-                    <input type="text" name="harga" class="form-control" id="harga" value="{{ $data->harga }}"> required>
+                    <input type="text" name="harga" class="form-control" id="harga" value="{{ $data->harga }}" required>
                 </div>
 
-                <div class="form-group">
+                <div class="col-md-3">
                     <label for="satuan">Satuan Barang :</label>
                     <select style="width:100%" name="satuan_fg" id="satuan" class="form-control" required>
                         <option value="{{ $data->satuan_fg }}">{{ $data->satuan_fg }}
@@ -39,6 +41,8 @@
                         <option value="Meter">Meter</option>
                     </select>
                 </div>
+            </div>
+            <div class="form-group row">
 
                 <div class="col-md-5">
                     <label for="barang">Jenis Warna Finish Good :</label>

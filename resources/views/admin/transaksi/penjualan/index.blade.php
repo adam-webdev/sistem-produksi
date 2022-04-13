@@ -43,10 +43,10 @@
                         </div>
                         <div class="form-group">
                             <label for="customer_id">Customer :</label>
-                            <select type="text" name="customer_id" class="form-control" id="customer_idrequired>
-                                                    <option value="">-- Pilih Nama Customer --</option>
-                                                         @foreach ($customer as $c)
-                                <option value="{{ $c->id }}">{{ $c->nama_customer }}</option>
+                            <select type="text" name="customer_id" class="form-control" id="customer_id" required>
+                                <option value="">-- Pilih Nama Customer --</option>
+                                @foreach ($customer as $c)
+                                    <option value="{{ $c->id }}">{{ $c->nama_customer }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -82,7 +82,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="ket">keterangan :</label>
+                            <label for="ket">Keterangan :</label>
                             <textarea name="keterangan" id="ket" rows="4" class="form-control"></textarea>
                         </div>
 
@@ -109,6 +109,7 @@
                     <thead>
                         <tr align="center">
                             <th>No Penjualan</th>
+                            <th>Customer </th>
                             <th>Tanggal Penjualan </th>
                             <th>Keterangan </th>
                             <th>Aksi</th>
@@ -118,6 +119,7 @@
                         @foreach ($penjualan as $pj)
                             <tr align="center">
                                 <td>{{ $pj->no_penjualan }}</td>
+                                <td>{{ $pj->penjualandetail[0]->customer->nama_customer }}</td>
                                 <td>{{ $pj->tanggal_penjualan }}</td>
                                 <td>{{ $pj->keterangan }}</td>
                                 <td align="center" width="15%">

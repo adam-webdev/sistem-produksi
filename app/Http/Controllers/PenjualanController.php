@@ -18,7 +18,8 @@ class PenjualanController extends Controller
     {
         $no = Penjualan::NoPenjualan();
         $finishgood = FinishGood::all();
-        $penjualan = Penjualan::all();
+        $penjualan = Penjualan::with('penjualandetail.customer')->get();
+        // ddd($penjualan);
         $customer = Customer::all();
         return view('admin.transaksi.penjualan.index', compact('finishgood', 'penjualan', 'no', 'customer'));
     }
@@ -63,7 +64,6 @@ class PenjualanController extends Controller
             'updated_at' => Carbon::now()
         ];
 
-        $penjualan_id = DB::table('penjualans')->insertGetId($penjualan);
 
         $finishgood = $request->input('finishgood_id', []);
         $jumlah = $request->input('jumlah', []);
@@ -72,9 +72,11 @@ class PenjualanController extends Controller
 
         $hargaFG = [];
         $stokfg = [];
+
         foreach ($finishgood as $fg) {
             $hargaFG[] = FinishGood::select('harga')->where('id', $fg)->sum('harga');
             $stokfg[] = FinishGood::select('jumlah_fg')->where('id', $fg)->sum('jumlah_fg');
+            $namaFg[] = FinishGood::select('nama_fg')->where('id', $fg)->pluck('nama_fg');
         }
 
         $result = [];
@@ -84,7 +86,7 @@ class PenjualanController extends Controller
 
         foreach ($stokfg as $index => $value) {
             if ($jumlah[$index] > $stokfg[$index]) {
-                Alert::error("Gagal", "Jumlah stok fg tidak cukup maksimal {{$stokfg[$index]}} ");
+                Alert::error("Gagal", "Jumlah stok fg {{$namaFg[$index]}} tidak cukup maksimal {{$stokfg[$index]}} ");
                 return redirect()->route('penjualan.index');
             }
         }
@@ -97,6 +99,8 @@ class PenjualanController extends Controller
         } else {
             $tanggal = Carbon::now()->addDay(30);
         }
+
+        $penjualan_id = DB::table('penjualans')->insertGetId($penjualan);
 
         foreach ($finishgood as $index => $value) {
             $penjualan_detail[] = [
