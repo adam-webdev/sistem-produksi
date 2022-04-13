@@ -18,7 +18,7 @@ class CreateTriggerUpdateStokfgTable extends Migration
         CREATE TRIGGER update_stokfg after INSERT ON penjualan_details
         FOR EACH ROW BEGIN
         UPDATE finish_goods
-            SET jumlah_fg = jumlah-fg + NEW.jumlah
+            SET jumlah_fg = jumlah_fg + NEW.jumlah
         WHERE
         id = NEW.finishgood_id;
         END

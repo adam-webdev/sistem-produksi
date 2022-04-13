@@ -159,8 +159,18 @@
                             <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('laporan.finishgood') }}">
                                 Finish Good </a>
                         @endhasanyrole --}}
-
+                        @hasanyrole('Admin|Direktur|Produksi')
+                            <a class="collapse-item fas fa-hands" href="{{ route('laporan.pencatatanproduksi') }}">
+                                Produksi </a>
+                            {{-- <a class="collapse-item fas fa-archive" href="{{ route('laporan.permintaanbahanbaku') }}">
+                            Permintaan Bahan Baku </a> --}}
+                        @endhasanyrole
                         @hasanyrole('Admin|Direktur')
+                            <a class="collapse-item fas fa-door-open" href="{{ route('laporan.bahanbaku_masuk') }}">
+                                Bahan Baku Masuk </a>
+                            <a class="collapse-item fas fa-external-link-alt"
+                                href="{{ route('laporan.bahanbaku_keluar') }}">
+                                Bahan Baku Keluar </a>
                             <a class="collapse-item fas fa-shopping-basket" href="{{ route('laporan.pembelian') }}">
                                 Pembelian </a>
                             <a class="collapse-item fas fa-money-bill-alt" href="{{ route('laporan.penjualan') }}">
@@ -169,25 +179,16 @@
                                 Hutang </a>
                             <a class="collapse-item fas fa-credit-card" href="{{ route('laporan.piutang') }}">
                                 Piutang </a>
+
                             {{-- <a class="collapse-item fas fa-hourglass-half" href="{{ route('laporan.jadwalproduksi') }}">
                                 Jadwal Produksi </a>
-                            <a class="collapse-item fas fa-external-link-alt"
-                                href="{{ route('laporan.bahanbaku_keluar') }}">
-                                Bahan Baku Keluar </a>
-                            <a class="collapse-item fas fa-door-open" href="{{ route('laporan.bahanbaku_masuk') }}">
-                                Bahan Baku Masuk </a>
                             <a class="collapse-item fas fa-box" href="{{ route('laporan.stok') }}">
                                 Stok Bahan Baku </a>
                             <a class="collapse-item fas fa-check-double" href="{{ route('laporan.stokfinishgood') }}">
                                 Stok Finsih Good </a> --}}
                         @endhasanyrole
 
-                        @hasanyrole('Admin|Direktur|Produksi')
-                            <a class="collapse-item fas fa-hands" href="{{ route('laporan.pencatatanproduksi') }}">
-                                Produksi </a>
-                            {{-- <a class="collapse-item fas fa-archive" href="{{ route('laporan.permintaanbahanbaku') }}">
-                                Permintaan Bahan Baku </a> --}}
-                        @endhasanyrole
+
 
                     </div>
                 </div>

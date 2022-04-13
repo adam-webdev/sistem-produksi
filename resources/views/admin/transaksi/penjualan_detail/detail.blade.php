@@ -1,9 +1,9 @@
 @extends('layouts.layout')
-@section('title', 'Detail Pembelian')
+@section('title', 'Detail Penjualan')
 @section('content')
     @include('sweetalert::alert')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Detail Pembelian </h1>
+        <h1 class="h3 mb-0 text-gray-800">Detail Penjualan </h1>
         <!-- Button trigger modal -->
     </div>
 

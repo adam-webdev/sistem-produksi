@@ -36,7 +36,7 @@
                                     id="kode_barang" readonly required>
                             </div>
                             <div class="col-md-6">
-                                <label for="tanggal">Tanggal Pembelian :</label>
+                                <label for="tanggal">Tanggal Penjualan :</label>
                                 <input type="date" name="tanggal_penjualan" class="form-control" id="tanggal" required>
                             </div>
 
@@ -44,8 +44,8 @@
                         <div class="form-group">
                             <label for="customer_id">Customer :</label>
                             <select type="text" name="customer_id" class="form-control" id="customer_idrequired>
-                                        <option value="">-- Pilih Nama Customer --</option>
-                                          @foreach ($customer as $c)
+                                                    <option value="">-- Pilih Nama Customer --</option>
+                                                         @foreach ($customer as $c)
                                 <option value="{{ $c->id }}">{{ $c->nama_customer }}</option>
                                 @endforeach
                             </select>
@@ -108,8 +108,8 @@
                 <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr align="center">
-                            <th>No Pembelian</th>
-                            <th>Tanggal Pembelian </th>
+                            <th>No Penjualan</th>
+                            <th>Tanggal Penjualan </th>
                             <th>Keterangan </th>
                             <th>Aksi</th>
                         </tr>
