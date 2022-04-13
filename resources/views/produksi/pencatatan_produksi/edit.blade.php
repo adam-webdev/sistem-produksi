@@ -9,12 +9,12 @@
             <legend>Edit Pencatatan Produksi</legend>
             <div class="form-group row">
                 <div class="col-md-5">
-                    <label for="barang">Nama Barang :</label>
+                    <label for="barang">Kode Jadwal Produksi :</label>
                     <select style="width:100%" name="jadwalproduksi_id" id="barang" class="form-control select" required>
                         <option disabled value="{{ $data->jadwalproduksi_id }}">
                             {{ $data->finishgood->nama_fg }}</option>
                         @foreach ($jadwalproduksi as $jp)
-                            <option value="{{ $jp->id }}">{{ $jp->finishgood->nama_fg }}</option>
+                            <option value="{{ $jp->id }}">{{ $jp->kode_jadwalproduksi }}</option>
                         @endforeach
                     </select>
                 </div>
