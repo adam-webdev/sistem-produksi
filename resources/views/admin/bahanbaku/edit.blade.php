@@ -32,30 +32,33 @@
                     <label for="satuan">Satuan Barang :</label>
                     <select style="width:100%" name="satuan" id="satuan" class="form-control" required>
                         <option value="{{ $bahanbaku->satuan }}">{{ $bahanbaku->satuan }}</option>
-                        <option value="Unit">Unit</option>
-                        <option value="Kg">Kg</option>
-                        <option value="Liter">Liter</option>
-                        <option value="Pcs">Pcs</option>
-                        <option value="Meter">Meter</option>
+                        <option value="Unit" {{ $bahanbaku->satuan === 'Unit' ? 'selected' : '' }}>Unit</option>
+                        <option value="Kg" {{ $bahanbaku->satuan === 'Kg' ? 'selected' : '' }}>Kg</option>
+                        <option value="Liter" {{ $bahanbaku->satuan === 'Liter' ? 'selected' : '' }}>Liter</option>
+                        <option value="Pcs" {{ $bahanbaku->satuan === 'Pcs' ? 'selected' : '' }}>Pcs</option>
+                        <option value="Meter" {{ $bahanbaku->satuan === 'Meter' ? 'selected' : '' }}>Meter</option>
                     </select>
                 </div>
                 <div class="col-md-5">
                     <label for="barang">Jenis Material :</label>
                     <select style="width:100%" name="jenis_material" id="barang" class="form-control select" required>
-                        <option value="{{ $bahanbaku->jenis_material }}">{{ $bahanbaku->jenis_material }}
-                        </option>
-                        <option value="a">a</option>
-                        <option value="b">b</option>
-                        <option value="c">c</option>
+                        {{-- <option value="{{ $bahanbaku->jenis_material }}">{{ $bahanbaku->jenis_material }}
+                        </option> --}}
+                        <option value="a" {{ $bahanbaku->jenis_material === 'a' ? 'selected' : '' }}>a</option>
+                        <option value="b" {{ $bahanbaku->jenis_material === 'b' ? 'selected' : '' }}>b</option>
+                        <option value="c" {{ $bahanbaku->jenis_material === 'c' ? 'selected' : '' }}>c</option>
                     </select>
                 </div>
                 <div class="col-md-5">
                     <label for="supplier">Supplier :</label>
                     <select type="text" name="supplier_id" class="form-control" id="supplier" required>
-                        <option disabled value="{{ $bahanbaku->supplier_id }}">{{ $bahanbaku->supplier->nama }}
-                        </option>
+                        {{-- <option disabled value="{{ $bahanbaku->supplier_id }}">{{ $bahanbaku->supplier->nama }}
+                        </option> --}}
                         @foreach ($supplier as $s)
-                            <option value="{{ $s->id }}">{{ $s->nama }}</option>
+                            <option value="{{ $s->id }}"
+                                {{ $bahanbaku->supplier_id === $s->id ? 'selected' : '' }}>
+                                {{ $bahanbaku->supplier->nama === $s->nama ? $bahanbaku->supplier->nama : $s->nama }}
+                            </option>
                         @endforeach
                     </select>
                 </div>

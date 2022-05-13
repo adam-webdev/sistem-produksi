@@ -11,22 +11,26 @@
                 <div class="col-md-5">
                     <label for="barang">Nama Finish Good :</label>
                     <select style="width:100%" name="finishgood_id" id="barang" class="form-control select" required>
-                        <option value="{{ $stokfinishgood->finishgood_id }}">
-                            {{ $stokfinishgood->finishgood->nama_fg }}</option>
+                        {{-- <option value="{{ $stokfinishgood->finishgood_id }}">
+                            {{ $stokfinishgood->finishgood->nama_fg }}</option> --}}
                         @foreach ($finishgoods as $fg)
-                            <option value="{{ $fg->id }}">{{ $fg->nama_fg }}</option>
+                            <option value="{{ $fg->id }}"
+                                {{ $stokfinishgood->finishgood_id === $fg->id ? 'selected' : '' }}>
+                                {{ $stokfinishgood->finishgood->nama_fg === $fg->nama_fg ? $stokfinishgood->finishgood->nama_fg : $fg->nama_fg }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-5">
                     <label for="satuan">Satuan Barang :</label>
                     <select style="width:100%" name="satuan" id="satuan" class="form-control" required>
-                        <option value="{{ $stokfinishgood->satuan }}">{{ $stokfinishgood->satuan }}</option>
-                        <option value="Unit">Unit</option>
-                        <option value="Kg">Kg</option>
-                        <option value="Liter">Liter</option>
-                        <option value="Pcs">Pcs</option>
-                        <option value="Meter">Meter</option>
+                        {{-- <option value="{{ $stokfinishgood->satuan === 'Unit' ? 'selected' : '' }}">
+                            {{ $stokfinishgood->satuan }}</option> --}}
+                        <option value="Unit" {{ $stokfinishgood->satuan === 'Unit' ? 'selected' : '' }}>Unit</option>
+                        <option value="Kg" {{ $stokfinishgood->satuan === 'Kg' ? 'selected' : '' }}>Kg</option>
+                        <option value="Liter" {{ $stokfinishgood->satuan === 'Liter' ? 'selected' : '' }}>Liter</option>
+                        <option value="Pcs" {{ $stokfinishgood->satuan === 'Pcs' ? 'selected' : '' }}>Pcs</option>
+                        <option value="Meter" {{ $stokfinishgood->satuan === 'Meter' ? 'selected' : '' }}>Meter</option>
                     </select>
                 </div>
                 <div class="col-md-5">

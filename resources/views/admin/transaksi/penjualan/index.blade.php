@@ -63,7 +63,7 @@
                             </div>
                             <div class="col-md-5">
                                 <label for="jumlah">Jumlah :</label>
-                                <input type="number" name="jumlah[]" class="form-control" id="jumlah" required>
+                                <input type="number" name="jumlah[]" class="form-control" id="jumlah" min="1" required>
                             </div>
 
                             <div class="col-md-2 add">
@@ -128,10 +128,10 @@
                                             title="Detail" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                             <i class="fas fa-eye  text-white-50"></i>
                                         </a>
-                                        {{-- <a href="{{ route('penjualan.edit', [$pj->id]) }}" data-toggle="tooltip" title="Edit"
+                                        <a href="{{ route('penjualan.edit', [$pj->id]) }}" data-toggle="tooltip" title="Edit"
                                             class="d-none  d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
                                             <i class="fas fa-edit fa-sm text-white-50"></i>
-                                        </a> --}}
+                                        </a>
                                         <a href="/penjualan/hapus/{{ $pj->id }}" data-toggle="tooltip" title="Hapus"
                                             onclick="return confirm('Yakin Ingin menghapus data?')"
                                             class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
@@ -155,7 +155,6 @@
 
     <script>
         $(document).ready(function() {
-
             $(add).on('click', function() {
                 $('.add-data').append(` <div class="form-group row child px-3 mt-3">
                     <div class="col-md-5">

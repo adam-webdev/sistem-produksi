@@ -11,10 +11,13 @@
                 <div class="col-md-5">
                     <label for="barang">Nama Material :</label>
                     <select style="width:100%" name="stok_id" id="barang" class="form-control select" required>
-                        <option disabled value="{{ $bahanbaku_masuk->stok->bahanbaku->id }}">
-                            {{ $bahanbaku_masuk->stok->bahanbaku->nama_material }}</option>
+                        {{-- <option disabled value="{{ $bahanbaku_masuk->stok->bahanbaku->id }}">
+                            {{ $bahanbaku_masuk->stok->bahanbaku->nama_material }}</option> --}}
                         @foreach ($bahanbaku as $b)
-                            <option value="{{ $b->id }}">{{ $b->nama_material }}</option>
+                            <option value="{{ $b->id }}"
+                                {{ $bahanbaku_masuk->stok->bahanbaku->id === $b->id ? 'selected' : '' }}>
+                                {{ $bahanbaku_masuk->stok->bahanbaku->nama_material === $b->nama_material ? $bahanbaku_masuk->stok->bahanbaku->nama_material : $b->nama_material }}
+                            </option>
                         @endforeach
                     </select>
                 </div>

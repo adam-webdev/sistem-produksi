@@ -20,6 +20,7 @@ class PembelianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
 
@@ -43,7 +44,8 @@ class PembelianController extends Controller
     public function pembelian_detail($id)
     {
         $pembelian_detail = PembelianDetail::where('pembelian_id', $id)->get();
-        return view('admin.transaksi.pembelian_detail.detail', compact('pembelian_detail'));
+        $kredit = $pembelian_detail[0]->jenis_pembayaran === "Kredit" ? $pembelian_detail[0]->tanggal_pembayaran : '-';
+        return view('admin.transaksi.pembelian_detail.detail', compact('pembelian_detail', 'kredit'));
     }
     /**
      * Show the form for creating a new resource.
@@ -105,7 +107,6 @@ class PembelianController extends Controller
             $result[$index] = $value * $jumlah[$index];
         }
         // array_sum($res)
-        // ddd(array_sum($result));
         $total = array_sum($result);
         foreach ($bahanbaku as $index => $value) {
 
@@ -114,6 +115,7 @@ class PembelianController extends Controller
                 'pembelian_id' => $pembelian_id,
                 'bahanbaku_id' => $bahanbaku[$index],
                 'jumlah' => $jumlah[$index],
+                'harga' => $hargaBahanbaku[$index],
                 'jenis_pembayaran' => $request->jenis_pembayaran,
                 'tanggal_pembayaran' => $tanggal,
                 'total_pembayaran' => $result[$index],
@@ -131,9 +133,9 @@ class PembelianController extends Controller
             $hutang->pembelian_id = $pembelian_id;
             $hutang->total = array_sum($result);
             $hutang->save();
-            Alert::success('Berhasil', 'Data Berhasil Disimpan');
-            return redirect()->route('pembelian.index');
         }
+        Alert::success('Berhasil', 'Data Berhasil Disimpan');
+        return redirect()->route('pembelian.index');
     }
 
     /**
@@ -155,7 +157,10 @@ class PembelianController extends Controller
      */
     public function edit($id)
     {
-        //
+        $supplier = Supplier::all();
+        $pembelian_id = Pembelian::findOrFail($id);
+        $pembeliandetail_id = PembelianDetail::where('pembelian_id', $id)->get();
+        return view('admin.transaksi.pembelian.edit', compact('pembelian_id', 'pembeliandetail_id', 'supplier'));
     }
 
     /**
@@ -167,8 +172,82 @@ class PembelianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pembelian = Pembelian::findOrFail($id);
+        // $pembelian->no_pembelian = $pembelian->no_pembelian;
+        $pembelian->tanggal_pembelian = $request->tanggal_pembelian;
+        $pembelian->keterangan = $request->keterangan;
+        $pembelian->save();
+
+        $bahanbaku = $request->input('bahanbaku_id', []);
+        $jumlah =  $request->input('jumlah', []);
+        if (empty($bahanbaku)) {
+            Alert::error('gagal.', 'Silahkan pilih Bahan Baku dari Supplier Terlebih dahulu!');
+            return redirect()->route('pembelian.edit', [$id]);
+        }
+
+        PembelianDetail::where('pembelian_id', $id)->delete();
+        $pembelian_detail = [];
+        $tanggal = '';
+
+        if ($request->jenis_pembayaran === 'Cash') {
+            $tanggal = Carbon::now();
+        } else {
+            $tanggal = Carbon::now()->addDay(30);
+        }
+
+        $hargaBahanbaku = [];
+        // ddd($bahanbaku);
+        foreach ($bahanbaku as $bb) {
+            $hargaBahanbaku[] = BahanBaku::select('harga')->where('id', $bb)->sum('harga');
+        }
+
+        $result = [];
+        foreach ($hargaBahanbaku as $index => $value) {
+            $result[$index] = $value * $jumlah[$index];
+        }
+        // array_sum($res)
+        $total = array_sum($result);
+        foreach ($bahanbaku as $index => $value) {
+            // ddd($result[$index]);
+            $pembelian_detail[] = [
+                'pembelian_id' => $id,
+                'bahanbaku_id' => $bahanbaku[$index],
+                'jumlah' => $jumlah[$index],
+                'harga' => $hargaBahanbaku[$index],
+                'jenis_pembayaran' => $request->jenis_pembayaran,
+                'tanggal_pembayaran' => $tanggal,
+                'total_pembayaran' => $result[$index],
+                'tanggal_pembelian' => $request->tanggal_pembelian,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
+        }
+        DB::table('pembelian_details')->insert($pembelian_detail);
+        // ddd($pembelian_detail);
+
+        $cek_hutang =  Hutang::where('pembelian_id', $id)->get(); // array
+        $id_hutang = '';
+        foreach ($cek_hutang as $h) {
+            $id_hutang = $h->id;
+        }
+        if ($request->jenis_pembayaran === 'Kredit') {
+            if ($id_hutang === "") {
+                $hutang = new Hutang();
+                $hutang->pembelian_id = $id;
+                $hutang->total = array_sum($result);
+                $hutang->save();
+            } else {
+                $data_hutang = Hutang::findOrFail($id_hutang);
+                $data_hutang->total = array_sum($result);
+                $data_hutang->save();
+            }
+        } else {
+            Hutang::where('pembelian_id', $id)->delete();
+        }
+        Alert::success('Berhasil', 'Data Berhasil Diupdate');
+        return redirect()->route('pembelian.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -179,7 +258,7 @@ class PembelianController extends Controller
     public function destroy($id)
     {
         $data = Pembelian::findOrFail($id);
-        $data->delete();
+        $data->pembeliandetail()->detach();
         Alert::success("Terhapus", "Data Berhasil Dihapus");
         return redirect()->route('pembelian.index');
     }

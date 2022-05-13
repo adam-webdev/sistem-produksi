@@ -23,13 +23,16 @@
                 <div class="col-md-5">
                     <label for="nama">Nama Bank :</label>
                     <select name="nama_bank" id="nama" class="form-control">
-                        <option value="{{ $data->nama_bank }}"> {{ $data->nama_bank }}</option>
-                        <option value="BRI"> Bank BRI</option>
-                        <option value="Mandiri">Bank Mandiri</option>
-                        <option value="BCA">Bank BCA</option>
-                        <option value="BTN">Bank BTN</option>
-                        <option value="Permata">Bank Permata</option>
-                        <option value="Syariah">Bank Syariah</option>
+                        {{-- <option value="{{ $data->nama_bank }}"> {{ $data->nama_bank }}</option> --}}
+                        <option value="BRI" {{ $data->nama_bank === 'BRI' ? 'selected' : '' }}> Bank BRI</option>
+                        <option value="Mandiri" {{ $data->nama_bank === 'Mandiri' ? 'selected' : '' }}>Bank Mandiri
+                        </option>
+                        <option value="BCA" {{ $data->nama_bank === 'BCA' ? 'selected' : '' }}>Bank BCA</option>
+                        <option value="BTN" {{ $data->nama_bank === 'BTN' ? 'selected' : '' }}>Bank BTN</option>
+                        <option value="Permata" {{ $data->nama_bank === 'Permata' ? 'selected' : '' }}>Bank Permata
+                        </option>
+                        <option value="Syariah" {{ $data->nama_bank === 'Syariah' ? 'selected' : '' }}>Bank Syariah
+                        </option>
                     </select>
                 </div>
                 <div class="col-md-5">

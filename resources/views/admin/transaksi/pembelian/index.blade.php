@@ -79,7 +79,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="ket">keterangan :</label>
+                            <label for="ket">Keterangan :</label>
                             <textarea name="keterangan" id="ket" rows="4" class="form-control"></textarea>
                         </div>
 
@@ -123,10 +123,10 @@
                                             title="Detail" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                             <i class="fas fa-eye  text-white-50"></i>
                                         </a>
-                                        {{-- <a href="{{ route('pembelian.edit', [$pb->id]) }}" data-toggle="tooltip" title="Edit"
+                                        <a href="{{ route('pembelian.edit', [$pb->id]) }}" data-toggle="tooltip" title="Edit"
                                             class="d-none  d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
                                             <i class="fas fa-edit fa-sm text-white-50"></i>
-                                        </a> --}}
+                                        </a>
                                         <a href="/pembelian/hapus/{{ $pb->id }}" data-toggle="tooltip" title="Hapus"
                                             onclick="return confirm('Yakin Ingin menghapus data?')"
                                             class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
@@ -182,7 +182,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <label for="jumlah">Jumlah :</label>
-                                    <input type="number" name="jumlah[]" class="form-control" id="jumlah" required>
+                                    <input type="number" min="1" name="jumlah[]" class="form-control" id="jumlah" required>
                                 </div>
 
                                 <div class="col-md-2 add">
@@ -206,7 +206,7 @@
                             </div>
                             <div class="col-md-5">
                                 <label for="jumlah">Jumlah :</label>
-                                <input type="number" name="jumlah[]" class="form-control" id="jumlah" required>
+                                <input type="number" name="jumlah[]" min="1" class="form-control" id="jumlah" required>
                             </div>
                             <div class="col-md-2 add">
                                 <label>Aksi :</label>

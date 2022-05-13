@@ -33,12 +33,14 @@
                 <div class="col-md-3">
                     <label for="satuan">Satuan Barang :</label>
                     <select style="width:100%" name="satuan_fg" id="satuan" class="form-control" required>
-                        <option value="{{ $data->satuan_fg }}">{{ $data->satuan_fg }}
-                        <option value="Unit">Unit</option>
-                        <option value="Kg">Kg</option>
-                        <option value="Liter">Liter</option>
-                        <option value="Pcs">Pcs</option>
-                        <option value="Meter">Meter</option>
+                        {{-- <option value="{{ $data->satuan_fg }}">{{ $data->satuan_fg }} --}}
+                        <option value="Unit" {{ $data->satuan_fg === 'Unit' ? 'selected' : '' }}>Unit</option>
+                        <option value="Kg" {{ $data->satuan_fg === 'Kg' ? 'selected' : '' }}>Kg</option>
+                        <option value="Liter" {{ $data->satuan_fg === 'Liter' ? 'selected' : '' }}>Liter
+                        </option>
+                        <option value="Pcs" {{ $data->satuan_fg === 'Pcs' ? 'selected' : '' }}>Pcs</option>
+                        <option value="Meter" {{ $data->satuan_fg === 'Meter' ? 'selected' : '' }}>Meter
+                        </option>
                     </select>
                 </div>
             </div>
@@ -47,15 +49,15 @@
                 <div class="col-md-5">
                     <label for="barang">Jenis Warna Finish Good :</label>
                     <select style="width:100%" name="jeniswarna_fg" id="barang" class="form-control select" required>
-                        <option value="{{ $data->jeniswarna_fg }}">{{ $data->jeniswarna_fg }}
+                        {{-- <option value="{{ $data->jeniswarna_fg }}">{{ $data->jeniswarna_fg }} --}}
                         </option>
-                        <option value="Red">Red</option>
-                        <option value="White">White</option>
-                        <option value="Blue">Blue</option>
-                        <option value="Green">Green</option>
-                        <option value="Black">Black</option>
-                        <option value="Gold">Gold</option>
-                        <option value="Yellow">Yellow</option>
+                        <option value="Red" {{ $data->jeniswarna_fg === 'Red' ? 'selected' : '' }}>Red</option>
+                        <option value="White" {{ $data->jeniswarna_fg === 'White' ? 'selected' : '' }}>White</option>
+                        <option value="Blue" {{ $data->jeniswarna_fg === 'Blue' ? 'selected' : '' }}>Blue</option>
+                        <option value="Green" {{ $data->jeniswarna_fg === 'Green' ? 'selected' : '' }}>Green</option>
+                        <option value="Black " {{ $data->jeniswarna_fg === 'Black' ? 'selected' : '' }}>Black</option>
+                        <option value="Gold" {{ $data->jeniswarna_fg === 'Gold' ? 'selected' : '' }}>Gold</option>
+                        <option value="Yellow" {{ $data->jeniswarna_fg === 'Yellow' ? 'selected' : '' }}>Yellow</option>
                     </select>
                 </div>
             </div>

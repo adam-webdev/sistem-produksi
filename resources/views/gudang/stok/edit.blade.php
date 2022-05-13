@@ -11,10 +11,12 @@
                 <div class="col-md-5">
                     <label for="barang">Nama Material :</label>
                     <select style="width:100%" name="bahanbaku_id" id="barang" class="form-control select" required>
-                        <option disabled value="{{ $stok->bahanbaku->id }}">
-                            {{ $stok->bahanbaku->nama_material }}</option>
+                        {{-- <option disabled value="{{ $stok->bahanbaku->id }}">
+                            {{ $stok->bahanbaku->nama_material }}</option> --}}
                         @foreach ($bahanbaku as $b)
-                            <option value="{{ $b->id }}">{{ $b->nama_material }}</option>
+                            <option value="{{ $b->id }}" {{ $stok->bahanbaku->id === $b->id ? 'selected' : '' }}>
+                                {{ $stok->bahanbaku->nama_material === $b->nama_material ? $stok->bahanbaku->nama_material : $b->nama_material }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -23,11 +25,11 @@
                     <label for="satuan">Satuan Barang :</label>
                     <select style="width:100%" name="satuan" id="satuan" class="form-control select" required>
                         <option value="{{ $stok->satuan }}">{{ $stok->satuan }}</option>
-                        <option value="Unit">Unit</option>
-                        <option value="Kg">Kg</option>
-                        <option value="Liter">Liter</option>
-                        <option value="Pcs">Pcs</option>
-                        <option value="Meter">Meter</option>
+                        <option value="Unit" {{ $stok->satuan == 'Unit' ? 'selected' : '' }}>Unit</option>
+                        <option value="Kg" {{ $stok->satuan == 'Kg' ? 'selected' : '' }}>Kg</option>
+                        <option value="Liter" {{ $stok->satuan == 'Liter' ? 'selected' : '' }}>Liter</option>
+                        <option value="Pcs" {{ $stok->satuan == 'Pcs' ? 'selected' : '' }}>Pcs</option>
+                        <option value="Meter" {{ $stok->satuan == 'Meter' ? 'selected' : '' }}>Meter</option>
                     </select>
                 </div>
             </div>
