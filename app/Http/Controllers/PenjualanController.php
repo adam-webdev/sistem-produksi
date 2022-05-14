@@ -181,9 +181,9 @@ class PenjualanController extends Controller
         }
         DB::beginTransaction();
 
-        // PenjualanDetail::where('penjualan_id', $id)->delete();
+        PenjualanDetail::where('penjualan_id', $id)->delete();
         $penjualan->save();
-        $id_penjualan = (array) PenjualanDetail::select('id')->where('penjualan_id', $id)->get();
+        // $id_penjualan = (array) PenjualanDetail::select('id')->where('penjualan_id', $id)->get();
         // ddd(gettype($id_penjualan[0]));
 
         $penjualan_detail = [];
@@ -243,7 +243,7 @@ class PenjualanController extends Controller
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ];
-            PenjualanDetail::whereIn('penjualan_id', $id[$index])->update($penjualan_detail[$index]);
+            // PenjualanDetail::whereIn('penjualan_id', $id[$index])->update($penjualan_detail[$index]);
         }
         // ddd($penjualan_detail[1]);
         // foreach ($id_penjualan as $index => $idp) {
@@ -252,7 +252,7 @@ class PenjualanController extends Controller
         // ddd($idp);
         // ddd($penjualan_detail);
 
-        // DB::table('penjualan_details')->where('id',)update($penjualan_detail);
+        DB::table('penjualan_details')->insert($penjualan_detail);
 
         $cek_piutang =  Piutang::where('penjualan_id', $id)->get(); // array
         $id_piutang = '';
@@ -273,6 +273,7 @@ class PenjualanController extends Controller
         } else {
             Piutang::where('penjualan_id', $id)->delete();
         }
+        DB::commit();
         Alert::success('Berhasil', 'Data Berhasil Diupdate');
         return redirect()->route('penjualan.index');
     }
