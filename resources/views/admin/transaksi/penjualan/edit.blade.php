@@ -70,7 +70,7 @@
                     <div class="col-md-5">
                         <label for="finishgood_id">Nama Finish Good :</label>
                         <select type="text" name="finishgood_id[]" class="form-control" id="finishgood_id"
-                            >
+                            required>
                             <option value="">-- Pilih Nama Finish Good --</option>
                             @foreach ($finishgood as $fg)
                                 <option value="{{$fg->id}}">{{$fg->nama_fg}}</option>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-5">
                         <label for="jumlah">Jumlah :</label>
-                        <input type="number" name="jumlah[]"  class="form-control" id="jumlah" >
+                        <input type="number" name="jumlah[]"  class="form-control" id="jumlah" required>
                     </div>
                     <div class="col-md-2  add">
                         <label>Aksi :</label>

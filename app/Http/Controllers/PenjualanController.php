@@ -180,41 +180,22 @@ class PenjualanController extends Controller
             return redirect()->route('penjualan.edit', [$id]);
         }
         DB::beginTransaction();
-
-        PenjualanDetail::where('penjualan_id', $id)->delete();
-        $penjualan->save();
-        // $id_penjualan =  PenjualanDetail::where('penjualan_id', $id)->with('finishgood')->get();
-        // $jumlah_fg = [];
-        // $fg_id = [];
-        // foreach ($id_penjualan as $index => $idp) {
-        //     $jumlah_fg[$index] = $idp->jumlah;
-        //     $fg_id[$index] = $idp->finishgood_id;
-        // }
-        // ddd($fg_id);
-        $penjualan_detail = [];
-        // harga Fg array
         $hargaFG = [];
         // stock Fg array
         $stokfg = [];
+        $penjualan_detail = [];
+        $result = [];
 
         // loop & get total hargaFg, stokFg, namaFg
         foreach ($finishgood as $fg) {
             $hargaFG[] = FinishGood::select('harga')->where('id', $fg)->sum('harga');
-            // $stokfg[] =  FinishGood::select('jumlah_fg')->where('id', 2)->get('jumlah_fg');
+            $stokfg[] =   FinishGood::select('jumlah_fg')->where('id', $fg)->sum('jumlah_fg');
             $namaFg[] = FinishGood::select('nama_fg')->where('id', $fg)->pluck('nama_fg');
         }
-        // ddd($hargaFG);
-        $result = [];
-        // get hargaFg * request jumlah
-
-        // result = [
-        //     20000,      item1
-        //     300000      item2
-        // ]
         foreach ($hargaFG as $index => $value) {
             $result[$index] = $value * $jumlah[$index];
         }
-
+        // ddd($stokfg);
         foreach ($stokfg as $index => $value) {
             if ($jumlah[$index] > $stokfg[$index]) {
                 Alert::error("Gagal", "Jumlah stok fg {{$namaFg[$index]}} tidak cukup maksimal {{$stokfg[$index]}} ");
@@ -222,6 +203,19 @@ class PenjualanController extends Controller
                 return redirect()->route('penjualan.index');
             }
         }
+
+        PenjualanDetail::where('penjualan_id', $id)->delete();
+        $penjualan->save();
+
+
+        // ddd($hargaFG);
+        // get hargaFg * request jumlah
+
+        // result = [
+        //     20000,      item1
+        //     300000      item2
+        // ]
+
 
         $total = array_sum($result);
         $tanggal = '';
@@ -248,14 +242,8 @@ class PenjualanController extends Controller
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ];
-            // PenjualanDetail::whereIn('penjualan_id', $id[$index])->update($penjualan_detail[$index]);
         }
-        // ddd($penjualan_detail[1]);
-        // foreach ($id_penjualan as $index => $idp) {
-        //     // ddd($idp);
-        // }
-        // ddd($idp);
-        // ddd($penjualan_detail);
+
 
         DB::table('penjualan_details')->insert($penjualan_detail);
 
