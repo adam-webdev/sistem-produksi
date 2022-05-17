@@ -36,17 +36,43 @@
                     <label for="bahanbaku">Supplier :</label>
                     <input type="hidden" id="_token" value="{{ csrf_token() }}">
                     <select type="text" name="supplier" class="form-control " id="bahanbaku" required>
-                        <option value="{{ $pembelian_id->pembeliandetail[0]->bahanbaku->supplier->id }}" selected
+                        {{-- <option value="{{ $pembelian_id->pembeliandetail[0]->bahanbaku->supplier->id }}" selected
                             disabled>
-                            {{ $pembelian_id->pembeliandetail[0]->bahanbaku->supplier->nama }}</option>
+                            {{ $pembelian_id->pembeliandetail[0]->bahanbaku->supplier->nama }}</option> --}}
                         @foreach ($supplier as $sp)
-                            <option value="{{ $sp->id }}">{{ $sp->nama }}</option>
+                            <option value="{{ $sp->id }}"
+                                {{ $pembelian_id->pembeliandetail[0]->bahanbaku->supplier->id === $sp->id ? 'selected' : '' }}>
+                                {{ $pembelian_id->pembeliandetail[0]->bahanbaku->supplier->nama === $sp->nama ? $pembelian_id->pembeliandetail[0]->bahanbaku->supplier->nama : $sp->nama }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="form-group add-data" id="ajax">
-
+                <div class="col-md-12 row">
+                    @foreach ($pembeliandetail_id as $pd_id)
+                        <div class="col-md-5">
+                            <label for="bahanbaku">Bahan Baku :</label>
+                            <select type="text" name="bahanbaku_id[]" class="form-control" id="bahanbaku" required>
+                                @foreach ($bahanbaku as $bb)
+                                    <option value="{{ $bb->id }}"
+                                        {{ $pd_id->bahanbaku->id === $bb->id ? 'selected' : '' }}>
+                                        {{ $pd_id->bahanbaku->nama_material === $bb->nama_material ? $pd_id->bahanbaku->nama_material : $bb->nama_material }}
+                                    </option>`
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="jumlah">Jumlah :</label>
+                            <input type="number" name="jumlah[]" value={{ $pd_id->jumlah }} class="form-control"
+                                id="jumlah" required>
+                        </div>
+                    @endforeach
+                    {{-- <div class="col-md-2 add">
+                        <label>Aksi :</label>
+                        <button id="add" name="add" type="button" class="btn btn-sm btn-success">Add</button>
+                    </div> --}}
+                </div>
             </div>
             <div class="form-group row">
                 <div class="col-md-12">
@@ -127,6 +153,7 @@
     <script>
         $(document).ready(function() {
             var data = []
+
             $('#bahanbaku').on('change', function() {
                 var supp_id = $(this).val()
                 $.ajaxSetup({
@@ -134,6 +161,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+
                 $.ajax({
                     type: "POST",
                     url: "{{ route('pembelian.bahanbakuid') }}",
@@ -142,9 +170,8 @@
                         supp_id: supp_id
                     },
                     success: function(data) {
-                        console.log(data)
+                        // console.log(data)
                         $('#ajax').html(`
-
                               <div class="col-md-12 row">
                                 <div class="col-md-5">
                                     <label for="bahanbaku">Bahan Baku :</label>
@@ -155,7 +182,6 @@
                                                 return `<option value="${bb.id}">${bb.nama_material}</option>`
                                             })
                                         }
-
                                     </select>
                                 </div>
                                 <div class="col-md-5">
@@ -170,7 +196,6 @@
                               </div>
                         `)
                         $(document).ready(function() {
-
                             $(add).on('click', function() {
                                 $('.add-data').append(`
                                 <div class="col-md-12 child row">

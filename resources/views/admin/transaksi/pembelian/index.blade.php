@@ -127,11 +127,11 @@
                                             class="d-none  d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
                                             <i class="fas fa-edit fa-sm text-white-50"></i>
                                         </a>
-                                        <a href="/pembelian/hapus/{{ $pb->id }}" data-toggle="tooltip" title="Hapus"
+                                        {{-- <a href="/pembelian/hapus/{{ $pb->id }}" data-toggle="tooltip" title="Hapus"
                                             onclick="return confirm('Yakin Ingin menghapus data?')"
                                             class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
                                             <i class="fas fa-trash-alt fa-sm text-white-50"></i>
-                                        </a>
+                                        </a> --}}
                                     @endrole
                                 </td>
                             </tr>
@@ -187,7 +187,7 @@
 
                                 <div class="col-md-2 add">
                                     <label>Aksi :</label>
-                                    <button id="add" name="add" type="button" class="btn btn-sm btn-success">Add</button>
+                                    <button id="add" name="add" type="button" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
                                 </div>
                         `)
                         $(document).ready(function() {
@@ -210,7 +210,7 @@
                             </div>
                             <div class="col-md-2 add">
                                 <label>Aksi :</label>
-                                <button id="add" name="add" type="button" class="btn btn-sm btn-danger delete-child btn-danger">Delete</button>
+                                <button id="add" name="add" type="button" class="btn btn-sm btn-danger delete-child btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </div>`)
                             })

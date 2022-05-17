@@ -160,7 +160,8 @@ class PembelianController extends Controller
         $supplier = Supplier::all();
         $pembelian_id = Pembelian::findOrFail($id);
         $pembeliandetail_id = PembelianDetail::where('pembelian_id', $id)->get();
-        return view('admin.transaksi.pembelian.edit', compact('pembelian_id', 'pembeliandetail_id', 'supplier'));
+        $bahanbaku = BahanBaku::all();
+        return view('admin.transaksi.pembelian.edit', compact('pembelian_id', 'bahanbaku', 'pembeliandetail_id', 'supplier'));
     }
 
     /**
@@ -257,9 +258,10 @@ class PembelianController extends Controller
      */
     public function destroy($id)
     {
-        $data = Pembelian::findOrFail($id);
-        $data->pembeliandetail()->detach();
-        Alert::success("Terhapus", "Data Berhasil Dihapus");
-        return redirect()->route('pembelian.index');
+        return Alert::error('Gagal', 'Mohon maaf data tidak bisa dihapus!');
+        // $data = Pembelian::findOrFail($id);
+        // $data->pembeliandetail()->detach();
+        // Alert::success("Terhapus", "Data Berhasil Dihapus");
+        // return redirect()->route('pembelian.index');
     }
 }

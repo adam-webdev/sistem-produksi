@@ -44,26 +44,50 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group row add-data">
-                <div class="col-md-5">
-                    <label for="finishgood_id">Nama Finish Good :</label>
-                    <select type="text" name="finishgood_id[]" class="form-control" id="finishgood_id"
-                        required>
-                        <option value="">-- Pilih Nama Finish Good --</option>
-                        @foreach ($finishgood as $fg)
-                            <option value="{{ $fg->id }}">{{ $fg->nama_fg }}</option>
-                        @endforeach
-                    </select>
+            @foreach($penjualandetail as $pd)
+            <div class="form-group row  child">
+                    <div class="col-md-5">
+                        <label for="finishgood_id">Nama Finish Good :</label>
+                        <select type="text" name="finishgood_id[]" class="form-control" id="finishgood_id"
+                            required>
+                            {{-- <option value="">-- Pilih Nama Finish Good --</option> --}}
+                            @foreach ($finishgood as $fg)
+                                <option value="{{$fg->id}}" {{ $pd->finishgood->id === $fg->id ? 'selected' :'' }}>{{ $pd->finishgood->nama_fg === $fg->nama_fg ?  $pd->finishgood->nama_fg : $fg->nama_fg}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="jumlah">Jumlah :</label>
+                        <input type="number" name="jumlah[]" value="{{$pd->jumlah}}" class="form-control" id="jumlah" required>
+                    </div>
+                    <div class="col-md-2 .del">
+                        <label>Aksi :</label>
+                        <button id="del" name="del" type="button" class="btn btn-sm btn-danger delete-child btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    </div>
                 </div>
-                <div class="col-md-5">
-                    <label for="jumlah">Jumlah :</label>
-                    <input type="number" name="jumlah[]" class="form-control" id="jumlah" required>
-                </div>
-
-                <div class="col-md-2 add">
-                    <label>Aksi :</label>
-                    <button id="add" name="add" type="button" class="btn btn-sm btn-success">Add</button>
-                </div>
+                    @endforeach
+            <div class="form-group row add-data child-one">
+                    <div class="col-md-5">
+                        <label for="finishgood_id">Nama Finish Good :</label>
+                        <select type="text" name="finishgood_id[]" class="form-control" id="finishgood_id"
+                            >
+                            <option value="">-- Pilih Nama Finish Good --</option>
+                            @foreach ($finishgood as $fg)
+                                <option value="{{$fg->id}}">{{$fg->nama_fg}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="jumlah">Jumlah :</label>
+                        <input type="number" name="jumlah[]"  class="form-control" id="jumlah" >
+                    </div>
+                    <div class="col-md-2  add">
+                        <label>Aksi :</label>
+                        <span class="d-flex">
+                            <button id="add" name="add" type="button" class="btn btn-sm btn-success mr-1"><i class="fas fa-plus "></i></button>
+                            <button id="del" name="del" type="button" class="btn btn-sm btn-danger delete-child btn-danger"><i class="fas fa-trash-alt"></i></button>
+                        </span>
+                    </div>
 
             </div>
 
@@ -113,7 +137,7 @@
                 </div>
                 <div class="col-md-2 add">
                     <label>Aksi :</label>
-                    <button id="add" name="add" type="button" class="btn btn-sm btn-danger delete-child btn-danger">Delete</button>
+                    <button id="add" name="add" type="button" class="btn btn-sm btn-danger delete-child btn-danger"><i class="fas fa-trash-alt"></i></button>
                 </div>
               </div>
             `)
@@ -121,6 +145,9 @@
 
         $(document).on('click', '.delete-child', function() {
             $(this).parents('.child').remove()
+        })
+        $(document).on('click', '.delete-child', function() {
+            $(this).parents('.child-one').remove()
         })
 
     })

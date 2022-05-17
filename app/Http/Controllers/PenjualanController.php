@@ -183,9 +183,14 @@ class PenjualanController extends Controller
 
         PenjualanDetail::where('penjualan_id', $id)->delete();
         $penjualan->save();
-        // $id_penjualan = (array) PenjualanDetail::select('id')->where('penjualan_id', $id)->get();
-        // ddd(gettype($id_penjualan[0]));
-
+        // $id_penjualan =  PenjualanDetail::where('penjualan_id', $id)->with('finishgood')->get();
+        // $jumlah_fg = [];
+        // $fg_id = [];
+        // foreach ($id_penjualan as $index => $idp) {
+        //     $jumlah_fg[$index] = $idp->jumlah;
+        //     $fg_id[$index] = $idp->finishgood_id;
+        // }
+        // ddd($fg_id);
         $penjualan_detail = [];
         // harga Fg array
         $hargaFG = [];
@@ -195,10 +200,10 @@ class PenjualanController extends Controller
         // loop & get total hargaFg, stokFg, namaFg
         foreach ($finishgood as $fg) {
             $hargaFG[] = FinishGood::select('harga')->where('id', $fg)->sum('harga');
-            $stokfg[] =  FinishGood::select('jumlah_fg')->where('id', 2)->get('jumlah_fg');
+            // $stokfg[] =  FinishGood::select('jumlah_fg')->where('id', 2)->get('jumlah_fg');
             $namaFg[] = FinishGood::select('nama_fg')->where('id', $fg)->pluck('nama_fg');
         }
-
+        // ddd($hargaFG);
         $result = [];
         // get hargaFg * request jumlah
 
@@ -286,9 +291,6 @@ class PenjualanController extends Controller
      */
     public function destroy($id)
     {
-        $data = Penjualan::findOrFail($id);
-        $data->delete();
-        Alert::success("Terhapus", "Data Berhasil Dihapus");
-        return redirect()->route('penjualan.index');
+        return Alert::error('Gagal', 'Mohon maaf data tidak bisa dihapus!');
     }
 }
