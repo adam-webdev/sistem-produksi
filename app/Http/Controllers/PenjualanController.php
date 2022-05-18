@@ -14,6 +14,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PenjualanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin|Direktur');
+    }
     public function index()
     {
         $no = Penjualan::NoPenjualan();
@@ -180,6 +184,9 @@ class PenjualanController extends Controller
             return redirect()->route('penjualan.edit', [$id]);
         }
         DB::beginTransaction();
+        PenjualanDetail::where('penjualan_id', $id)->delete();
+        $penjualan->save();
+
         $hargaFG = [];
         // stock Fg array
         $stokfg = [];
@@ -204,8 +211,6 @@ class PenjualanController extends Controller
             }
         }
 
-        PenjualanDetail::where('penjualan_id', $id)->delete();
-        $penjualan->save();
 
 
         // ddd($hargaFG);
@@ -255,7 +260,7 @@ class PenjualanController extends Controller
         if ($request->jenis_pembayaran === 'Kredit') {
             if ($id_piutang === "") {
                 $piutang = new Piutang();
-                $piutang->pembelian_id = $id;
+                $piutang->penjualan_id = $id;
                 $piutang->total = array_sum($result);
                 $piutang->save();
             } else {

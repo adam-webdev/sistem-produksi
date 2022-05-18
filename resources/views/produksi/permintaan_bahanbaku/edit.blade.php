@@ -14,7 +14,9 @@
                         {{-- <option disabled value="{{ $data->bahanbaku->id }}">
                             {{ $data->bahanbaku->nama_material }}</option> --}}
                         @foreach ($bahanbaku as $b)
-                            <option value="{{ $b->id }}" {{{{ $data->bahanbaku->id === $b->id ? 'selected' : ''}}}}>{{ $data->bahanbaku->nama_material === $b->nama_material ? $data->bahanbaku->nama_material : $b->nama_material }}</option>
+                            <option value="{{ $b->id }}" {{ $data->bahanbaku->id === $b->id ? 'selected' : '' }}>
+                                {{ $data->bahanbaku->nama_material === $b->nama_material ? $data->bahanbaku->nama_material : $b->nama_material }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -29,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label for="tanggal">Tanggal :</label>
-                    <input type="date" name="date" value="{{ $data->jumlah_material }}" class="form-control" id="tanggal"
+                    <input type="date" name="date" value="{{ $data->tanggal }}" class="form-control" id="tanggal"
                         required>
                 </div>
             </div>

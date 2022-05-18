@@ -66,7 +66,7 @@ class PermintaanBahanBakuController extends Controller
         $data->bahanbaku_id = $request->bahanbaku_id;
         $data->jumlah_material = $request->jumlah_material;
         $data->kode = $data->kode;
-        $data->tanggal = $data->date;
+        $data->tanggal = $request->date;
         $data->status = $data->status;
         $data->save();
         Alert::success("Terupdate", "Data Berhasil Diupdate");

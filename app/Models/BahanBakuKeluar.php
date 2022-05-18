@@ -14,4 +14,8 @@ class BahanBakuKeluar extends Model
     {
         return $this->belongsTo(BahanBaku::class);
     }
+    public function stok()
+    {
+        return $this->belongsTo(Stok::class);
+    }
 }

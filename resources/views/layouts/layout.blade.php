@@ -86,6 +86,8 @@
                     <div id="collapsePages1" class="collapse" aria-labelledby="headingPages"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item fas fa-hourglass-half" href="{{ route('jadwal-produksi.index') }}">
+                                Jadwal Produksi</a>
                             <a class="collapse-item fas fa-hands" href="{{ route('permintaan-bahanbaku.index') }}">
                                 Permintaan Bahan Baku</a>
                             <a class="collapse-item fas fa-box-open" href="{{ route('pencatatan-produksi.index') }}">
@@ -116,8 +118,7 @@
                                 Baku Masuk</a>
                             <a class="collapse-item fas fa-external-link-alt"
                                 href="{{ route('bahanbaku-keluar.index') }}"> Bahan Baku Keluar</a>
-                            <a class="collapse-item fas fa-hourglass-half" href="{{ route('jadwal-produksi.index') }}">
-                                Jadwal Produksi</a>
+
                             <a class="collapse-item fas fa-hands" href="{{ route('cek-permintaan.index') }}">
                                 Permintaan Produksi</a>
                         </div>
@@ -133,7 +134,7 @@
                 <div id="collapsePages4" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        @hasanyrole('Admin|Direktur|Gudang')
+                        @hasanyrole('Admin|Direktur')
                             <a class="collapse-item fas  fa-shopping-basket" href="{{ route('pembelian.index') }}">
                                 Pembelian </a>
                             <a class="collapse-item fas fa-money-bill-alt" href="{{ route('penjualan.index') }}">
@@ -165,12 +166,14 @@
                             {{-- <a class="collapse-item fas fa-archive" href="{{ route('laporan.permintaanbahanbaku') }}">
                             Permintaan Bahan Baku </a> --}}
                         @endhasanyrole
-                        @hasanyrole('Admin|Direktur')
+                        @hasanyrole('Admin|Direktur|Gudang')
                             <a class="collapse-item fas fa-door-open" href="{{ route('laporan.bahanbaku_masuk') }}">
                                 Bahan Baku Masuk </a>
                             <a class="collapse-item fas fa-external-link-alt"
                                 href="{{ route('laporan.bahanbaku_keluar') }}">
                                 Bahan Baku Keluar </a>
+                        @endhasanyrole
+                        @hasanyrole('Admin|Direktur')
                             <a class="collapse-item fas fa-shopping-basket" href="{{ route('laporan.pembelian') }}">
                                 Pembelian </a>
                             <a class="collapse-item fas fa-money-bill-alt" href="{{ route('laporan.penjualan') }}">

@@ -78,7 +78,7 @@ class LaporanController extends Controller
     {
         $periode = $request->periode;
         if ($periode == "all") {
-            $data = BahanBakuKeluar::with("stok")->get();
+            $data = BahanBakuKeluar::get();
             $pdf = PDF::loadview('gudang.bahanbaku_keluar.laporan.print', compact('data', 'periode'));
             return $pdf->stream('laporan-bahanbaku-keluar-all.pdf');
         } else if ($periode == "periode") {
@@ -100,7 +100,7 @@ class LaporanController extends Controller
     {
         $periode = $request->periode;
         if ($periode == "all") {
-            $data = BahanBakuMasuk::with("stok")->get();
+            $data = BahanBakuMasuk::get();
             $pdf = PDF::loadview('gudang.bahanbaku_masuk.laporan.print', compact('data', 'periode'))->setPaper('A4');
             return $pdf->stream('laporan-bahanbaku-masuk-all.pdf');
         } else if ($periode == "periode") {
