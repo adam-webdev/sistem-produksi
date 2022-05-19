@@ -12,7 +12,7 @@ class BahanBakuController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:Admin|Direktur');
+        $this->middleware('role:Admin|Direktur|Gudang');
     }
     public function index()
     {

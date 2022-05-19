@@ -47,26 +47,28 @@
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
-            @hasanyrole('Admin|Direktur')
-                <li class="nav-item">
-                    <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas  fa-fw fa-table"></i>
-                        <span>Data Master</span>
-                    </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
+            <li class="nav-item">
+                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas  fa-fw fa-table"></i>
+                    <span>Data Master</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        @hasanyrole('Admin|Direktur|Gudang')
                             <a class="collapse-item fas fa-archive" href="{{ route('bahan-baku.index') }}">
                                 Bahan Baku
                             </a>
+                            <a class="collapse-item fas fa-clipboard-check" href="{{ route('finish-good.index') }}">
+                                Barang Finish Good</a>
+                        @endhasanyrole
+                        @hasanyrole('Admin|Direktur')
                             <a class="collapse-item fas fa-car" href="{{ route('supplier.index') }}">
                                 Supplier
                                 <a class="collapse-item fas fa-digital-tachograph" href="{{ route('customer.index') }}">
                                     Customer
                                 </a>
-                                <a class="collapse-item fas fa-clipboard-check" href="{{ route('finish-good.index') }}">
-                                    Barang Finish Good</a>
                                 <a class="collapse-item fas fa-users" href="{{ route('user.index') }}">
                                     User</a>
 
