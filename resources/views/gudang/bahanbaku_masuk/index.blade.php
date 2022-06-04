@@ -1,6 +1,8 @@
 @extends('layouts.layout')
 @section('title', 'Bahan Baku Masuk')
-
+@section('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('content')
     @include('sweetalert::alert')
 
@@ -28,14 +30,21 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="barang">No Pembelian :</label>
-                            <select style="width:100%" name="pembelian" id="barang" class="form-control select" required>
-                                <option selected disabled value="">-- Pilih No Pembelian --</option>
+                            <label for="nopembelian">No Pembelian :</label>
+                            <input type="hidden" id="_token" value="{{ csrf_token() }}">
+                            <select style="width:100%" name="pembelian_id" id="nopembelian" class="form-control select"
+                                required>
+                                <option value="">-- Pilih No Pembelian --</option>
                                 @foreach ($pembelian as $pb)
                                     <option value="{{ $pb->id }}">{{ $pb->no_pembelian }}</option>
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group row add-data" id="ajax">
+
+
+                        </div>
+
                         {{-- <div class="form-group">
                             <label for="jumlah_barang">Jumlah Material :</label>
                             <input type="number" name="jumlah" class="form-control" id="jumlah_barang" required>
@@ -90,8 +99,8 @@
                                         <i class="fas fa-edit fa-sm text-white-50"></i>
                                     </a> --}}
                                     @role('Admin|Gudang')
-                                        <a href="/bahanbaku-masuk/hapus/{{ $bm->id }}" data-toggle="tooltip" title="Hapus"
-                                            onclick="return confirm('Yakin Ingin menghapus data?')"
+                                        <a href="/bahanbaku-masuk/hapus/{{ $bm->id }}" data-toggle="tooltip"
+                                            title="Hapus" onclick="return confirm('Yakin Ingin menghapus data?')"
                                             class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
                                             <i class="fas fa-trash-alt fa-sm text-white-50"></i>
                                         </a>
@@ -107,11 +116,73 @@
 @endsection
 @section('scripts')
     <script>
+        // $(document).ready(function() {
+        //     $('.select').select2({
+        //         tags: true,
+        //         width: 'resolve'
+        //     });
+        // });
         $(document).ready(function() {
-            $('.select').select2({
-                tags: true,
-                width: 'resolve'
-            });
-        });
+
+            var data = []
+            $('#nopembelian').on('change', function() {
+                var pembelian_id = $(this).val()
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('bahanbaku-masuk.detail') }}",
+                    data: {
+                        // _token: "{{ csrf_token() }}",
+                        pembelian_id: pembelian_id
+                    },
+                    success: function(data) {
+                        console.log(data)
+                        $('#ajax').html(`
+                                ${
+                                    data.map((dd) => {
+                                    return `<div class="col-md-5">
+                                                        <label for="bahanbaku">Bahan Baku :</label>
+                                                        <select type="text" name="bahanbaku_id[]" class="form-control" id="bahanbaku"
+                                                            required>
+                                                            <option value="${dd.bahanbaku_id}">${dd.bahanbaku.nama_material}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label for="jumlah">Jumlah :</label>
+                                                            <input type="number" value="${dd.jumlah}" min="1" name="jumlah[]" class="form-control" id="jumlah" required>
+                                                        </div>
+
+                                                        `
+                                    })
+
+                                }
+
+
+
+
+                         `)
+
+                    }
+                })
+
+            })
+            // $('#bahanbaku').on('change', function() {
+            //     $(this).parents('.add-data').remove()
+            // })
+
+        })
     </script>
 @endsection
+{{-- ${
+    dd.map((pd) => {
+        return `<option value="${pd.bahanbaku_id}">${pd.bahanbaku.nama_material}</option>`
+    })
+} --}}
+{{-- <div class="col-md-2 add">
+    <label>Aksi :</label>
+    <button id="add" name="add" type="button" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
+</div> --}}

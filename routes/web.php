@@ -35,9 +35,11 @@ Route::get('/customer/hapus/{id}', [CustomerController::class, "delete"]);
 
 Route::resource('/bahanbaku-keluar', BahanBakuKeluarController::class);
 Route::get('/bahanbaku-keluar/hapus/{id}', [BahanBakuKeluarController::class, "delete"]);
+Route::post('/bahanbaku-keluar-detail', [BahanBakuKeluarController::class, 'bahanbakukeluarid'])->name('bahanbaku-keluar.detail');
 
 Route::resource('/bahanbaku-masuk', BahanBakuMasukController::class);
 Route::get('/bahanbaku-masuk/hapus/{id}', [BahanBakuMasukController::class, "delete"]);
+Route::post('/bahanbaku-masuk-detail', [BahanBakuMasukController::class, 'bahanbakumasukid'])->name('bahanbaku-masuk.detail');
 
 Route::resource('/finish-good', FinishGoodController::class);
 Route::get('/finish-good/hapus/{id}', [FinishGoodController::class, "delete"]);

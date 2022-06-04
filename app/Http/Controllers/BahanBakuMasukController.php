@@ -31,24 +31,32 @@ class BahanBakuMasukController extends Controller
     {
     }
 
-
+    public function bahanbakumasukid(Request $request)
+    {
+        // if (request()->ajax()) {
+        // return $request->supp_id;?
+        // }
+        return PembelianDetail::where('pembelian_id', $request->pembelian_id)->with('bahanbaku')->get();
+        // return view('admin.transaksi.pembelian.index', compact('data'));
+    }
     public function store(Request $request)
     {
 
-        $data = PembelianDetail::where('pembelian_id', $request->pembelian)->get();
+        $bahanbaku = $request->input('bahanbaku_id', []);
+        $jumlah =  $request->input('jumlah', []);
+        // $data = PembelianDetail::where('pembelian_id', $request->pembelian)->get();
 
-        if ($data) {
-            foreach ($data as $index => $value) {
-                $bahanbaku[] = [
-                    "bahanbaku_id" => $data[$index]->bahanbaku_id,
-                    "jumlah" => $data[$index]->jumlah,
-                    "tanggal" => $data[$index]->tanggal_pembelian,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ];
-            }
-            DB::table('bahan_baku_masuks')->insert($bahanbaku);
+        // if ($data) {
+        foreach ($bahanbaku as $index => $value) {
+            $data[] = [
+                "bahanbaku_id" => $bahanbaku[$index],
+                "jumlah" => $jumlah[$index],
+                "tanggal" => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
         }
+        DB::table('bahan_baku_masuks')->insert($data);
         // $bahanbaku_masuk->bahanbaku_id = 22;
         Alert::success("Tersimpan", "Data Berhasil Disimpan");
         return redirect()->route('bahanbaku-masuk.index');

@@ -35,35 +35,71 @@ class BahanBakuKeluarController extends Controller
     }
 
 
+    public function bahanbakukeluarid(Request $request)
+    {
+        // if (request()->ajax()) {
+        // return $request->supp_id;?
+        // }
+        return PermintaanBahanBaku::where('kode', $request->kode)->with('bahanbaku')->get();
+        // return view('admin.transaksi.pembelian.index', compact('data'));
+    }
     public function store(Request $request)
     {
-        $data = PermintaanBahanBaku::where('kode', $request->kode)->get();
-        if ($data) {
-            $bahanbaku_jumlah = [];
-            $namabahanbaku = [];
-            foreach ($data as $index => $value) {
-                $bahanbaku[] = [
-                    "bahanbaku_id" => $data[$index]->bahanbaku_id,
-                    "jumlah" => $data[$index]->jumlah_material,
-                    "tanggal" => Carbon::now(),
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ];
-                $namabahanbaku[$index] = BahanBaku::select('nama_material')->where('id', $data[$index]->bahanbaku_id)->pluck('nama_material');
 
-                $bahanbaku_jumlah[$index] = BahanBaku::select("jumlah_material")->where("id", $data[$index]->bahanbaku_id)->sum('jumlah_material');
+        $bahanbaku = $request->input('bahanbaku_id', []);
+        $jumlah =  $request->input('jumlah', []);
+        // $data = PembelianDetail::where('pembelian_id', $request->pembelian)->get();
 
-                if ($data[$index]->jumlah > $bahanbaku_jumlah[$index]) {
-                    Alert::error("Gagal", "Jumlah stok fg {{$namabahanbaku[$index]}} tidak cukup maksimal {{$bahanbaku_jumlah[$index]}} ");
-                    return redirect()->route('bahanbaku-keluar.index');
-                }
+        // if ($data) {
+        foreach ($bahanbaku as $index => $value) {
+            $data[] = [
+                "bahanbaku_id" => $bahanbaku[$index],
+                "jumlah" => $jumlah[$index],
+                "tanggal" => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
+            $namabahanbaku[$index] = BahanBaku::select('nama_material')->where('id', $bahanbaku[$index])->pluck('nama_material');
+
+            $bahanbaku_jumlah[$index] = BahanBaku::select("jumlah_material")->where("id", $bahanbaku[$index])->sum('jumlah_material');
+
+            if ($jumlah[$index] > $bahanbaku_jumlah[$index]) {
+                Alert::error("Gagal", "Jumlah stok fg {{$namabahanbaku[$index]}} tidak cukup maksimal {{$bahanbaku_jumlah[$index]}} ");
+                return redirect()->route('bahanbaku-keluar.index');
             }
-            // if()
-            DB::table('bahan_baku_keluars')->insert($bahanbaku);
         }
+        DB::table('bahan_baku_keluars')->insert($data);
         // $bahanbaku_masuk->bahanbaku_id = 22;
         Alert::success("Tersimpan", "Data Berhasil Disimpan");
         return redirect()->route('bahanbaku-keluar.index');
+
+        // $data = PermintaanBahanBaku::where('kode', $request->kode)->get();
+        // if ($data) {
+        //     $bahanbaku_jumlah = [];
+        //     $namabahanbaku = [];
+        //     foreach ($data as $index => $value) {
+        //         $bahanbaku[] = [
+        //             "bahanbaku_id" => $data[$index]->bahanbaku_id,
+        //             "jumlah" => $data[$index]->jumlah_material,
+        //             "tanggal" => Carbon::now(),
+        //             'created_at' => Carbon::now(),
+        //             'updated_at' => Carbon::now()
+        //         ];
+        //         $namabahanbaku[$index] = BahanBaku::select('nama_material')->where('id', $data[$index]->bahanbaku_id)->pluck('nama_material');
+
+        //         $bahanbaku_jumlah[$index] = BahanBaku::select("jumlah_material")->where("id", $data[$index]->bahanbaku_id)->sum('jumlah_material');
+
+        //         if ($data[$index]->jumlah > $bahanbaku_jumlah[$index]) {
+        //             Alert::error("Gagal", "Jumlah stok fg {{$namabahanbaku[$index]}} tidak cukup maksimal {{$bahanbaku_jumlah[$index]}} ");
+        //             return redirect()->route('bahanbaku-keluar.index');
+        //         }
+        //     }
+        //     // if()
+        //     DB::table('bahan_baku_keluars')->insert($bahanbaku);
+        // }
+        // // $bahanbaku_masuk->bahanbaku_id = 22;
+        // Alert::success("Tersimpan", "Data Berhasil Disimpan");
+        // return redirect()->route('bahanbaku-keluar.index');
         // $bahanbaku_keluar = new BahanBakuKeluar;
         // $bahanbaku_keluar->bahanbaku_id = $request->bahanbaku_id;
         // $bahanbaku_keluar->jumlah = $request->jumlah;
