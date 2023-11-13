@@ -43,10 +43,17 @@
                     <label for="barang">Jenis Material :</label>
                     <select style="width:100%" name="jenis_material" id="barang" class="form-control select" required>
                         {{-- <option value="{{ $bahanbaku->jenis_material }}">{{ $bahanbaku->jenis_material }}
-                        </option> --}}
-                        <option value="a" {{ $bahanbaku->jenis_material === 'a' ? 'selected' : '' }}>a</option>
-                        <option value="b" {{ $bahanbaku->jenis_material === 'b' ? 'selected' : '' }}>b</option>
-                        <option value="c" {{ $bahanbaku->jenis_material === 'c' ? 'selected' : '' }}>c</option>
+                        </option> --}} <option disabled selected value="">-- Pilih Jenis Material --</option>
+
+                        <option value="Besi" {{ $bahanbaku->jenis_material === 'Besi' ? 'selected' : '' }}>Besi</option>
+                        <option value="Kayu" {{ $bahanbaku->jenis_material === 'Kayu' ? 'selected' : '' }}>Kayu</option>
+                        <option value="Plastik" {{ $bahanbaku->jenis_material === 'Plastik' ? 'selected' : '' }}>Plastik
+                        </option>
+                        <option value="Kaca" {{ $bahanbaku->jenis_material === 'Kaca' ? 'selected' : '' }}>Kaca</option>
+                        <option value="Alumuium" {{ $bahanbaku->jenis_material === 'Alumuium' ? 'selected' : '' }}>Alumuium
+                        </option>
+                        <option value="Kertas" {{ $bahanbaku->jenis_material === 'Kertas' ? 'selected' : '' }}>Kertas
+                        </option>
                     </select>
                 </div>
                 <div class="col-md-5">

@@ -30,8 +30,8 @@
     <div class="row mb-4 mt-3">
         <div class="col-md-4">
             <label for="nama">Nama Pelanggan</label>
-            <input type="text" id="nama" class="form-control" value="{{ $penjualan_detail[0]->customer->nama_customer }}"
-                readonly>
+            <input type="text" id="nama" class="form-control"
+                value="{{ $penjualan_detail[0]->penjualan->customer->nama_customer }}" readonly>
         </div>
         <div class="col-md-4">
             <label for="tempo">Tanggal Jatuh Tempo</label>
@@ -39,8 +39,7 @@
         </div>
         <div class="col-md-4">
             <label for="ket">Keterangan</label>
-            <textarea type="text" rows="5" id="ket" class="form-control"
-                readonly>{{ $penjualan_detail[0]->penjualan->keterangan }}</textarea>
+            <textarea type="text" rows="5" id="ket" class="form-control" readonly>{{ $penjualan_detail[0]->penjualan->keterangan }}</textarea>
         </div>
     </div>
 

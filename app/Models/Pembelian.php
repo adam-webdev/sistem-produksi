@@ -10,6 +10,8 @@ class Pembelian extends Model
 {
     use HasFactory;
     protected $table = 'pembelians';
+    // protected $primaryKey = 'no_pembelian'; // or null
+    public $incrementing = false;
 
     public function pembeliandetail()
     {

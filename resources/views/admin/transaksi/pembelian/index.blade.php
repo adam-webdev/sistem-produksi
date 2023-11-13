@@ -123,7 +123,8 @@
                                             title="Detail" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                             <i class="fas fa-eye  text-white-50"></i>
                                         </a>
-                                        <a href="{{ route('pembelian.edit', [$pb->id]) }}" data-toggle="tooltip" title="Edit"
+                                        <a href="{{ route('pembelian.edit', [$pb->id]) }}" data-toggle="tooltip"
+                                            title="Edit"
                                             class="d-none  d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
                                             <i class="fas fa-edit fa-sm text-white-50"></i>
                                         </a>

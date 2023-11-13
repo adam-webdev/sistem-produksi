@@ -74,9 +74,12 @@
                             <label for="jenis_material">Jenis Material :</label>
                             <select type="text" required name="jenis_material" class="form-control" id="jenis_material">
                                 <option disabled selected value="">-- Pilih Jenis Material --</option>
-                                <option value="a">a</option>
-                                <option value="b">b</option>
-                                <option value="c">c</option>
+                                <option value="Besi">Besi</option>
+                                <option value="Kayu">Kayu</option>
+                                <option value="Plastik">Plastik</option>
+                                <option value="Kaca">Kaca</option>
+                                <option value="Alumuium">Alumuium</option>
+                                <option value="Kertas">Kertas</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -128,8 +131,8 @@
                                 <td>{{ $b->supplier->nama }}</td>
                                 <td align="center" width="10%">
                                     @role('Admin')
-                                        <a href="{{ route('bahan-baku.edit', [$b->id]) }}" data-toggle="tooltip" title="Edit"
-                                            class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                        <a href="{{ route('bahan-baku.edit', [$b->id]) }}" data-toggle="tooltip"
+                                            title="Edit" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                             <i class="fas fa-edit fa-sm text-white-50"></i>
                                         </a>
                                         <a href="/bahan-baku/hapus/{{ $b->id }}" data-toggle="tooltip" title="Hapus"

@@ -17,7 +17,6 @@ class CreatePenjualanDetailsTable extends Migration
             $table->id();
             $table->foreignId('penjualan_id')->constrained('penjualans')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('finishgood_id')->constrained('finish_goods')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
             $table->string('jumlah');
             $table->string('jenis_pembayaran');
             $table->date('tanggal_pembayaran');

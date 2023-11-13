@@ -48,13 +48,12 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse"
+                    data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas  fa-fw fa-table"></i>
                     <span>Data Master</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         @hasanyrole('Admin|Direktur|Gudang')
                             <a class="collapse-item fas fa-archive" href="{{ route('bahan-baku.index') }}">
@@ -79,8 +78,8 @@
             @endhasanyrole
             @hasanyrole('Admin|Direktur|Produksi')
                 <li class="nav-item">
-                    <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages1"
-                        aria-expanded="true" aria-controls="collapsePages1">
+                    <a class="nav-link collapsed text-white" href="#" data-toggle="collapse"
+                        data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages1">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Produksi</span>
                     </a>
@@ -94,8 +93,7 @@
                                 Permintaan Bahan Baku</a>
                             <a class="collapse-item fas fa-box-open" href="{{ route('pencatatan-produksi.index') }}">
                                 Hasil Produksi</a>
-                            <a class="collapse-item fas fa-hourglass-half"
-                                href="{{ route('cek-jadwalproduksi.index') }}">
+                            <a class="collapse-item fas fa-hourglass-half" href="{{ route('cek-jadwalproduksi.index') }}">
                                 Cek Jadwal Produksi</a>
                         </div>
                     </div>
@@ -103,8 +101,8 @@
             @endhasanyrole
             @hasanyrole('Admin|Direktur|Gudang')
                 <li class="nav-item">
-                    <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages2"
-                        aria-expanded="true" aria-controls="collapsePage2">
+                    <a class="nav-link collapsed text-white" href="#" data-toggle="collapse"
+                        data-target="#collapsePages2" aria-expanded="true" aria-controls="collapsePage2">
                         <i class="fas fa-fw fa-warehouse"></i>
                         <span>Gudang</span>
                     </a>
@@ -118,8 +116,8 @@
                                 Finish Good</a> --}}
                             <a class="collapse-item fas fa-door-open" href="{{ route('bahanbaku-masuk.index') }}"> Bahan
                                 Baku Masuk</a>
-                            <a class="collapse-item fas fa-external-link-alt"
-                                href="{{ route('bahanbaku-keluar.index') }}"> Bahan Baku Keluar</a>
+                            <a class="collapse-item fas fa-external-link-alt" href="{{ route('bahanbaku-keluar.index') }}">
+                                Bahan Baku Keluar</a>
 
                             <a class="collapse-item fas fa-hands" href="{{ route('cek-permintaan.index') }}">
                                 Permintaan Produksi</a>
@@ -128,8 +126,8 @@
                 </li>
             @endhasanyrole
             <li class="nav-item">
-                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages4"
-                    aria-expanded="true" aria-controls="collapsePage4">
+                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse"
+                    data-target="#collapsePages4" aria-expanded="true" aria-controls="collapsePage4">
                     <i class="fas fa-fw fa-money-bill-wave"></i>
                     <span>Transaksi</span>
                 </a>
@@ -148,8 +146,8 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapsePages3"
-                    aria-expanded="true" aria-controls="collapsePage3">
+                <a class="nav-link collapsed text-white" href="#" data-toggle="collapse"
+                    data-target="#collapsePages3" aria-expanded="true" aria-controls="collapsePage3">
                     <i class="fas fa-fw fa-file-pdf"></i>
                     <span>Laporan</span>
                 </a>
@@ -281,7 +279,8 @@
                                     Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>

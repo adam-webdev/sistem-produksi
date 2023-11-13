@@ -22,8 +22,7 @@ class PenjualanController extends Controller
     {
         $no = Penjualan::NoPenjualan();
         $finishgood = FinishGood::all();
-        $penjualan = Penjualan::with('penjualandetail.customer')->get();
-        // ddd($penjualan);
+        $penjualan = Penjualan::with('customer')->get();
         $customer = Customer::all();
         return view('admin.transaksi.penjualan.index', compact('finishgood', 'penjualan', 'no', 'customer'));
     }
@@ -32,7 +31,8 @@ class PenjualanController extends Controller
 
     public function penjualan_detail($id)
     {
-        $penjualan_detail = PenjualanDetail::where('penjualan_id', $id)->get();
+        $penjualan_detail = PenjualanDetail::where('penjualan_id', $id)->with('penjualan.customer')->get();
+        // ddd($penjualan_detail);
         $kredit = $penjualan_detail[0]->jenis_pembayaran === "Kredit" ? $penjualan_detail[0]->tanggal_pembayaran : '-';
         return view('admin.transaksi.penjualan_detail.detail', compact('penjualan_detail', 'kredit'));
     }
@@ -54,6 +54,7 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
+        $no_penjualan = $request->no_penjualan;
         $penjualan = [
             'no_penjualan' => $request->no_penjualan,
             'tanggal_penjualan' => $request->tanggal_penjualan,
@@ -176,6 +177,7 @@ class PenjualanController extends Controller
         $penjualan = Penjualan::findOrFail($id);
         $penjualan->tanggal_penjualan = $request->tanggal_penjualan;
         $penjualan->keterangan = $request->keterangan;
+        $penjualan->customer_id = $request->customer_id;
 
         $finishgood = $request->input('finishgood_id', []);
         $jumlah = $request->input('jumlah', []);
@@ -238,7 +240,6 @@ class PenjualanController extends Controller
                 'penjualan_id' => $id,
                 'finishgood_id' => $finishgood[$index],
                 'jumlah' => $jumlah[$index],
-                'customer_id' => $request->customer_id,
                 'jenis_pembayaran' => $request->jenis_pembayaran,
                 'tanggal_pembayaran' => $tanggal,
                 'harga' => $hargaFG[$index],

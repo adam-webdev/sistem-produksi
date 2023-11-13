@@ -51,7 +51,8 @@
                                 required>
                                 <option selected disabled value="">-- Pilih Finish Good --</option>
                                 @foreach ($jadwalproduksi as $d)
-                                    <option value="{{ $d->finishgood->id }}">{{ $d->finishgood->nama_fg }}</option>
+                                    <option value="{{ $d->finishgood->id }}">
+                                        {{ $d->finishgood->nama_fg . ' - ' . $d->kode_jadwalproduksi }}</option>
                                 @endforeach
                             </select>
                         </div>

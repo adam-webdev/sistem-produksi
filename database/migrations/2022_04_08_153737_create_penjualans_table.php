@@ -18,6 +18,7 @@ class CreatePenjualansTable extends Migration
             $table->string('no_penjualan');
             $table->string('keterangan');
             $table->date('tanggal_penjualan');
+            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

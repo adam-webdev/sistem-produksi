@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Penjualan extends Model
 {
     use HasFactory;
+    // protected $primaryKey = 'no_penjualan'; // or null
+    public $incrementing = false;
     public function penjualandetail()
     {
         return $this->hasMany(PenjualanDetail::class);
@@ -16,6 +18,10 @@ class Penjualan extends Model
     public function piutang()
     {
         return $this->hasMany(Piutang::class);
+    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
     }
     public static function NoPenjualan()
     {

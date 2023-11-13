@@ -10,6 +10,7 @@ class Piutang extends Model
     use HasFactory;
     public function penjualan()
     {
+        // return $this->belongsTo(Penjualan::class, 'no_penjualan', 'id');
         return $this->belongsTo(Penjualan::class);
     }
 }

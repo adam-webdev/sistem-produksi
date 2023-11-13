@@ -68,15 +68,18 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
+        $no_pembelian = $request->no_pembelian;
         $pembelian = [
-            'no_pembelian' => $request->no_pembelian,
+            'no_pembelian' => $no_pembelian,
             'tanggal_pembelian' => $request->tanggal_pembelian,
             'keterangan' => $request->keterangan,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ];
 
-        $pembelian_id = DB::table('pembelians')->insertGetId($pembelian);
+        $pembelian_id  = DB::table('pembelians')->insertGetId($pembelian);
+
+        // ddd($pembelian);
 
         $bahanbaku = $request->input('bahanbaku_id', []);
         $jumlah =  $request->input('jumlah', []);
@@ -177,7 +180,7 @@ class PembelianController extends Controller
     public function update(Request $request, $id)
     {
         $pembelian = Pembelian::findOrFail($id);
-        // $pembelian->no_pembelian = $pembelian->no_pembelian;
+        $pembelian->no_pembelian = $pembelian->no_pembelian;
         $pembelian->tanggal_pembelian = $request->tanggal_pembelian;
         $pembelian->keterangan = $request->keterangan;
         $pembelian->save();
