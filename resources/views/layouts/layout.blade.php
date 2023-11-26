@@ -19,7 +19,7 @@
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     @yield('meta')
-
+    @yield('css')
     <style>
         .sidebar li a:hover {
             background: rgba(168, 168, 188, 0.535);
