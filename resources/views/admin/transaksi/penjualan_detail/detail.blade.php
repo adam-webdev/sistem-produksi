@@ -54,7 +54,7 @@
                             {{-- <th>Jenis Pembayaran </th> --}}
                             <th>Jumlah </th>
                             <th>Harga </th>
-                            <th>Total </th>
+                            <th>Sub Total </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,6 +79,11 @@
                                 <td>@currency($pd->finishgood->harga * $pd->jumlah)</td>
                             </tr>
                         @endforeach
+                        <tr align="center">
+                            <td colspan="3"></td>
+                            <td><b>Total</b></td>
+                            <td><b>@currency($penjualan_detail[0]->penjualan->total)</b></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

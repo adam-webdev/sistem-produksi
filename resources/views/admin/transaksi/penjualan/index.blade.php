@@ -113,6 +113,7 @@
                             <th>No Penjualan</th>
                             <th>Customer </th>
                             <th>Tanggal Penjualan </th>
+                            <th>Total </th>
                             <th>Keterangan </th>
                             <th>Aksi</th>
                         </tr>
@@ -123,6 +124,7 @@
                                 <td>{{ $pj->no_penjualan }}</td>
                                 <td>{{ $pj->customer->nama_customer }}</td>
                                 <td>{{ $pj->tanggal_penjualan }}</td>
+                                <td>@currency($pj->total)</td>
                                 <td>{{ $pj->keterangan }}</td>
                                 <td align="center" width="15%">
                                     @role('Admin')

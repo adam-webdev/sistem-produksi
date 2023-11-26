@@ -55,13 +55,6 @@ class PenjualanController extends Controller
     public function store(Request $request)
     {
         $no_penjualan = $request->no_penjualan;
-        $penjualan = [
-            'no_penjualan' => $request->no_penjualan,
-            'tanggal_penjualan' => $request->tanggal_penjualan,
-            'keterangan' => $request->keterangan,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ];
 
 
         $finishgood = $request->input('finishgood_id', []);
@@ -99,6 +92,7 @@ class PenjualanController extends Controller
         }
 
         $total = array_sum($result);
+
         $tanggal = '';
 
         if ($request->jenis_pembayaran === 'Cash') {
@@ -108,6 +102,16 @@ class PenjualanController extends Controller
         }
 
         // save penjualan & get id penjualans
+        $penjualan = [
+            'no_penjualan' => $request->no_penjualan,
+            'tanggal_penjualan' => $request->tanggal_penjualan,
+            'keterangan' => $request->keterangan,
+            'total' => $total,
+            'customer_id' => $request->customer_id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ];
+
         $penjualan_id = DB::table('penjualans')->insertGetId($penjualan);
 
         foreach ($finishgood as $index => $value) {
@@ -115,7 +119,6 @@ class PenjualanController extends Controller
                 'penjualan_id' => $penjualan_id,
                 'finishgood_id' => $finishgood[$index],
                 'jumlah' => $jumlah[$index],
-                'customer_id' => $request->customer_id,
                 'jenis_pembayaran' => $request->jenis_pembayaran,
                 'tanggal_pembayaran' => $tanggal,
                 'harga' => $hargaFG[$index],
@@ -187,7 +190,6 @@ class PenjualanController extends Controller
         }
         DB::beginTransaction();
         PenjualanDetail::where('penjualan_id', $id)->delete();
-        $penjualan->save();
 
         $hargaFG = [];
         // stock Fg array
@@ -225,6 +227,9 @@ class PenjualanController extends Controller
 
 
         $total = array_sum($result);
+        $penjualan->total = $total;
+        $penjualan->save();
+
         $tanggal = '';
 
         if ($request->jenis_pembayaran === 'Cash') {

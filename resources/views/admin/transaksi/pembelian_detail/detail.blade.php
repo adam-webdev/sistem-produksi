@@ -75,6 +75,11 @@
                                 <td>@currency($pd->bahanbaku->harga * $pd->jumlah)</td>
                             </tr>
                         @endforeach
+                        <tr align="center">
+                            <td colspan="3"></td>
+                            <td><b>Total</b></td>
+                            <td><b>@currency($pembelian_detail[0]->pembelian->total)</b></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

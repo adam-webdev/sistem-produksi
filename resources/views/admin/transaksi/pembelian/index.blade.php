@@ -107,6 +107,7 @@
                         <tr align="center">
                             <th>No Pembelian</th>
                             <th>Tanggal Pembelian </th>
+                            <th>Total </th>
                             <th>Keterangan </th>
                             <th>Aksi</th>
                         </tr>
@@ -116,6 +117,7 @@
                             <tr align="center">
                                 <td>{{ $pb->no_pembelian }}</td>
                                 <td>{{ $pb->tanggal_pembelian }}</td>
+                                <td>@currency($pb->total)</td>
                                 <td>{{ $pb->keterangan }}</td>
                                 <td align="center" width="15%">
                                     @role('Admin')
