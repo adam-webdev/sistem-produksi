@@ -17,6 +17,7 @@ class CreatePembeliansTable extends Migration
             $table->id();
             $table->string('no_pembelian');
             $table->string('keterangan');
+            $table->integer('total')->nullable();
             $table->date('tanggal_pembelian');
             $table->timestamps();
         });

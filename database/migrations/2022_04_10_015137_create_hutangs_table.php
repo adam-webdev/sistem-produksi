@@ -15,7 +15,7 @@ class CreateHutangsTable extends Migration
     {
         Schema::create('hutangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pembelian_id')->constrained('pembelians')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('no_pembelian')->constrained('pembelians')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('total');
             $table->timestamps();
         });

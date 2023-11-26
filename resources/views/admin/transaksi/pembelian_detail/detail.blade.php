@@ -6,6 +6,7 @@
         <h1 class="h3 mb-0 text-gray-800">Detail Pembelian </h1>
         <!-- Button trigger modal -->
     </div>
+
     <div class="row">
         <div class="col-md-4">
             <label for="nopembelian">No Pembelian</label>
@@ -36,8 +37,7 @@
         </div>
         <div class="col-md-4">
             <label for="ket">Keterangan</label>
-            <textarea type="text" rows="5" id="ket" class="form-control"
-                readonly>{{ $pembelian_detail[0]->pembelian->keterangan }}</textarea>
+            <textarea type="text" rows="5" id="ket" class="form-control" readonly>{{ $pembelian_detail[0]->pembelian->keterangan }}</textarea>
         </div>
     </div>
 
@@ -75,6 +75,11 @@
                                 <td>@currency($pd->bahanbaku->harga * $pd->jumlah)</td>
                             </tr>
                         @endforeach
+                        <tr align="center">
+                            <td colspan="3"></td>
+                            <td><b>Total</b></td>
+                            <td><b>@currency($pembelian_detail[0]->pembelian->total)</b></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

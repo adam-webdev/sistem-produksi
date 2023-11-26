@@ -30,8 +30,8 @@
     <div class="row mb-4 mt-3">
         <div class="col-md-4">
             <label for="nama">Nama Pelanggan</label>
-            <input type="text" id="nama" class="form-control" value="{{ $penjualan_detail[0]->customer->nama_customer }}"
-                readonly>
+            <input type="text" id="nama" class="form-control"
+                value="{{ $penjualan_detail[0]->penjualan->customer->nama_customer }}" readonly>
         </div>
         <div class="col-md-4">
             <label for="tempo">Tanggal Jatuh Tempo</label>
@@ -39,8 +39,7 @@
         </div>
         <div class="col-md-4">
             <label for="ket">Keterangan</label>
-            <textarea type="text" rows="5" id="ket" class="form-control"
-                readonly>{{ $penjualan_detail[0]->penjualan->keterangan }}</textarea>
+            <textarea type="text" rows="5" id="ket" class="form-control" readonly>{{ $penjualan_detail[0]->penjualan->keterangan }}</textarea>
         </div>
     </div>
 
@@ -55,7 +54,7 @@
                             {{-- <th>Jenis Pembayaran </th> --}}
                             <th>Jumlah </th>
                             <th>Harga </th>
-                            <th>Total </th>
+                            <th>Sub Total </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,6 +79,11 @@
                                 <td>@currency($pd->finishgood->harga * $pd->jumlah)</td>
                             </tr>
                         @endforeach
+                        <tr align="center">
+                            <td colspan="3"></td>
+                            <td><b>Total</b></td>
+                            <td><b>@currency($penjualan_detail[0]->penjualan->total)</b></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

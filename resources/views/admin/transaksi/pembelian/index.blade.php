@@ -107,6 +107,7 @@
                         <tr align="center">
                             <th>No Pembelian</th>
                             <th>Tanggal Pembelian </th>
+                            <th>Total </th>
                             <th>Keterangan </th>
                             <th>Aksi</th>
                         </tr>
@@ -116,6 +117,7 @@
                             <tr align="center">
                                 <td>{{ $pb->no_pembelian }}</td>
                                 <td>{{ $pb->tanggal_pembelian }}</td>
+                                <td>@currency($pb->total)</td>
                                 <td>{{ $pb->keterangan }}</td>
                                 <td align="center" width="15%">
                                     @role('Admin')
@@ -123,7 +125,8 @@
                                             title="Detail" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                             <i class="fas fa-eye  text-white-50"></i>
                                         </a>
-                                        <a href="{{ route('pembelian.edit', [$pb->id]) }}" data-toggle="tooltip" title="Edit"
+                                        <a href="{{ route('pembelian.edit', [$pb->id]) }}" data-toggle="tooltip"
+                                            title="Edit"
                                             class="d-none  d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
                                             <i class="fas fa-edit fa-sm text-white-50"></i>
                                         </a>

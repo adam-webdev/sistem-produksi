@@ -15,6 +15,9 @@ class FinishGoodController extends Controller
 
     public function index()
     {
+        $this->middleware('role:Admin|Direktur|
+        Gudang');
+
         $data = FinishGood::all();
         return view('admin.finishgood.index', compact("data"));
     }
@@ -49,6 +52,7 @@ class FinishGoodController extends Controller
 
     public function edit($id)
     {
+        $this->middleware('role:Admin|Direktur');
         $data = FinishGood::findOrFail($id);
         return view("admin.finishgood.edit", compact('data'));
     }

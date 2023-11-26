@@ -28,7 +28,6 @@
         hr {
             margin-bottom: 30px;
         }
-
     </style>
 </head>
 
@@ -43,7 +42,7 @@
     <hr>
     <div class="row">
         <h5 class="text-center">
-            {{ $periode == 'all'? 'Laporan Penjualan all ': 'Laporan  Penjualan Per-periode ' . $tgl_awal . ' sampai dengan ' . $tgl_akhir . '.' }}
+            {{ $periode == 'all' ? 'Laporan Penjualan all ' : 'Laporan  Penjualan Per-periode ' . $tgl_awal . ' sampai dengan ' . $tgl_akhir . '.' }}
         </h5>
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -65,7 +64,7 @@
                         <td width="2%">{{ $loop->iteration }}</td>
                         <td>{{ $r->penjualan->no_penjualan }}</td>
                         <td>{{ $r->finishgood->nama_fg }}</td>
-                        <td>{{ $r->customer->nama_customer }}</td>
+                        <td>{{ $r->penjualan->customer->nama_customer }}</td>
                         <td>{{ $r->penjualan->tanggal_penjualan }}</td>
                         <td>{{ $r->jenis_pembayaran }}</td>
                         <td>@currency($r->finishgood->harga * $r->jumlah)</td>

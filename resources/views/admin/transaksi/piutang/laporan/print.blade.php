@@ -28,7 +28,6 @@
         hr {
             margin-bottom: 30px;
         }
-
     </style>
 </head>
 
@@ -43,7 +42,7 @@
     <hr>
     <div class="row">
         <h5 class="text-center">
-            {{ $periode == 'all'? 'Laporan Piutang all ': 'Laporan  Piutang Per-periode ' . $tgl_awal . ' sampai dengan ' . $tgl_akhir . '.' }}
+            {{ $periode == 'all' ? 'Laporan Piutang all ' : 'Laporan  Piutang Per-periode ' . $tgl_awal . ' sampai dengan ' . $tgl_akhir . '.' }}
         </h5>
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">

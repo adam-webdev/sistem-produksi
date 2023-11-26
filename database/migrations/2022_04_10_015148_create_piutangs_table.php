@@ -15,7 +15,7 @@ class CreatePiutangsTable extends Migration
     {
         Schema::create('piutangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('penjualan_id')->constrained('penjualans')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('no_penjualan')->constrained('penjualans')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('total');
             $table->timestamps();
         });

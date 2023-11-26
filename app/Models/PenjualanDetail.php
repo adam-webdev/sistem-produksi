@@ -12,13 +12,12 @@ class PenjualanDetail extends Model
     {
         return $this->belongsTo(Penjualan::class);
     }
-    public function finishgood()
-    {
-        return $this->belongsTo(FinishGood::class);
-    }
-
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+    public function finishgood()
+    {
+        return $this->belongsTo(FinishGood::class);
     }
 }

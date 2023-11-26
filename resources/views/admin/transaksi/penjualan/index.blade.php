@@ -63,12 +63,14 @@
                             </div>
                             <div class="col-md-5">
                                 <label for="jumlah">Jumlah :</label>
-                                <input type="number" name="jumlah[]" class="form-control" id="jumlah" min="1" required>
+                                <input type="number" name="jumlah[]" class="form-control" id="jumlah" min="1"
+                                    required>
                             </div>
 
                             <div class="col-md-2 add">
                                 <label>Aksi :</label>
-                                <button id="add" name="add" type="button" class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
+                                <button id="add" name="add" type="button" class="btn btn-sm btn-success"><i
+                                        class="fas fa-plus"></i></button>
                             </div>
 
                         </div>
@@ -111,6 +113,7 @@
                             <th>No Penjualan</th>
                             <th>Customer </th>
                             <th>Tanggal Penjualan </th>
+                            <th>Total </th>
                             <th>Keterangan </th>
                             <th>Aksi</th>
                         </tr>
@@ -119,8 +122,9 @@
                         @foreach ($penjualan as $pj)
                             <tr align="center">
                                 <td>{{ $pj->no_penjualan }}</td>
-                                <td>{{ $pj->penjualandetail[0]->customer->nama_customer }}</td>
+                                <td>{{ $pj->customer->nama_customer }}</td>
                                 <td>{{ $pj->tanggal_penjualan }}</td>
+                                <td>@currency($pj->total)</td>
                                 <td>{{ $pj->keterangan }}</td>
                                 <td align="center" width="15%">
                                     @role('Admin')
@@ -128,7 +132,8 @@
                                             title="Detail" class="d-none  d-sm-inline-block btn btn-sm btn-success shadow-sm">
                                             <i class="fas fa-eye  text-white-50"></i>
                                         </a>
-                                        <a href="{{ route('penjualan.edit', [$pj->id]) }}" data-toggle="tooltip" title="Edit"
+                                        <a href="{{ route('penjualan.edit', [$pj->id]) }}" data-toggle="tooltip"
+                                            title="Edit"
                                             class="d-none  d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
                                             <i class="fas fa-edit fa-sm text-white-50"></i>
                                         </a>

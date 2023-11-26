@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    = @currency($bahanbaku->harga )
+                    = @currency($bahanbaku->harga)
                 </div>
             </div>
             <div class="row">
@@ -152,7 +152,7 @@
                     Total Pembayaran
                 </div>
                 <div class="col-md-3">
-                    = @currency($bahanbaku->harga * $bahanbaku->jumlah_material )
+                    = @currency($bahanbaku->harga * $bahanbaku->jumlah_material)
                 </div>
             </div>
         </div>
