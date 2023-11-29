@@ -6,69 +6,16 @@
         <h1 class="h3 mb-0 text-gray-800">Data Jadwal Produksi </h1>
         <!-- Button trigger modal -->
         @role('Admin')
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                + Tambah
-            </button>
+            <a href="{{ route('jadwal-produksi.create') }}">
+                <button type="button" class="btn btn-primary">
+                    + Tambah
+                </button>
+            </a>
         @endrole
 
     </div>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Jadwal Produksi</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ route('jadwal-produksi.store') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="kode">Kode Jadwal Produksi :</label>
-                            <input type="text" name="kode" class="form-control" id="kode" value="{{ $kodeGenerator }}"
-                                readonly required>
-                        </div>
-                        <div class="form-group row align-items-center add-data">
-                            <div class="col-md-6">
-                                <label for="barang">Finish Good :</label>
-                                <select style="width:100%" name="finishgood_id[]" id="barang" class="form-control  "
-                                    required>
-                                    <option selected disabled value="">-- Pilih Finish Good --</option>
-                                    @foreach ($finishgoods as $fg)
-                                        <option value="{{ $fg->id }}">{{ $fg->nama_fg }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="barang">Target Produksi :</label>
-                                <input type="number" name="target[]" class="form-control" id="barang" required>
-                            </div>
-
-                            <div class="col-md-2 add">
-                                <label>Aksi :</label>
-                                <button id="add" name="add" type="button" class="btn btn-sm btn-success">Add</button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="barang">Tanggal :</label>
-                            <input type="date" name="tanggal" class="form-control" id="barang" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Batal</button>
-                        <input type="submit" class="btn btn-primary btn-send" value="Simpan">
-                    </div>
-            </div>
-            </form>
-
-
-        </div>
-    </div>
 
 
 

@@ -6,6 +6,7 @@ use App\Models\FinishGood;
 use App\Models\JadwalProduksi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class JadwalProduksiController extends Controller
@@ -31,7 +32,28 @@ class JadwalProduksiController extends Controller
 
     public function create()
     {
-        //
+        $kodeGenerator = JadwalProduksi::kode();
+        $data = JadwalProduksi::with('finishgood')->get();
+        $finishgoods = FinishGood::all();
+
+        $produk_terlaris = DB::table('penjualan_details')
+            ->join('finish_goods', 'penjualan_details.finishgood_id', '=', 'finish_goods.id')
+            ->select(
+                'finish_goods.nama_fg',
+                DB::raw('YEAR(penjualan_details.tanggal_penjualan) as tahun'),
+                DB::raw('MONTH(penjualan_details.tanggal_penjualan) as bulan'),
+                DB::raw('SUM(penjualan_details.jumlah) as jumlah_penjualan')
+            )
+            // ->whereYear('penjualan_details.tanggal_penjualan', Carbon::now()->year)
+            // ->whereMonth('penjualan_details.tanggal_penjualan', Carbon::now()->month)
+            ->groupBy('finish_goods.id', 'finish_goods.nama_fg', 'tahun', 'bulan')
+            ->orderBy('tahun', 'desc')
+            ->orderBy('bulan', 'desc')
+            ->orderBy('jumlah_penjualan', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('gudang.jadwal_produksi.create', compact("data", "finishgoods", "kodeGenerator", "produk_terlaris"));
     }
 
     public function store(Request $request)

@@ -80,9 +80,9 @@
         </div>
     </div>
 
-    <div class="card p-4 mt-4">
-        <div class="row">
-            <div class="col-md-4">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card p-4 mt-4">
                 <div class="d-flex">
                     <h5 class="text-dark">Produk Terlaris </h5>
                     <div class="form-group ml-4">
