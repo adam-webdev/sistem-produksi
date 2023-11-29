@@ -45,7 +45,7 @@
                 <div class="sidebar-brand-icon rotate-n-0">
                     <img src="{{ asset('asset/img/logos.jpg') }}" width="60">
                 </div>
-                <div class="sidebar-brand-text text-white mx-2">CV Mutiara Kencana</div>
+                <div class="sidebar-brand-text text-white mx-2">CV Rapopo</div>
             </a>
 
             <!-- Divider -->
@@ -337,7 +337,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Create By: Skripsiku<br>Copyright &copy; CV mutiara kencana
+                        <span>Create By: Adam Webdev<br>Copyright &copy; CV Rapopo
                             {{ \Carbon\Carbon::now()->year }} </span>
                     </div>
                 </div>

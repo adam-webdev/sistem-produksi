@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::resource('/dashboard', DashboardController::class);
+Route::get('/produk-telaris', [DashboardController::class, 'getByBulanTahun'])->name('produkterlaris');
 
 Route::resource('/bahan-baku', BahanBakuController::class);
 Route::get('/bahan-baku/hapus/{id}', [BahanBakuController::class, "delete"]);
